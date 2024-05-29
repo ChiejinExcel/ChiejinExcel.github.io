@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>依頼文</title>
+    <title>依頼文とコード例</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,11 +11,16 @@
         nav {
             background-color: #f8f8f8;
             padding: 10px;
+            display: flex;
+            flex-direction: column;
         }
         nav a {
             margin: 0 10px;
             text-decoration: none;
             color: #007BFF;
+        }
+        .nav-bar {
+            display: flex;
         }
         section {
             margin-bottom: 50px;
@@ -35,74 +40,73 @@
             margin: 1.5em 10px;
             padding: 0.5em 10px;
         }
-        .title {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .title h1 {
-            margin: 0;
-            font-size: 2em;
-            color: #333;
-        }
-        .title h2 {
-            margin: 0;
-            font-size: 1.5em;
-            color: #555;
-        }
     </style>
 </head>
 <body>
-    <div class="title">
-        <h1>ゼロからできる！医師が教えるエクセルとチャットGPTを使った働き方改革</h1>
-        <h2>チャットGPTでエクセルを5倍活用する方法</h2>
-    </div>
     <nav>
-        <a href="#step1">ステップ1</a>
-        <a href="#step2">ステップ2</a>
-        <a href="#step3">ステップ3</a>
-        <a href="#step4">ステップ4</a>
-        <a href="#step5">ステップ5</a>
-        <a href="#step6">ステップ6</a>
-        <a href="#step7">ステップ7</a>
-        <a href="#step8">ステップ8</a>
+        <div class="nav-bar">
+            <div>
+                <strong>依頼文</strong>
+                <a href="#request-step1">ステップ1</a>
+                <a href="#request-step2">ステップ2</a>
+                <a href="#request-step3">ステップ3</a>
+                <a href="#request-step4">ステップ4</a>
+                <a href="#request-step5">ステップ5</a>
+                <a href="#request-step6">ステップ6</a>
+                <a href="#request-step7">ステップ7</a>
+                <a href="#request-step8">ステップ8</a>
+            </div>
+            <div>
+                <strong>コード例</strong>
+                <a href="#code-step1">ステップ1</a>
+                <a href="#code-step2">ステップ2</a>
+                <a href="#code-step3">ステップ3</a>
+                <a href="#code-step4">ステップ4</a>
+                <a href="#code-step5">ステップ5</a>
+                <a href="#code-step6">ステップ6</a>
+                <a href="#code-step7">ステップ7</a>
+                <a href="#code-step8">ステップ8</a>
+            </div>
+        </div>
     </nav>
 
-    <section id="step1">
+    <!-- 依頼文セクション -->
+    <section id="request-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
         <blockquote>
             エクセルで「Sheet1」のセルA1に、現在の年月を表示するマクロを「DisplayCurrentYearMonth」という名前で作りたいです。セルA1からG1までを結合して「YYYY/MM」形式で中央揃えで表示されるようにしてください。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step2">
+    <section id="request-step2">
         <h2>ステップ2: カレンダーの曜日ヘッダーを設定する</h2>
         <blockquote>
             エクセルで「Sheet1」のセルA2からG2に、カレンダーの曜日ヘッダー（日、月、火、水、木、金、土）を表示するマクロを「SetCalendarHeaders」という名前で作りたいです。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step3">
+    <section id="request-step3">
         <h2>ステップ3: カレンダーの枠線を設定する</h2>
         <blockquote>
             エクセルで「Sheet1」のセルA2からG8に、カレンダーの枠線を引くマクロを「DrawCalendarBorders」という名前で作りたいです。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step4">
+    <section id="request-step4">
         <h2>ステップ4: 1日目をカレンダーに表示する</h2>
         <blockquote>
             エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。カレンダーの1日目を適切な位置に表示するマクロを「DisplayFirstDay」という名前で作りたいです。1日目はセルA3から表示します。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step5">
+    <section id="request-step5">
         <h2>ステップ5: 2日目以降を追加する</h2>
         <blockquote>
             エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。さらに、1日目は適切な位置に表示されています。この状態から、カレンダーの2日目以降を1日の右から順に追加していくマクロを「AddRemainingDays」という名前で作りたいです。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step6">
+    <section id="request-step6">
         <h2>ステップ6: 土曜日を青、日曜日を赤にする</h2>
         <blockquote>
             エクセルで「Sheet1」のカレンダーの土曜日を青、日曜日を赤に表示するマクロを「ColorWeekends」という名前で作りたいです。曜日ヘッダー（セルA2からG2）も同様に土曜日を青、日曜日を赤にしてください。カレンダーは以下の前提で作成されています。
@@ -115,14 +119,14 @@
         </blockquote>
     </section>
 
-    <section id="step7">
+    <section id="request-step7">
         <h2>ステップ7: 祝日というシートに今年の祝日リストを書く</h2>
         <blockquote>
             エクセルで今年の日本の祝日リストを「祝日」という名前のシートに書き込むマクロを「CreateHolidaySheet」という名前で作成したいです。祝日リストは内閣府のサイトを参照して取得し、そのリストをマクロコード内に直接書き込んでください。HTML解析やウェブサイトのリンクは使用せず、正確な祝日リストをコード内に含めてください。リストは、1行目をヘッダーとして、A列に祝日名、B列に「YYYY/MM/DD」の形式で日付を入力し、枠線を付け、文字が切れないようにセル幅も調整してください。コードを教えてください。
         </blockquote>
     </section>
 
-    <section id="step8">
+    <section id="request-step8">
         <h2>ステップ8: カレンダーの祝日を赤にする</h2>
         <blockquote>
             エクセルで「Sheet1」にカレンダーを作成しています。カレンダーは以下の前提で作成されています。
@@ -161,6 +165,342 @@
             </ol>
             この構造に従ってマクロを作成してください。
         </blockquote>
+    </section>
+
+    <!-- コード例セクション -->
+    <section id="code-step1">
+        <h2>ステップ1: セルA1に現在の年月を表示する</h2>
+        <pre>
+Sub DisplayCurrentYearMonth()
+    Dim ws As Worksheet
+    Dim currentYear As Integer
+    Dim currentMonth As Integer
+
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' 現在の年と月を取得
+    currentYear = Year(Date)
+    currentMonth = Month(Date)
+
+    ' セルA1からG1を結合して現在の年月を表示（YYYY/MM形式）
+    With ws.Range("A1:G1")
+        .Merge
+        .Value = currentYear & "/" & Format(currentMonth, "00")
+        .HorizontalAlignment = xlCenter
+    End With
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step2">
+        <h2>ステップ2: カレンダーの曜日ヘッダーを設定する</h2>
+        <pre>
+Sub SetCalendarHeaders()
+    Dim ws As Worksheet
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+    ' 曜日ヘッダーをセルA2からG2に設定
+    ws.Range("A2").Value = "日"
+    ws.Range("B2").Value = "月"
+    ws.Range("C2").Value = "火"
+    ws.Range("D2").Value = "水"
+    ws.Range("E2").Value = "木"
+    ws.Range("F2").Value = "金"
+    ws.Range("G2").Value = "土"
+    ' 文字を中央揃えに設定
+    ws.Range("A2:G2").HorizontalAlignment = xlCenter
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step3">
+        <h2>ステップ3: カレンダーの枠線を設定する</h2>
+        <pre>
+Sub DrawCalendarBorders()
+    Dim ws As Worksheet
+    Dim calendarRange As Range
+
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' カレンダー範囲を設定
+    Set calendarRange = ws.Range("A2:G8")
+
+    ' 外枠の設定
+    With calendarRange.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+
+    With calendarRange.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+
+    With calendarRange.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+
+    With calendarRange.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+
+    ' 内側の枠線の設定
+    With calendarRange.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+
+    With calendarRange.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .Weight = xlThin
+        .ColorIndex = 0
+    End With
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step4">
+        <h2>ステップ4: 1日目をカレンダーに表示する</h2>
+        <pre>
+Sub DisplayFirstDay()
+    Dim ws As Worksheet
+    Dim startDate As Date
+    Dim firstDayColumn As Integer
+
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' 現在の年月の1日目を取得
+    startDate = DateSerial(Year(Date), Month(Date), 1)
+
+    ' 1日目の曜日を取得し、対応する列を計算
+    firstDayColumn = Weekday(startDate, vbSunday)
+
+    ' 1日目を表示
+    ws.Cells(3, firstDayColumn).Value = 1
+
+    ' 文字を中央揃えに設定
+    ws.Cells(3, firstDayColumn).HorizontalAlignment = xlCenter
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step5">
+        <h2>ステップ5: 2日目以降を追加する</h2>
+        <pre>
+Sub AddRemainingDays()
+    Dim ws As Worksheet
+    Dim startDate As Date
+    Dim currentDate As Date
+    Dim endDate As Date
+    Dim currentRow As Integer
+    Dim currentColumn As Integer
+
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' 1日目の日付を取得
+    startDate = DateSerial(Year(Date), Month(Date), 1)
+    currentDate = startDate + 1
+
+    ' 月の最終日を取得
+    endDate = DateSerial(Year(Date), Month(Date) + 1, 0)
+
+    ' 1日目の表示位置を計算
+    currentRow = 3
+    currentColumn = Weekday(startDate, vbSunday)
+
+    ' 2日目以降を表示
+    Do While currentDate <= endDate
+        currentColumn = currentColumn + 1
+
+        ' 次の行に移動するか確認
+        If currentColumn > 7 Then
+            currentColumn = 1
+            currentRow = currentRow + 1
+        End If
+
+        ws.Cells(currentRow, currentColumn).Value = Day(currentDate)
+        ws.Cells(currentRow, currentColumn).HorizontalAlignment = xlCenter
+
+        ' 次の日付へ
+        currentDate = currentDate + 1
+    Loop
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step6">
+        <h2>ステップ6: 土曜日を青、日曜日を赤にする</h2>
+        <pre>
+Sub ColorWeekends()
+    Dim ws As Worksheet
+    Dim cell As Range
+    Dim startDate As Date
+    Dim endDate As Date
+    Dim currentDate As Date
+    Dim firstDayColumn As Integer
+    Dim currentRow As Integer
+    Dim currentColumn As Integer
+
+    ' Sheet1を取得
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' 曜日ヘッダーの色設定
+    ws.Range("A2").Font.Color = RGB(255, 0, 0) ' 日曜日 赤色
+    ws.Range("G2").Font.Color = RGB(0, 0, 255) ' 土曜日 青色
+
+    ' 1日目の日付を取得
+    startDate = DateSerial(Year(Date), Month(Date), 1)
+    endDate = DateSerial(Year(Date), Month(Date) + 1, 0)
+    firstDayColumn = Weekday(startDate, vbSunday)
+
+    ' 各日付をループ
+    currentDate = startDate
+    currentRow = 3
+    currentColumn = firstDayColumn
+
+    Do While currentDate <= endDate
+        Set cell = ws.Cells(currentRow, currentColumn)
+
+        ' 土曜日と日曜日の色設定
+        If Weekday(currentDate, vbSunday) = vbSunday Then
+            cell.Font.Color = RGB(255, 0, 0) ' 赤色
+        ElseIf Weekday(currentDate, vbSunday) = vbSaturday Then
+            cell.Font.Color = RGB(0, 0, 255) ' 青色
+        End If
+
+        ' 次の日付へ
+        currentDate = currentDate + 1
+        currentColumn = currentColumn + 1
+
+        ' 次の行に移動するか確認
+        If currentColumn > 7 Then
+            currentColumn = 1
+            currentRow = currentRow + 1
+        End If
+    Loop
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step7">
+        <h2>ステップ7: 祝日というシートに今年の祝日リストを書く</h2>
+        <pre>
+Sub CreateHolidaySheet()
+    Dim ws As Worksheet
+    Dim holidays As Variant
+    Dim i As Integer
+
+    ' 既存の「祝日」シートがあれば削除
+    On Error Resume Next
+    Application.DisplayAlerts = False
+    Sheets("祝日").Delete
+    Application.DisplayAlerts = True
+    On Error GoTo 0
+
+    ' 新しい「祝日」シートを作成
+    Set ws = Sheets.Add
+    ws.Name = "祝日"
+
+    ' 祝日リストを定義（祝日の名前, YYYY/MM/DD）
+    holidays = Array( _
+        Array("元日", "2024/01/01"), _
+        Array("成人の日", "2024/01/08"), _
+        Array("建国記念の日", "2024/02/11"), _
+        Array("休日", "2024/02/12"), _
+        Array("天皇誕生日", "2024/02/23"), _
+        Array("春分の日", "2024/03/20"), _
+        Array("昭和の日", "2024/04/29"), _
+        Array("憲法記念日", "2024/05/03"), _
+        Array("みどりの日", "2024/05/04"), _
+        Array("こどもの日", "2024/05/05"), _
+        Array("休日", "2024/05/06"), _
+        Array("海の日", "2024/07/15"), _
+        Array("山の日", "2024/08/11"), _
+        Array("休日", "2024/08/12"), _
+        Array("敬老の日", "2024/09/16"), _
+        Array("秋分の日", "2024/09/22"), _
+        Array("体育の日", "2024/10/14"), _
+        Array("文化の日", "2024/11/03"), _
+        Array("休日", "2024/11/04"), _
+        Array("勤労感謝の日", "2024/11/23"), _
+        Array("天皇誕生日", "2024/12/23") _
+    )
+
+    ' ヘッダーを追加
+    ws.Cells(1, 1).Value = "名称"
+    ws.Cells(1, 2).Value = "日付"
+
+    ' 祝日リストをシートに書き込む
+    For i = LBound(holidays) To UBound(holidays)
+        ws.Cells(i + 2, 1).Value = holidays(i)(0)
+        ws.Cells(i + 2, 2).Value = holidays(i)(1)
+    Next i
+
+    ' 枠線を付ける
+    ws.Range(ws.Cells(1, 1), ws.Cells(UBound(holidays) + 2, 2)).Borders.LineStyle = xlContinuous
+
+    ' セル幅を調整
+    ws.Columns("A:B").AutoFit
+End Sub
+        </pre>
+    </section>
+
+    <section id="code-step8">
+        <h2>ステップ8: カレンダーの祝日を赤にする</h2>
+        <pre>
+Sub MarkHolidaysInRed()
+    Dim calendarSheet As Worksheet
+    Dim holidaySheet As Worksheet
+    Dim calendarRange As Range
+    Dim holidayRange As Range
+    Dim calendarCell As Range
+    Dim holidayCell As Range
+    Dim currentYear As Integer
+    Dim currentMonth As Integer
+    Dim currentDate As Date
+    Dim holidayDate As Date
+
+    ' シートと範囲の設定
+    Set calendarSheet = ThisWorkbook.Sheets("Sheet1")
+    Set holidaySheet = ThisWorkbook.Sheets("祝日")
+    Set calendarRange = calendarSheet.Range("A3:G8")
+    Set holidayRange = holidaySheet.Range("B2", holidaySheet.Cells(holidaySheet.Rows.Count, "B").End(xlUp))
+
+    ' セルA1の値から年月を取得し、完全な日付を生成
+    currentYear = CInt(Left(calendarSheet.Range("A1").Value, 4))
+    currentMonth = CInt(Right(calendarSheet.Range("A1").Value, 2))
+
+    ' カレンダーの日付範囲をループし、各日付を完全な日付に変換
+    For Each calendarCell In calendarRange
+        If IsNumeric(calendarCell.Value) Then
+            currentDate = DateSerial(currentYear, currentMonth, calendarCell.Value)
+
+            ' 祝日リストをループし、日付を比較
+            For Each holidayCell In holidayRange
+                If IsDate(holidayCell.Value) Then
+                    holidayDate = DateValue(holidayCell.Value)
+                    ' 一致する場合、フォントの色を赤に設定
+                    If currentDate = holidayDate Then
+                        calendarCell.Font.Color = RGB(255, 0, 0) ' 赤色
+                        Exit For ' 一致したらループを抜ける
+                    End If
+                End If
+            Next holidayCell
+        End If
+    Next calendarCell
+End Sub
+        </pre>
     </section>
 </body>
 </html>
