@@ -38,6 +38,20 @@
             margin: 1.5em 10px;
             padding: 0.5em 10px;
         }
+        .code-container {
+            position: relative;
+            margin-bottom: 1em;
+        }
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -72,104 +86,130 @@
     <!-- 依頼文セクション -->
     <section id="request-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
-        <blockquote>
-            エクセルで「Sheet1」のセルA1に、現在の年月を表示するマクロを「DisplayCurrentYearMonth」という名前で作りたいです。セルA1からG1までを結合して「YYYY/MM」形式で中央揃えで表示されるようにしてください。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText1')">コピーする</button>
+            <blockquote id="requestText1">
+                エクセルで「Sheet1」のセルA1に、現在の年月を表示するマクロを「DisplayCurrentYearMonth」という名前で作りたいです。セルA1からG1までを結合して「YYYY/MM」形式で中央揃えで表示されるようにしてください。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step2">
         <h2>ステップ2: カレンダーの曜日ヘッダーを設定する</h2>
-        <blockquote>
-            エクセルで「Sheet1」のセルA2からG2に、カレンダーの曜日ヘッダー（日、月、火、水、木、金、土）を表示するマクロを「SetCalendarHeaders」という名前で作りたいです。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText2')">コピーする</button>
+            <blockquote id="requestText2">
+                エクセルで「Sheet1」のセルA2からG2に、カレンダーの曜日ヘッダー（日、月、火、水、木、金、土）を表示するマクロを「SetCalendarHeaders」という名前で作りたいです。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step3">
         <h2>ステップ3: カレンダーの枠線を設定する</h2>
-        <blockquote>
-            エクセルで「Sheet1」のセルA2からG8に、カレンダーの枠線を引くマクロを「DrawCalendarBorders」という名前で作りたいです。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText3')">コピーする</button>
+            <blockquote id="requestText3">
+                エクセルで「Sheet1」のセルA2からG8に、カレンダーの枠線を引くマクロを「DrawCalendarBorders」という名前で作りたいです。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step4">
         <h2>ステップ4: 1日目をカレンダーに表示する</h2>
-        <blockquote>
-            エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。カレンダーの1日目を適切な位置に表示するマクロを「DisplayFirstDay」という名前で作りたいです。1日目はセルA3から表示します。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText4')">コピーする</button>
+            <blockquote id="requestText4">
+                エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。カレンダーの1日目を適切な位置に表示するマクロを「DisplayFirstDay」という名前で作りたいです。1日目はセルA3から表示します。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step5">
         <h2>ステップ5: 2日目以降を追加する</h2>
-        <blockquote>
-            エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。さらに、1日目は適切な位置に表示されています。この状態から、カレンダーの2日目以降を1日の右から順に追加していくマクロを「AddRemainingDays」という名前で作りたいです。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText5')">コピーする</button>
+            <blockquote id="requestText5">
+                エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。さらに、1日目は適切な位置に表示されています。この状態から、カレンダーの2日目以降を1日の右から順に追加していくマクロを「AddRemainingDays」という名前で作りたいです。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step6">
         <h2>ステップ6: 土曜日を青、日曜日を赤にする</h2>
-        <blockquote>
-            エクセルで「Sheet1」のカレンダーの土曜日を青、日曜日を赤に表示するマクロを「ColorWeekends」という名前で作りたいです。曜日ヘッダー（セルA2からG2）も同様に土曜日を青、日曜日を赤にしてください。カレンダーは以下の前提で作成されています。
-            <ol>
-                <li>セルA1には現在の年月が表示され、A1からG1までが結合されています。</li>
-                <li>セルA2からG2には曜日（日、月、火、水、木、金、土）が表示されています。</li>
-                <li>カレンダーの日付はセルA3から始まり、適切に配置されています。</li>
-            </ol>
-            コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText6')">コピーする</button>
+            <blockquote id="requestText6">
+                エクセルで「Sheet1」のカレンダーの土曜日を青、日曜日を赤に表示するマクロを「ColorWeekends」という名前で作りたいです。曜日ヘッダー（セルA2からG2）も同様に土曜日を青、日曜日を赤にしてください。カレンダーは以下の前提で作成されています。
+                <ol>
+                    <li>セルA1には現在の年月が表示され、A1からG1までが結合されています。</li>
+                    <li>セルA2からG2には曜日（日、月、火、水、木、金、土）が表示されています。</li>
+                    <li>カレンダーの日付はセルA3から始まり、適切に配置されています。</li>
+                </ol>
+                コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step7">
         <h2>ステップ7: 祝日というシートに今年の祝日リストを書く</h2>
-        <blockquote>
-            エクセルで今年の日本の祝日リストを「祝日」という名前のシートに書き込むマクロを「CreateHolidaySheet」という名前で作成したいです。祝日リストは内閣府のサイトを参照して取得し、そのリストをマクロコード内に直接書き込んでください。HTML解析やウェブサイトのリンクは使用せず、正確な祝日リストをコード内に含めてください。リストは、1行目をヘッダーとして、A列に祝日名、B列に「YYYY/MM/DD」の形式で日付を入力し、枠線を付け、文字が切れないようにセル幅も調整してください。コードを教えてください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText7')">コピーする</button>
+            <blockquote id="requestText7">
+                エクセルで今年の日本の祝日リストを「祝日」という名前のシートに書き込むマクロを「CreateHolidaySheet」という名前で作成したいです。祝日リストは内閣府のサイトを参照して取得し、そのリストをマクロコード内に直接書き込んでください。HTML解析やウェブサイトのリンクは使用せず、正確な祝日リストをコード内に含めてください。リストは、1行目をヘッダーとして、A列に祝日名、B列に「YYYY/MM/DD」の形式で日付を入力し、枠線を付け、文字が切れないようにセル幅も調整してください。コードを教えてください。
+            </blockquote>
+        </div>
     </section>
 
     <section id="request-step8">
         <h2>ステップ8: カレンダーの祝日を赤にする</h2>
-        <blockquote>
-            エクセルで「Sheet1」にカレンダーを作成しています。カレンダーは以下の前提で作成されています。
-            <ol>
-                <li>セルA1には「YYYY/MM」の形式で現在の年月が表示されており、A1からG1までが結合されています。</li>
-                <li>セルA2からG2には曜日（日、月、火、水、木、金、土）が表示されています。</li>
-                <li>カレンダーの日付はセルA3からG8に配置されており、これらの日付は数値のみで表示されています（例：1, 2, 3など）。</li>
-            </ol>
-            また、「祝日」という名前のシートがあり、祝日リストは以下の形式で入力されています。
-            <ol>
-                <li>1行目はヘッダーです。</li>
-                <li>A列には祝日の名前が入力されています。</li>
-                <li>B列には「YYYY/MM/DD」形式で日付が入力されています。</li>
-            </ol>
-            以下の手順でカレンダーの日付を祝日リストの日付と比較し、一致する場合は赤文字にするマクロ「MarkHolidaysInRed」を作成してください。
-            <ol>
-                <li>シート「Sheet1」と「祝日」の参照を取得してください。</li>
-                <li>セルA1の値を「YYYY/MM」形式から年と月を取得してください（例：「2023/05」→「2023」と「5」）。</li>
-                <li>カレンダーの日付範囲（セルA3からG8）をループし、各日付を現在の年月と組み合わせてDateSerial関数で完全な日付に変換してください。</li>
-                <li>祝日リストの日付範囲（セルB2から最後の行まで）をループし、各日付を比較してください。</li>
-                <li>一致する日付が見つかった場合、そのカレンダーの日付を赤文字にしてください。</li>
-            </ol>
-            注意点：
-            <ol>
-                <li>カレンダーの日付を変換する際、Year関数とMonth関数を使用してセルA1の値から年と月を取得してください。</li>
-                <li>For Eachループを使用する際、変数をセルオブジェクトに適したものに設定してください（例：calendarCell、holidayCellはそれぞれRangeオブジェクト内の個々のセルを指します）。</li>
-                <li>日付の比較にはDateSerial関数とDateValue関数を使用してください。</li>
-            </ol>
-            具体的なコードの構造は以下の通りです：
-            <ol>
-                <li>シートと範囲の設定。</li>
-                <li>セルA1の値から年月を取得し、完全な日付を生成。</li>
-                <li>カレンダーの日付範囲をループし、各日付を完全な日付に変換。</li>
-                <li>祝日リストをループし、日付を比較。</li>
-                <li>一致する場合、フォントの色を赤に設定。</li>
-            </ol>
-            この構造に従ってマクロを作成してください。
-        </blockquote>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText8')">コピーする</button>
+            <blockquote id="requestText8">
+                エクセルで「Sheet1」にカレンダーを作成しています。カレンダーは以下の前提で作成されています。
+                <ol>
+                    <li>セルA1には「YYYY/MM」の形式で現在の年月が表示されており、A1からG1までが結合されています。</li>
+                    <li>セルA2からG2には曜日（日、月、火、水、木、金、土）が表示されています。</li>
+                    <li>カレンダーの日付はセルA3からG8に配置されており、これらの日付は数値のみで表示されています（例：1, 2, 3など）。</li>
+                </ol>
+                また、「祝日」という名前のシートがあり、祝日リストは以下の形式で入力されています。
+                <ol>
+                    <li>1行目はヘッダーです。</li>
+                    <li>A列には祝日の名前が入力されています。</li>
+                    <li>B列には「YYYY/MM/DD」形式で日付が入力されています。</li>
+                </ol>
+                以下の手順でカレンダーの日付を祝日リストの日付と比較し、一致する場合は赤文字にするマクロ「MarkHolidaysInRed」を作成してください。
+                <ol>
+                    <li>シート「Sheet1」と「祝日」の参照を取得してください。</li>
+                    <li>セルA1の値を「YYYY/MM」形式から年と月を取得してください（例：「2023/05」→「2023」と「5」）。</li>
+                    <li>カレンダーの日付範囲（セルA3からG8）をループし、各日付を現在の年月と組み合わせてDateSerial関数で完全な日付に変換してください。</li>
+                    <li>祝日リストの日付範囲（セルB2から最後の行まで）をループし、各日付を比較してください。</li>
+                    <li>一致する日付が見つかった場合、そのカレンダーの日付を赤文字にしてください。</li>
+                </ol>
+                注意点：
+                <ol>
+                    <li>カレンダーの日付を変換する際、Year関数とMonth関数を使用してセルA1の値から年と月を取得してください。</li>
+                    <li>For Eachループを使用する際、変数をセルオブジェクトに適したものに設定してください（例：calendarCell、holidayCellはそれぞれRangeオブジェクト内の個々のセルを指します）。</li>
+                    <li>日付の比較にはDateSerial関数とDateValue関数を使用してください。</li>
+                </ol>
+                具体的なコードの構造は以下の通りです：
+                <ol>
+                    <li>シートと範囲の設定。</li>
+                    <li>セルA1の値から年月を取得し、完全な日付を生成。</li>
+                    <li>カレンダーの日付範囲をループし、各日付を完全な日付に変換。</li>
+                    <li>祝日リストをループし、日付を比較。</li>
+                    <li>一致する場合、フォントの色を赤に設定。</li>
+                </ol>
+                この構造に従ってマクロを作成してください。
+            </blockquote>
+        </div>
     </section>
 
     <!-- コード例セクション -->
     <section id="code-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample1')">コピーする</button>
+            <pre id="codeExample1">
 Sub DisplayCurrentYearMonth()
     Dim ws As Worksheet
     Dim currentYear As Integer
@@ -189,12 +229,15 @@ Sub DisplayCurrentYearMonth()
         .HorizontalAlignment = xlCenter
     End With
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step2">
         <h2>ステップ2: カレンダーの曜日ヘッダーを設定する</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample2')">コピーする</button>
+            <pre id="codeExample2">
 Sub SetCalendarHeaders()
     Dim ws As Worksheet
     ' Sheet1を取得
@@ -210,12 +253,15 @@ Sub SetCalendarHeaders()
     ' 文字を中央揃えに設定
     ws.Range("A2:G2").HorizontalAlignment = xlCenter
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step3">
         <h2>ステップ3: カレンダーの枠線を設定する</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample3')">コピーする</button>
+            <pre id="codeExample3">
 Sub DrawCalendarBorders()
     Dim ws As Worksheet
     Dim calendarRange As Range
@@ -264,12 +310,15 @@ Sub DrawCalendarBorders()
         .ColorIndex = 0
     End With
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step4">
         <h2>ステップ4: 1日目をカレンダーに表示する</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample4')">コピーする</button>
+            <pre id="codeExample4">
 Sub DisplayFirstDay()
     Dim ws As Worksheet
     Dim startDate As Date
@@ -290,12 +339,15 @@ Sub DisplayFirstDay()
     ' 文字を中央揃えに設定
     ws.Cells(3, firstDayColumn).HorizontalAlignment = xlCenter
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step5">
         <h2>ステップ5: 2日目以降を追加する</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample5')">コピーする</button>
+            <pre id="codeExample5">
 Sub AddRemainingDays()
     Dim ws As Worksheet
     Dim startDate As Date
@@ -335,12 +387,15 @@ Sub AddRemainingDays()
         currentDate = currentDate + 1
     Loop
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step6">
         <h2>ステップ6: 土曜日を青、日曜日を赤にする</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample6')">コピーする</button>
+            <pre id="codeExample6">
 Sub ColorWeekends()
     Dim ws As Worksheet
     Dim cell As Range
@@ -389,12 +444,15 @@ Sub ColorWeekends()
         End If
     Loop
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step7">
         <h2>ステップ7: 祝日というシートに今年の祝日リストを書く</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample7')">コピーする</button>
+            <pre id="codeExample7">
 Sub CreateHolidaySheet()
     Dim ws As Worksheet
     Dim holidays As Variant
@@ -452,12 +510,15 @@ Sub CreateHolidaySheet()
     ' セル幅を調整
     ws.Columns("A:B").AutoFit
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
 
     <section id="code-step8">
         <h2>ステップ8: カレンダーの祝日を赤にする</h2>
-        <pre>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample8')">コピーする</button>
+            <pre id="codeExample8">
 Sub MarkHolidaysInRed()
     Dim calendarSheet As Worksheet
     Dim holidaySheet As Worksheet
@@ -499,7 +560,20 @@ Sub MarkHolidaysInRed()
         End If
     Next calendarCell
 End Sub
-        </pre>
+            </pre>
+        </div>
     </section>
+
+    <script>
+        function copyToClipboard(element) {
+            var temp = document.createElement('textarea');
+            temp.value = document.querySelector(element).innerText;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert('コピーしました!');
+        }
+    </script>
 </body>
 </html>
