@@ -69,6 +69,10 @@
             <a href="#request-step6">ステップ6</a>
             <a href="#request-step7">ステップ7</a>
             <a href="#request-step8">ステップ8</a>
+            <a href="#request-step8">ステップ9</a>
+            <a href="#request-step8">ステップ10</a>
+            <a href="#request-step8">ステップ11</a>
+            <a href="#request-step8">ステップ12</a>            
         </div>
         <div><strong>コード例</strong></div>
         <div>
@@ -80,6 +84,10 @@
             <a href="#code-step6">ステップ6</a>
             <a href="#code-step7">ステップ7</a>
             <a href="#code-step8">ステップ8</a>
+            <a href="#code-step5">ステップ9</a>
+            <a href="#code-step6">ステップ10</a>
+            <a href="#code-step7">ステップ11</a>
+            <a href="#code-step8">ステップ12</a>            
         </div>
     </nav>
 
@@ -266,6 +274,115 @@
         </div>
     </section>
 
+    <section id="request-step9">
+        <h2>ステップ9: 初期化してカレンダーを作成する</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText9')">コピーする</button>
+            <blockquote id="requestText9">
+                エクセルで「Sheet1」にカレンダーを作成しています。シートを初期状態に戻してからカレンダーを作成するためのVBAマクロを作成したいと考えています。具体的な要件は以下の通りです：
+                <ol>
+                    <li>シート1の内容、書式、結合をクリアする。</li>
+                    <li>カレンダーを作成するための各ステップを順に呼び出す。</li>
+                </ol>
+                各ステップは既に用意されており、以下の順番で呼び出します：
+                <ul>
+                    <li>DisplayCurrentYearMonth</li>
+                    <li>SetCalendarHeaders</li>
+                    <li>DrawCalendarBorders</li>
+                    <li>DisplayFirstDay</li>
+                    <li>AddRemainingDays</li>
+                    <li>ColorWeekends</li>
+                    <li>CreateHolidaySheet</li>
+                    <li>MarkHolidaysInRed</li>
+                </ul>
+                これらのステップをまとめて呼び出すマクロを「InitializeAndCreateCalendar」という名前で作成したいです。コードを教えてください。
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="request-step10">
+        <h2>ステップ10: ダブルクリックでセルの色を変更する</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText10')">コピーする</button>
+            <blockquote id="requestText10">
+                エクセルで「Sheet1」にカレンダーを作成しています。各日付セルをダブルクリックすることでセルの色を変更できるようにしたいと考えています。ダブルクリックしたセルの塗りつぶし色を赤にし、再度ダブルクリックすると元の状態に戻るようにしたいです。カレンダーの構成は以下の通りです：
+                <ol>
+                    <li>セルA1には「YYYY/MM」の形式で現在の年月が表示されており、A1からG1までが結合されています。</li>
+                    <li>セルA2からG2には曜日（日、月、火、水、木、金、土）が表示されています。</li>
+                    <li>カレンダーの日付はセルA3からG8に配置されており、これらの日付は数値のみで表示されています（例：1, 2, 3など）。</li>
+                </ol>
+                <b>注意点：</b>
+                <ul>
+                    <li>日付が入力されていないセルは色が変わらないようにする。</li>
+                    <li>ワークシートのコードとして実装する。</li>
+                    <li>ダブルクリックでセルが編集状態になるのを防ぐため、ダブルクリックイベントをキャンセルする。</li>
+                </ul>
+                この機能を実現するためのコードを教えてください。
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="request-step11">
+        <h2>ステップ11: メンバーリストの作成</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText11')">コピーする</button>
+            <blockquote id="requestText11">
+                エクセルで「管理用」というシートに、メンバーリストを作成してほしいです。以下の要件を満たすマクロを「CreateMemberList」という名前で作成してください。
+                <ol>
+                    <li>A列に通し番号、B列に架空の日本人スタッフメンバー20人分の氏名（フルネーム、苗字と名前の間に半角スペースを入れる）、C列に休み希望を入力できるようにしてください。</li>
+                    <li>1行目をヘッダーとして、「No」「氏名」「休み希望」のタイトルを設定し、黄色に塗りつぶし、太字にしてください。</li>
+                    <li>シートが既に存在する場合、そのシートを削除せずに、内容と書式をクリアしてから新しいデータを入力してください。具体的には、ws.Cells.Clearとws.Cells.ClearFormatsを使用してください。</li>
+                    <li>全体を中央揃えにしてください。具体的には、A列、B列、C列の全てのセルを中央揃えにしてください。</li>
+                    <li>各セルに枠線を付けてください。具体的には、A1からC21までの全てのセルに枠線を設定してください。</li>
+                    <li>列の幅をセル内容に合わせて自動調整してください。具体的には、A1からC21の範囲に対してAutoFitメソッドを使用してください。</li>
+                </ol>
+                20人分の架空の日本人名前を以下のリストから使用してください：
+                <ul>
+                    <li>田中 太郎</li>
+                    <li>山田 花子</li>
+                    <li>佐藤 雄大</li>
+                    <li>鈴木 美咲</li>
+                    <li>高橋 健太</li>
+                    <li>伊藤 まどか</li>
+                    <li>渡辺 拓也</li>
+                    <li>斎藤 亜美</li>
+                    <li>小林 健介</li>
+                    <li>中村 みゆき</li>
+                    <li>加藤 大輔</li>
+                    <li>吉田 美和</li>
+                    <li>山口 剛</li>
+                    <li>林 さくら</li>
+                    <li>清水 明美</li>
+                    <li>阿部 健太郎</li>
+                    <li>森田 未来</li>
+                    <li>岡田 優子</li>
+                    <li>橋本 貴之</li>
+                    <li>山崎 瞳</li>
+                </ul>
+                以下の骨子に従ってコードを作成してください：
+                <ol>
+                    <li>シートの作成または取得</li>
+                    <li>ヘッダーの設定</li>
+                    <li>架空のメンバー名のリストを使用してデータを入力</li>
+                    <li>セルの枠線の設定</li>
+                    <li>列の幅の自動調整</li>
+                </ol>
+                このシートを作成するためのコードを教えてください。
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="request-step12">
+        <h2>ステップ12: メンバー名取得とカレンダー更新</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText12')">コピーする</button>
+            <blockquote id="requestText12">
+                「管理用」シートのB列、B2以下最下段までのセルをダブルクリックしたときに実行される、「管理用」シート用のコードが欲しいです。ダブルクリックされたセルのメンバー名を取得し、既存のInitializeAndCreateCalendarマクロを呼び出してください。カレンダーがSheet1に作成されるので、そのA1セルの内容を、「元の内容 + 半角スペース + メンバー名」という形式で更新し、最後にSheet1をアクティブにしてください。引数は渡さないで実装してください。
+                以上の機能を実装したコードを教えてもらえますか。
+            </blockquote>
+        </div>
+    </section>
+    
     <!-- コード例セクション -->
     <section id="code-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
