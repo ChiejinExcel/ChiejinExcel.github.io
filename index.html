@@ -748,6 +748,157 @@ End Sub
         </div>
     </section>
 
+    <section id="code-step9">
+        <h2>ステップ9: 初期化してカレンダーを作成する</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample9')">コピーする</button>
+            <pre id="codeExample9">
+    Sub InitializeAndCreateCalendar()
+        ' シート1の内容、書式、結合をクリア
+        Dim ws As Worksheet
+        Set ws = ThisWorkbook.Sheets("Sheet1")
+        
+        ' セルの内容をクリア
+        ws.Cells.Clear
+        
+        ' 書式のクリア
+        ws.Cells.ClearFormats
+        
+        ' 結合の解除
+        ws.Cells.UnMerge
+        
+        ' カレンダー作成の各ステップを順に呼び出す
+        Call DisplayCurrentYearMonth
+        Call SetCalendarHeaders
+        Call DrawCalendarBorders
+        Call DisplayFirstDay
+        Call AddRemainingDays
+        Call ColorWeekends
+        Call CreateHolidaySheet
+        Call MarkHolidaysInRed
+    End Sub
+            </pre>
+        </div>
+    </section>
+    
+    <section id="code-step10">
+        <h2>ステップ10: ダブルクリックでセルの色を変更する</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample10')">コピーする</button>
+            <pre id="codeExample10">
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+        Dim rngCalendar As Range
+    
+        ' カレンダー範囲を指定（例：A3:G8）
+        Set rngCalendar = Range("A3:G8")
+    
+        ' カレンダー内のセルがダブルクリックされた場合
+        If Not Intersect(Target, rngCalendar) Is Nothing Then
+            ' クリックされたセルが空白でない場合のみ実行
+            If Target.Value <> "" Then
+                ' 色を切り替え
+                If Target.Interior.Color = RGB(255, 0, 0) Then
+                    Target.Interior.ColorIndex = xlNone ' 色を元に戻す
+                Else
+                    Target.Interior.Color = RGB(255, 0, 0) ' 赤く塗りつぶす
+                End If
+                Cancel = True ' ダブルクリックイベントをキャンセル
+            End If
+        End If
+    End Sub
+            </pre>
+        </div>
+    </section>
+
+    <section id="code-step11">
+        <h2>ステップ11: メンバーリストの作成</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample11')">コピーする</button>
+            <pre id="codeExample11">
+    Sub CreateMemberList()
+        Dim ws As Worksheet
+        Dim i As Integer
+        Dim memberNames As Variant
+        
+        ' メンバー名のリスト
+        memberNames = Array("田中 太郎", "山田 花子", "佐藤 雄大", "鈴木 美咲", "高橋 健太", _
+                            "伊藤 まどか", "渡辺 拓也", "斎藤 亜美", "小林 健介", "中村 みゆき", _
+                            "加藤 大輔", "吉田 美和", "山口 剛", "林 さくら", "清水 明美", _
+                            "阿部 健太郎", "森田 未来", "岡田 優子", "橋本 貴之", "山崎 瞳")
+        
+        ' シートの取得または新規作成
+        On Error Resume Next
+        Set ws = ThisWorkbook.Sheets("管理用")
+        On Error GoTo 0
+        If ws Is Nothing Then
+            Set ws = ThisWorkbook.Sheets.Add(After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count))
+            ws.Name = "管理用"
+        Else
+            ws.Cells.Clear
+            ws.Cells.ClearFormats
+        End If
+        
+        ' ヘッダーの設定
+        With ws.Range("A1:C1")
+            .Value = Array("No", "氏名", "休み希望")
+            .Font.Bold = True
+            .Interior.Color = RGB(255, 255, 0) ' 黄色に塗りつぶし
+            .HorizontalAlignment = xlCenter
+        End With
+        
+        ' メンバーリストの設定
+        For i = 1 To 20
+            ws.Cells(i + 1, 1).Value = i ' 通し番号
+            ws.Cells(i + 1, 2).Value = memberNames(i - 1) ' 氏名
+            ws.Cells(i + 1, 3).Value = "" ' 休み希望
+        Next i
+        
+        ' 全体を中央揃えに設定
+        ws.Range("A2:C21").HorizontalAlignment = xlCenter
+        
+        ' セルに枠線を設定
+        ws.Range("A1:C21").Borders.LineStyle = xlContinuous
+        
+        ' 列の幅を自動調整
+        ws.Columns("A:C").AutoFit
+    End Sub
+            </pre>
+        </div>
+    </section>
+
+    <section id="code-step12">
+        <h2>ステップ12: メンバー名取得とカレンダー更新</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample12')">コピーする</button>
+            <pre id="codeExample12">
+    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+        ' シート1のオブジェクトを取得
+        Dim ws As Worksheet
+        Set ws = ThisWorkbook.Sheets("Sheet1")
+        
+        ' 管理用シートのB列（B2以下）をチェック
+        If Not Intersect(Target, Me.Range("B2:B" & Me.Rows.Count)) Is Nothing Then
+            ' メンバー名を取得
+            Dim memberName As String
+            memberName = Target.Value
+            
+            ' カレンダーを作成
+            InitializeAndCreateCalendar
+            
+            ' A1セルの内容を更新
+            ws.Range("A1").Value = ws.Range("A1").Value & " " & memberName
+            
+            ' Sheet1をアクティブにする
+            ws.Activate
+            
+            ' ダブルクリックによる編集をキャンセル
+            Cancel = True
+        End If
+    End Sub
+            </pre>
+        </div>
+    </section>
+    
     <script>
         function copyToClipboard(element) {
             var temp = document.createElement('textarea');
