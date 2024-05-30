@@ -455,79 +455,65 @@ End Sub
             <pre id="codeExample7">
 Sub CreateHolidaySheet()
     Dim ws As Worksheet
-    Dim holidays As Variant
-    Dim i As Integer
+    Dim holidayList As Variant
+    Dim i As Long
+    
+    ' 祝日リストのデータ
+    holidayList = Array( _
+        Array("祝日名", "日付"), _
+        Array("元日", "2024/1/1"), Array("成人の日", "2024/1/8"), _
+        Array("建国記念の日", "2024/2/11"), Array("休日", "2024/2/12"), _
+        Array("天皇誕生日", "2024/2/23"), Array("春分の日", "2024/3/20"), _
+        Array("昭和の日", "2024/4/29"), Array("憲法記念日", "2024/5/3"), _
+        Array("みどりの日", "2024/5/4"), Array("こどもの日", "2024/5/5"), _
+        Array("休日", "2024/5/6"), Array("海の日", "2024/7/15"), _
+        Array("山の日", "2024/8/11"), Array("休日", "2024/8/12"), _
+        Array("敬老の日", "2024/9/16"), Array("秋分の日", "2024/9/22"), _
+        Array("休日", "2024/9/23"), Array("スポーツの日", "2024/10/14"), _
+        Array("文化の日", "2024/11/3"), Array("休日", "2024/11/4"), _
+        Array("勤労感謝の日", "2024/11/23"), Array("元日", "2025/1/1"), _
+        Array("成人の日", "2025/1/13"), Array("建国記念の日", "2025/2/11"), _
+        Array("天皇誕生日", "2025/2/23"), Array("休日", "2025/2/24"), _
+        Array("春分の日", "2025/3/20"), Array("昭和の日", "2025/4/29"), _
+        Array("憲法記念日", "2025/5/3"), Array("みどりの日", "2025/5/4"), _
+        Array("こどもの日", "2025/5/5"), Array("休日", "2025/5/6"), _
+        Array("海の日", "2025/7/21"), Array("山の日", "2025/8/11"), _
+        Array("敬老の日", "2025/9/15"), Array("秋分の日", "2025/9/23"), _
+        Array("スポーツの日", "2025/10/13"), Array("文化の日", "2025/11/3"), _
+        Array("勤労感謝の日", "2025/11/23"), Array("休日", "2025/11/24"))
 
-    ' 既存の「祝日」シートがあれば削除
+    ' 祝日シートの存在確認
     On Error Resume Next
-    Application.DisplayAlerts = False
-    Sheets("祝日").Delete
-    Application.DisplayAlerts = True
+    Set ws = ThisWorkbook.Worksheets("祝日")
     On Error GoTo 0
-
-    ' 新しい「祝日」シートを作成
-    Set ws = Sheets.Add
-    ws.Name = "祝日"
-
-    ' 祝日リストを定義（祝日の名前, YYYY/MM/DD）
-    holidays = Array( _
-        Array("元日", "2024/01/01"), _
-        Array("成人の日", "2024/01/08"), _
-        Array("建国記念の日", "2024/02/11"), _
-        Array("休日", "2024/02/12"), _
-        Array("天皇誕生日", "2024/02/23"), _
-        Array("春分の日", "2024/03/20"), _
-        Array("昭和の日", "2024/04/29"), _
-        Array("憲法記念日", "2024/05/03"), _
-        Array("みどりの日", "2024/05/04"), _
-        Array("こどもの日", "2024/05/05"), _
-        Array("休日", "2024/05/06"), _
-        Array("海の日", "2024/07/15"), _
-        Array("山の日", "2024/08/11"), _
-        Array("休日", "2024/08/12"), _
-        Array("敬老の日", "2024/09/16"), _
-        Array("秋分の日", "2024/09/22"), _
-        Array("体育の日", "2024/10/14"), _
-        Array("文化の日", "2024/11/03"), _
-        Array("休日", "2024/11/04"), _
-        Array("勤労感謝の日", "2024/11/23"), _
-        Array("天皇誕生日", "2024/12/23") _
-        Array("元日", "2025/01/01"), _
-        Array("成人の日", "2025/01/13"), _
-        Array("建国記念の日", "2025/02/11"), _
-        Array("天皇誕生日", "2025/02/23"), _
-        Array("休日", "2025/02/24"), _
-        Array("春分の日", "2025/03/20"), _
-        Array("昭和の日", "2025/04/29"), _
-        Array("憲法記念日", "2025/05/03"), _
-        Array("みどりの日", "2025/05/04"), _
-        Array("こどもの日", "2025/05/05"), _
-        Array("休日", "2025/05/06"), _
-        Array("海の日", "2025/07/21"), _
-        Array("山の日", "2025/08/11"), _
-        Array("敬老の日", "2025/09/15"), _
-        Array("秋分の日", "2025/09/23"), _
-        Array("スポーツの日", "2025/10/13"), _
-        Array("文化の日", "2025/11/03"), _
-        Array("勤労感謝の日", "2025/11/23"), _
-        Array("休日", "2025/11/24") _
-    )
-
-    ' ヘッダーを追加
-    ws.Cells(1, 1).Value = "名称"
-    ws.Cells(1, 2).Value = "日付"
+    
+    ' シートが存在しない場合は作成
+    If ws Is Nothing Then
+        Set ws = ThisWorkbook.Worksheets.Add
+        ws.Name = "祝日"
+    Else
+        ' シートの内容とフォーマットをクリア
+        ws.Cells.Clear
+        ws.Cells.ClearFormats
+    End If
 
     ' 祝日リストをシートに書き込む
-    For i = LBound(holidays) To UBound(holidays)
-        ws.Cells(i + 2, 1).Value = holidays(i)(0)
-        ws.Cells(i + 2, 2).Value = holidays(i)(1)
+    For i = LBound(holidayList) To UBound(holidayList)
+        ws.Cells(i + 1, 1).Value = holidayList(i)(0)
+        ws.Cells(i + 1, 2).Value = holidayList(i)(1)
     Next i
 
-    ' 枠線を付ける
-    ws.Range(ws.Cells(1, 1), ws.Cells(UBound(holidays) + 2, 2)).Borders.LineStyle = xlContinuous
+    ' 書式設定
+    With ws.Range("A1:B" & UBound(holidayList) + 1)
+        .Borders.LineStyle = xlContinuous
+        .HorizontalAlignment = xlCenter
+        .Columns("A:B").AutoFit
+    End With
 
-    ' セル幅を調整
-    ws.Columns("A:B").AutoFit
+    ' ヘッダーのみ黄色塗りつぶし
+    With ws.Range("A1:B1")
+        .Interior.Color = RGB(255, 255, 0)
+    End With
 End Sub
             </pre>
         </div>
