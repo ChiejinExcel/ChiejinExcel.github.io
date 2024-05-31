@@ -387,7 +387,40 @@
             </blockquote>
         </div>
     </section>
-    
+
+    <section id="request-step13">
+        <h2>ステップ13: 休み希望の「確定ボタン」設置</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText13')">コピーする</button>
+            <blockquote id="requestText13">
+                エクセルの「Sheet1」に、コマンドボタンを追加する「AddCommandButton」というVBAコードが欲しいです。<br>
+                以下の要件を満たすコードを教えてください。<br>
+                ・ シート「Sheet1」にコマンドボタンを追加<br>
+                ・ ボタンのキャプションは「確定」、名前は「btnKakutei」<br>
+                ・ ボタンの位置とサイズはセルI3とI4の2マス分<br>
+                ・ 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br>
+                この機能を実行するためのコードを教えてもらえますか。
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="request-step14">
+        <h2>ステップ14: 「確定ボタン」で休み希望を収集</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText14')">コピーする</button>
+            <blockquote id="requestText14">
+                エクセルの「Sheet1」にある、「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
+                コードは以下の要件を満たします。<br>
+                ・ ボタンクリックで下記内容が実行されます<br>
+                ・ Sheet1のA1セル内容の左から8文字目以降をメンバー名として取得します<br>
+                ・ メンバー名がカラの場合は何もしません<br>
+                ・ A3からG8までの範囲で赤塗りつぶしセルの日付を取得します<br>
+                ・ 「管理用」というシートのB列でメンバー名を検索し、C列に取得した日にちをカンマ区切り(スペースなし)で上書きします<br>
+                この機能を実行するためのコードを教えてもらえますか。
+            </blockquote>
+        </div>
+    </section>
+
     <!-- コード例セクション -->
     <section id="code-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
@@ -903,7 +936,99 @@ End Sub
             </pre>
         </div>
     </section>
-    
+
+    <section id="code-step13">
+        <h2>ステップ13: 休み希望の「確定ボタン」設置</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample13')">コピーする</button>
+            <pre id="codeExample13">
+        Sub AddCommandButton()
+            Dim ws As Worksheet
+            Dim btn As OLEObject
+            Dim cell1 As Range, cell2 As Range
+            Dim topPos As Double, leftPos As Double, btnWidth As Double, btnHeight As Double
+        
+            ' シートの参照
+            Set ws = ThisWorkbook.Sheets("Sheet1")
+            
+            ' 既存のボタンが存在する場合は削除
+            On Error Resume Next
+            ws.OLEObjects("btnKakutei").Delete
+            On Error GoTo 0
+        
+            ' I3とI4のセル範囲を取得
+            Set cell1 = ws.Range("I3")
+            Set cell2 = ws.Range("I4")
+        
+            ' ボタンの位置とサイズを設定
+            topPos = cell1.Top
+            leftPos = cell1.Left
+            btnWidth = cell1.Width
+            btnHeight = cell1.Height + cell2.Height
+        
+            ' コマンドボタンを追加
+            Set btn = ws.OLEObjects.Add(ClassType:="Forms.CommandButton.1", _
+                                        Left:=leftPos, Top:=topPos, Width:=btnWidth, Height:=btnHeight)
+            
+            ' ボタンのキャプションと名前を設定
+            With btn
+                .Name = "btnKakutei"
+                .Object.Caption = "確定"
+            End With
+        End Sub
+            </pre>
+        </div>
+    </section>
+
+    <section id="code-step14">
+        <h2>ステップ14: 「確定ボタン」で休み希望を収集</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample14')">コピーする</button>
+            <pre id="codeExample14">
+        Private Sub btnKakutei_Click()
+            Dim ws As Worksheet
+            Set ws = ThisWorkbook.Sheets("Sheet1")
+            Dim wsMgmt As Worksheet
+            Set wsMgmt = ThisWorkbook.Sheets("管理用")
+            
+            Dim cell As Range
+            Dim dates As String
+            Dim name As String
+            Dim yearMonth As String
+            Dim targetRow As Long
+            
+            ' A1セルの氏名を取得（左から8文字目以降）
+            yearMonth = ws.Range("A1").Value
+            name = Mid(yearMonth, 9)
+            
+            ' メンバー名が空の場合は何もしない
+            If Trim(name) = "" Then Exit Sub
+            
+            ' A3:G8の赤塗りつぶしセルの日付を取得
+            For Each cell In ws.Range("A3:G8")
+                If cell.Interior.Color = RGB(255, 0, 0) Then ' 赤色のセルを確認
+                    dates = dates & cell.Value & ","
+                End If
+            Next cell
+            ' 最後のカンマを削除
+            If Len(dates) > 0 Then dates = Left(dates, Len(dates) - 1)
+            
+            ' 氏名に一致する行を管理用シートから探す
+            On Error Resume Next
+            targetRow = Application.Match(name, wsMgmt.Range("B:B"), 0)
+            On Error GoTo 0
+            
+            If targetRow > 0 Then
+                ' C列に取得した日付をカンマ区切りで上書き
+                wsMgmt.Cells(targetRow, 3).Value = dates
+            Else
+                MsgBox "氏名が見つかりません。"
+            End If
+        End Sub
+            </pre>
+        </div>
+    </section>
+
     <script>
         function copyToClipboard(element) {
             var temp = document.createElement('textarea');
