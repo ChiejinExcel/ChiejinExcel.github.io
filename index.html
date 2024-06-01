@@ -423,6 +423,177 @@
         </div>
     </section>
 
+    <section id="request-step15">
+        <h2>ステップ15: 選択セルにメンバーを自動割付</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText15')">コピーする</button>
+            <blockquote id="requestText15">
+                エクセルの「Sheet1」上の「選択セル」にメンバーを割り当てるための「AssignShifts」というVBAコードを作成してください。<br>
+                コードは以下の要件を満たします。<br>
+                <ol>
+                    <li>選択セルが以下の場合はスキップ：
+                        <ul>
+                            <li>複数選択されている</li>
+                            <li>カレンダーの範囲外</li>
+                            <li>日付がない</li>
+                        </ul>
+                    </li>
+                    <li>メンバーリストの取得と各メンバーの「休み希望」情報の取得：
+                        <ul>
+                            <li>「管理用」シートのB列からメンバーリストを取得</li>
+                            <li>「休み希望」の「日にち」を取得</li>
+                            <li>「休み希望」の日数をカウント</li>
+                        </ul>
+                    </li>
+                    <li>各メンバーの「すでに割り付けられている回数」をカウント：
+                        <ul>
+                            <li>A3からG8の範囲内のセルをチェックして、各メンバーの名前が含まれている個数をカウント</li>
+                        </ul>
+                    </li>
+                    <li>メンバーから「割付候補」の絞り込み：
+                        <ul>
+                            <li>選択セルの日付を「休み希望」に含むメンバーを「割付候補」から外す</li>
+                            <li>「すでに割り付けられている回数」が少ないメンバーを「割付候補」とする</li>
+                            <li>全員が同じ回数であれば、全員を「割付候補」とする</li>
+                            <li>選択セルの左右隣接セルにすでに割り付けられているメンバーを「割付候補」から外す</li>
+                            <li>「割付候補」のうち、最多の「休み希望」をもつメンバーを「最終割付候補」とする</li>
+                        </ul>
+                    </li>
+                    <li>「最終割付候補」からランダムに1人選択：
+                        <ul>
+                            <li>「最終割付候補」をシャッフルし、メンバー1人を選択し、選択セルに改行区切りで追記する</li>
+                        </ul>
+                    </li>
+                </ol>
+                詳細設定：
+                <ul>
+                    <li>シートの設定：
+                        <ul>
+                            <li>`ws`を割り付け対象シート（例：`Sheet1`）に設定</li>
+                            <li>`wsManagement`を管理用シート（例：`管理用`）に設定</li>
+                        </ul>
+                    </li>
+                    <li>変数の設定：
+                        <ul>
+                            <li>`Candidates`、`MemberList`、`MemberCount`、`MemberOffs`、`OffCount`、`existingMembers`、`candidateArray`の変数を適切に初期化</li>
+                            <li>`shiftDate`は選択セルの日付を文字列として取得</li>
+                        </ul>
+                    </li>
+                    <li>メンバーリストの取得：
+                        <ul>
+                            <li>`MemberList`を`wsManagement`のB列から取得</li>
+                            <li>各メンバーの休み希望日をカンマ区切りで取得し、配列として格納</li>
+                            <li>`OffCount`に各メンバーの休み希望日数をカウントして格納</li>
+                        </ul>
+                    </li>
+                    <li>各メンバーの登場回数のカウント：
+                        <ul>
+                            <li>A3からG8の範囲内のセルをチェックし、各メンバーの登場回数を`MemberCount`にカウントして格納</li>
+                        </ul>
+                    </li>
+                    <li>割付候補の絞り込み：
+                        <ul>
+                            <li>`Candidates`に選択セルの日付を休み希望としていないメンバーを追加</li>
+                            <li>`minCount`と`maxCount`を算出し、登場回数が全員同じ場合は全員を`Candidates`に残し、最小のメンバーのみを残す場合は再度`Candidates`を更新</li>
+                            <li>選択セルの左右隣接セルにすでに割り付けられているメンバーを除外</li>
+                        </ul>
+                    </li>
+                    <li>最終割付候補の選定：
+                        <ul>
+                            <li>`GetOffCounts`関数を使用して、`candidateArray`から最多の休み希望日数を持つメンバーのみを残す</li>
+                            <li>`maxOffCandidates`に最終割付候補を追加</li>
+                        </ul>
+                    </li>
+                    <li>シャッフルと割り付け：
+                        <ul>
+                            <li>最終割付候補をシャッフルし、1人を選択して選択セルに割り付け</li>
+                        </ul>
+                    </li>
+                </ul>
+                関数の実装：
+                以下の関数を実装してください：
+                <ul>
+                    <li>`IsNumberInArray`：指定した数値が配列内に存在するかどうかを判定</li>
+                    <li>`IsInCollection`：指定したキーがコレクション内に存在するかどうかを判定</li>
+                    <li>`GetOffCounts`：指定した候補配列から休み希望日数を取得</li>
+                </ul>
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="request-step16">
+        <h2>ステップ16: 一か月分のメンバーを自動割付</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#requestText16')">コピーする</button>
+            <blockquote id="requestText16">
+                エクセルの「Sheet1」上のカレンダーにメンバーを割り当てるための「AssignShiftsBasedOnMemberOffDays」というVBAコードを作成してください。<br>
+                コードを実行すると、以下のルールに従って、選択セルを移動しながら「AssignShifts」という既存の関数を引数なしで呼び出します。<br>
+                <ol>
+                    <li>メンバーの取得：
+                        <ul>
+                            <li>管理用シートのB列にはメンバー名が、C列には「休み希望」の日付（数値）がカンマ区切りで並んでいます。この情報を基に、各メンバーとその休み希望日を配列に格納してください。</li>
+                            <li>メンバーと休み希望日を取得するために <code>GetMembersAndOffDays</code> 関数を使用してください。</li>
+                        </ul>
+                    </li>
+                    <li>休み希望日数のカウントとソート：
+                        <ul>
+                            <li>各メンバーの休み希望日数をカウントし、オフ日数で降順にソートします。このソートには <code>BubbleSort</code> 関数を使用してください。</li>
+                            <li><code>BubbleSort</code> 関数は、2次元配列を指定された列で降順にソートする機能を持つ必要があります。</li>
+                            <li>休み希望日数をカウントするために <code>CountAndSortOffDays</code> 関数を使用してください。</li>
+                        </ul>
+                    </li>
+                    <li>カレンダーの日数の範囲決定：
+                        <ul>
+                            <li>カレンダーは <code>Sheet1</code> のセル範囲A3からG8に配置されています。この範囲内の日数の最大値を取得するために <code>GetMaxDayInCalendar</code> 関数を使用します。</li>
+                            <li>この関数は、指定されたカレンダー範囲内の最大日数を返す必要があります。</li>
+                        </ul>
+                    </li>
+                    <li>シフトの割り付け：
+                        <ul>
+                            <li>ソートされたメンバーごとに、休み希望日を除外した利用可能な日付のリストを作成し、その中からランダムに1つの日付を選びます。</li>
+                            <li>利用可能な日付のリストを作成するために <code>GetAvailableDays</code> 関数を使用してください。</li>
+                            <li>選択した日付がカレンダーのセル範囲（<code>Sheet1</code> のA3からG8）に存在し、セルの値が日付である場合、そのセルを選択し、「AssignShifts」を引数なしで呼び出します。</li>
+                            <li>選択したセルが日付以外の文字を含んでいた場合は、他の日付をランダムに再選択してください。</li>
+                            <li>全メンバーについて同様の処理を行ったら、最初のメンバーに戻り、同じ処理を繰り返してください。</li>
+                            <li>全てのセルに割り付けが完了するまでループを続けてください。これを確認するために <code>AllCellsAssigned</code> 関数を使用します。</li>
+                            <li>この関数は、指定されたカレンダー範囲内の全てのセルが割り付けられているかどうかを確認する必要があります。</li>
+                        </ul>
+                    </li>
+                </ol>
+                補助関数の実装：
+                <ul>
+                    <li><code>BubbleSort</code>: 2次元配列を指定された列でソートします。</li>
+                    <li><code>GetMaxDayInCalendar</code>: カレンダーの最大日数を取得します。</li>
+                    <li><code>FindDateCell</code>: 指定した日付を含むセルを探します。セルが見つからない場合は <code>Nothing</code> を返します。</li>
+                    <li><code>IsNumberInArray</code>: 指定した数が配列に含まれているかを確認します。</li>
+                    <li><code>AllCellsAssigned</code>: カレンダーの全てのセルが割り付けられているかどうかを確認します。</li>
+                    <li><code>GetAvailableDays</code>: 最大日数と休み希望日を基に、利用可能な日付のリストを作成します。</li>
+                </ul>
+                変数の型指定：
+                <ul>
+                    <li><code>wsManagement</code> と <code>ws</code> は <code>Worksheet</code> 型。</li>
+                    <li><code>memberCell</code> は <code>Range</code> 型。</li>
+                    <li><code>memberOffDays</code> は <code>Variant</code> 型。</li>
+                    <li><code>offCountArray</code> と <code>sortedMembers</code> は <code>Variant</code> 配列。</li>
+                    <li><code>availableDays</code> は <code>Collection</code> 型。</li>
+                    <li><code>day</code> と <code>maxDay</code> は <code>Long</code> 型。</li>
+                    <li><code>member</code> は <code>String</code> 型。</li>
+                    <li><code>i</code> と <code>j</code> は <code>Long</code> 型。</li>
+                    <li><code>allAssigned</code> は <code>Boolean</code> 型。</li>
+                </ul>
+                注意点：
+                <ul>
+                    <li><code>BubbleSort</code> 関数は、2次元配列を指定された列で降順にソートしてください。</li>
+                    <li><code>GetMaxDayInCalendar</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内の最大日数を返してください。</li>
+                    <li><code>FindDateCell</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内で指定された日付に対応するセルを返してください。セルが見つからない場合は <code>Nothing</code> を返してください。</li>
+                    <li><code>IsNumberInArray</code> 関数は、指定された数値が配列内に存在するかを確認してください。</li>
+                    <li><code>AllCellsAssigned</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内の全てのセルが割り付けられているかどうかを確認してください。</li>
+                </ul>
+                この指定に基づいて、適切なVBAコードを提供してください。
+            </blockquote>
+        </div>
+    </section>
+    
     <!-- コード例セクション -->
     <section id="code-step1">
         <h2>ステップ1: セルA1に現在の年月を表示する</h2>
@@ -1030,6 +1201,455 @@ End Sub
             </pre>
         </div>
     </section>
+
+    <section id="code-step15">
+        <h2>ステップ15: 選択セルにメンバーを自動割付</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample15')">コピーする</button>
+            <pre id="codeExample15">
+    Sub AssignShifts()
+        Dim ws As Worksheet
+        Dim wsManagement As Worksheet
+        Dim Candidates As Collection
+        Dim MemberList As Range
+        Dim MemberCount As Object ' Dictionary
+        Dim MemberOffs As Object ' Dictionary
+        Dim OffCount As Object ' Dictionary
+        Dim i As Long
+        Dim member As String
+        Dim shiftDate As String
+        Dim cell As Range
+        Dim minCount As Long
+        Dim maxCount As Long
+        Dim maxOffCount As Long
+        Dim memberCell As Range ' MemberListの各セルを表す変数
+        Dim adjacentMembers As Collection ' 隣接するセルのメンバーを保持するコレクション
+        Dim candidateArray() As Variant ' 配列に変換した候補メンバー
+    
+        ' シートの設定
+        Set ws = ThisWorkbook.Sheets("Sheet1")
+        Set wsManagement = ThisWorkbook.Sheets("管理用")
+    
+        ' 選択セルの確認
+        If Selection.Cells.Count <> 1 Then Exit Sub
+    
+        ' 選択セルの範囲内確認
+        If Intersect(Selection, ws.Range("A3:G8")) Is Nothing Then Exit Sub
+    
+        ' 選択セルが数値か確認
+        If Not IsNumeric(Selection.Value) Or Selection.Value = "" Then Exit Sub
+    
+        ' メンバーのリスト取得
+        Set MemberList = wsManagement.Range("B2", wsManagement.Cells(wsManagement.Rows.Count, 2).End(xlUp))
+    
+        ' メンバーの登場回数と休み希望日数をカウントする辞書を作成
+        Set MemberCount = CreateObject("Scripting.Dictionary")
+        Set OffCount = CreateObject("Scripting.Dictionary")
+        Set MemberOffs = CreateObject("Scripting.Dictionary")
+        For Each memberCell In MemberList
+            member = memberCell.Value
+            MemberCount(member) = 0
+            MemberOffs(member) = Split(wsManagement.Cells(memberCell.Row, 3).Value, ",")
+            OffCount(member) = UBound(MemberOffs(member)) - LBound(MemberOffs(member)) + 1
+        Next memberCell
+    
+        ' A3:G8の範囲をチェックして登場回数をカウント
+        For Each cell In ws.Range("A3:G8")
+            If cell.Value <> "" Then
+                For Each memberCell In MemberList
+                    If InStr(cell.Value, memberCell.Value) > 0 Then
+                        MemberCount(memberCell.Value) = MemberCount(memberCell.Value) + 1
+                    End If
+                Next memberCell
+            End If
+        Next cell
+    
+        ' 選択セルの値を取得
+        shiftDate = CStr(Selection.Value)
+    
+        ' 最初に休み希望日を除外
+        Set Candidates = New Collection
+        For Each memberCell In MemberList
+            member = memberCell.Value
+            If Not IsNumberInArray(shiftDate, MemberOffs(member)) Then
+                Candidates.Add member
+            End If
+        Next memberCell
+    
+        ' 割り付け候補がいない場合は終了
+        If Candidates.Count = 0 Then
+            MsgBox "割り付け可能なメンバーがいません。"
+            Exit Sub
+        End If
+    
+        ' Candidatesを配列に変換
+        If Candidates.Count > 0 Then
+            ReDim candidateArray(1 To Candidates.Count)
+            For i = 1 To Candidates.Count
+                candidateArray(i) = Candidates(i)
+            Next i
+        Else
+            Exit Sub
+        End If
+    
+        ' 登場回数が全員同じ場合は全員をCandidatesに残す
+        minCount = Application.WorksheetFunction.Min(MemberCount.Items)
+        maxCount = Application.WorksheetFunction.Max(MemberCount.Items)
+        If minCount <> maxCount Then
+            ' 登場回数が最小のメンバーのみをCandidatesに残す
+            Dim tempCandidates As Collection
+            Set tempCandidates = New Collection
+            For i = LBound(candidateArray) To UBound(candidateArray)
+                member = candidateArray(i)
+                If MemberCount(member) = minCount Then
+                    tempCandidates.Add member
+                End If
+            Next i
+            Set Candidates = tempCandidates
+    
+            ' Candidatesを配列に再変換
+            If Candidates.Count > 0 Then
+                ReDim candidateArray(1 To Candidates.Count)
+                For i = 1 To Candidates.Count
+                    candidateArray(i) = Candidates(i)
+                Next i
+            Else
+                Exit Sub
+            End If
+        Else
+            ' 登場回数が全員同じ場合はそのままCandidatesを使用
+            If Candidates.Count > 0 Then
+                ReDim candidateArray(1 To Candidates.Count)
+                For i = 1 To Candidates.Count
+                    candidateArray(i) = Candidates(i)
+                Next i
+            Else
+                Exit Sub
+            End If
+        End If
+    
+        ' 左右の隣接セルのメンバーを取得
+        Set adjacentMembers = New Collection
+        Dim colIndex As Long
+        Dim rowIndex As Long
+        colIndex = Selection.Column
+        rowIndex = Selection.Row
+    
+        ' 左隣のセル（特別条件を含む）
+        If colIndex > 1 Then
+            ' 通常の左隣
+            If ws.Cells(rowIndex, colIndex - 1).Value <> "" Then
+                For Each memberCell In MemberList
+                    If InStr(ws.Cells(rowIndex, colIndex - 1).Value, memberCell.Value) > 0 Then
+                        On Error Resume Next
+                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                        On Error GoTo 0
+                    End If
+                Next memberCell
+            End If
+        ElseIf colIndex = 1 And rowIndex > 3 Then
+            ' 左端の場合の特別条件（A3は除外）
+            If ws.Cells(rowIndex - 1, 7).Value <> "" Then
+                For Each memberCell In MemberList
+                    If InStr(ws.Cells(rowIndex - 1, 7).Value, memberCell.Value) > 0 Then
+                        On Error Resume Next
+                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                        On Error GoTo 0
+                    End If
+                Next memberCell
+            End If
+        End If
+    
+        ' 右隣のセル（特別条件を含む）
+        If colIndex < 7 Then
+            ' 通常の右隣
+            If ws.Cells(rowIndex, colIndex + 1).Value <> "" Then
+                For Each memberCell In MemberList
+                    If InStr(ws.Cells(rowIndex, colIndex + 1).Value, memberCell.Value) > 0 Then
+                        On Error Resume Next
+                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                        On Error GoTo 0
+                    End If
+                Next memberCell
+            End If
+        ElseIf colIndex = 7 And rowIndex < 8 Then
+            ' 右端の場合の特別条件（G8は除外）
+            If ws.Cells(rowIndex + 1, 1).Value <> "" Then
+                For Each memberCell In MemberList
+                    If InStr(ws.Cells(rowIndex + 1, 1).Value, memberCell.Value) > 0 Then
+                        On Error Resume Next
+                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                        On Error GoTo 0
+                    End If
+                Next memberCell
+            End If
+        End If
+    
+        ' 割り付け候補から隣接メンバーを除外
+        Dim finalCandidates As Collection
+        Set finalCandidates = New Collection
+        For i = LBound(candidateArray) To UBound(candidateArray)
+            member = candidateArray(i)
+            If Not IsInCollection(adjacentMembers, member) Then
+                finalCandidates.Add member
+            End If
+        Next i
+    
+        ' finalCandidatesが空の場合は終了
+        If finalCandidates.Count = 0 Then
+            MsgBox "割り付け可能なメンバーがいません。"
+            Exit Sub
+        End If
+    
+        ' finalCandidatesを配列に変換
+        If finalCandidates.Count > 0 Then
+            ReDim candidateArray(1 To finalCandidates.Count)
+            For i = 1 To finalCandidates.Count
+                candidateArray(i) = finalCandidates(i)
+            Next i
+        Else
+            Exit Sub
+        End If
+    
+        ' finalCandidatesから最大の休み希望日数を持つメンバーのみを残す
+        maxOffCount = Application.WorksheetFunction.Max(GetOffCounts(candidateArray, OffCount))
+        Dim maxOffCandidates As Collection
+        Set maxOffCandidates = New Collection
+        For i = LBound(candidateArray) To UBound(candidateArray)
+            member = candidateArray(i)
+            If OffCount(member) = maxOffCount Then
+                maxOffCandidates.Add member
+            End If
+        Next i
+    
+        ' maxOffCandidatesが空の場合は終了
+        If maxOffCandidates.Count = 0 Then
+            MsgBox "割り付け可能なメンバーがいません。"
+            Exit Sub
+        End If
+    
+        ' maxOffCandidatesを配列に変換
+        If maxOffCandidates.Count > 0 Then
+            ReDim candidateArray(1 To maxOffCandidates.Count)
+            For i = 1 To maxOffCandidates.Count
+                candidateArray(i) = maxOffCandidates(i)
+            Next i
+        Else
+            Exit Sub
+        End If
+    
+        ' 候補メンバーをシャッフル
+        For i = UBound(candidateArray) To LBound(candidateArray) Step -1
+            shuffleIndex = Int((i - LBound(candidateArray) + 1) * Rnd + LBound(candidateArray))
+            member = candidateArray(shuffleIndex)
+            candidateArray(shuffleIndex) = candidateArray(i)
+            candidateArray(i) = member
+        Next i
+    
+        ' 割り付け実行
+        For i = LBound(candidateArray) To UBound(candidateArray)
+            member = candidateArray(i)
+            Selection.Value = Selection.Value & vbCrLf & member
+            MemberCount(member) = MemberCount(member) + 1
+            Exit For
+        Next i
+    End Sub
+    
+    Function IsNumberInArray(num As String, arr As Variant) As Boolean
+        Dim i As Long
+        IsNumberInArray = False
+        For i = LBound(arr) To UBound(arr)
+            If arr(i) = num Then
+                IsNumberInArray = True
+                Exit Function
+            End If
+        Next i
+    End Function
+    
+    Function IsInCollection(coll As Collection, key As String) As Boolean
+        Dim var As Variant
+        On Error Resume Next
+        var = coll(key)
+        On Error GoTo 0
+        If IsEmpty(var) Then
+            IsInCollection = False
+        Else
+            IsInCollection = True
+        End If
+    End Function
+    
+    Function GetOffCounts(candidateArray As Variant, OffCount As Object) As Variant
+        Dim counts() As Long
+        ReDim counts(LBound(candidateArray) To UBound(candidateArray))
+        Dim i As Long
+        For i = LBound(candidateArray) To UBound(candidateArray)
+            counts(i) = OffCount(candidateArray(i))
+        Next i
+        GetOffCounts = counts
+    End Function
+            </pre>
+        </div>
+    </section>
+
+    <section id="code-step16">
+        <h2>ステップ16: 一か月分のメンバーを自動割付</h2>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyToClipboard('#codeExample16')">コピーする</button>
+            <pre id="codeExample16">
+    Sub AssignShiftsBasedOnMemberOffDays()
+        Dim wsManagement As Worksheet
+        Dim ws As Worksheet
+        Dim memberCell As Range
+        Dim memberOffDays As Variant
+        Dim offCountArray() As Variant
+        Dim sortedMembers() As Variant
+        Dim availableDays As Collection
+        Dim day As Variant
+        Dim maxDay As Long
+        Dim member As String
+        Dim i As Long, j As Long
+        Dim allAssigned As Boolean
+    
+        ' シートの設定
+        Set wsManagement = ThisWorkbook.Sheets("管理用")
+        Set ws = ThisWorkbook.Sheets("Sheet1")
+    
+        ' メンバーのリストと休み希望日を配列に格納
+        Dim MemberOffs As Object
+        Set MemberOffs = CreateObject("Scripting.Dictionary")
+        Dim MemberList() As String
+        Dim memberIndex As Long
+        memberIndex = 0
+        For Each memberCell In wsManagement.Range("B2", wsManagement.Cells(wsManagement.Rows.Count, 2).End(xlUp))
+            member = memberCell.Value
+            memberOffDays = Split(wsManagement.Cells(memberCell.Row, 3).Value, ",")
+            MemberOffs(member) = memberOffDays
+            memberIndex = memberIndex + 1
+            ReDim Preserve MemberList(1 To memberIndex)
+            MemberList(memberIndex) = member
+        Next memberCell
+    
+        ' 休み希望日数をカウントし、配列に格納
+        ReDim offCountArray(1 To memberIndex, 1 To 2)
+        For i = 1 To memberIndex
+            member = MemberList(i)
+            offCountArray(i, 1) = member
+            offCountArray(i, 2) = UBound(MemberOffs(member)) - LBound(MemberOffs(member)) + 1
+        Next i
+    
+        ' 休み希望日数でソート
+        Call BubbleSort(offCountArray, 2)
+    
+        ' ソートされたメンバーを取得
+        ReDim sortedMembers(1 To UBound(offCountArray, 1))
+        For i = 1 To UBound(offCountArray, 1)
+            sortedMembers(i) = offCountArray(i, 1)
+        Next i
+    
+        ' カレンダーの日数の範囲を決定
+        maxDay = GetMaxDayInCalendar(ws)
+    
+        ' 全てのセルに割り付けが完了するまでループ
+        Do
+            allAssigned = True
+            ' メンバーごとに割り付けを実行
+            For i = LBound(sortedMembers) To UBound(sortedMembers)
+                member = sortedMembers(i)
+    
+                ' 休み希望日を除外した利用可能な日を取得
+                Set availableDays = New Collection
+                For day = 1 To maxDay
+                    If Not IsNumberInArray(CStr(day), MemberOffs(member)) Then
+                        availableDays.Add day
+                    End If
+                Next day
+    
+                ' 利用可能な日がある限りシフトを割り付け
+                Do While availableDays.Count > 0
+                    Dim randomIndex As Long
+                    randomIndex = Int(Rnd() * availableDays.Count) + 1
+                    day = availableDays(randomIndex)
+    
+                    ' 対応するセルを選択
+                    Set cell = FindDateCell(ws, CLng(day))
+                    If Not cell Is Nothing Then
+                        If IsNumeric(cell.Value) Then
+                            cell.Select
+                            Call AssignShifts
+                            allAssigned = False ' 割り付けが成功した場合
+                            Exit Do ' 割り付けが成功したらループを抜ける
+                        End If
+                    End If
+    
+                    ' 選択した日を利用可能日リストから削除
+                    availableDays.Remove randomIndex
+                Loop
+            Next i
+        Loop While Not allAssigned And Not AllCellsAssigned(ws)
+    
+    End Sub
+    
+    Function BubbleSort(arr As Variant, col As Long)
+        Dim i As Long, j As Long
+        Dim temp1 As Variant, temp2 As Variant
+    
+        For i = LBound(arr, 1) To UBound(arr, 1) - 1
+            For j = i + 1 To UBound(arr, 1)
+                If arr(i, col) < arr(j, col) Then
+                    ' Swap values in the array
+                    temp1 = arr(i, 1)
+                    temp2 = arr(i, 2)
+                    arr(i, 1) = arr(j, 1)
+                    arr(i, 2) = arr(j, 2)
+                    arr(j, 1) = temp1
+                    arr(j, 2) = temp2
+                End If
+            Next j
+        Next i
+    End Function
+    
+    Function GetMaxDayInCalendar(ws As Worksheet) As Long
+        Dim maxDay As Long
+        maxDay = Application.WorksheetFunction.Max(ws.Range("A3:G8"))
+        GetMaxDayInCalendar = maxDay
+    End Function
+    
+    Function FindDateCell(ws As Worksheet, dateValue As Long) As Range
+        Dim cell As Range
+        For Each cell In ws.Range("A3:G8")
+            If cell.Value = dateValue Then
+                Set FindDateCell = cell
+                Exit Function
+            End If
+        Next cell
+        Set FindDateCell = Nothing
+    End Function
+    
+    Function IsNumberInArray(num As String, arr As Variant) As Boolean
+        Dim i As Long
+        IsNumberInArray = False
+        For i = LBound(arr) To UBound(arr)
+            If arr(i) = num Then
+                IsNumberInArray = True
+                Exit Function
+            End If
+        Next i
+    End Function
+    
+    Function AllCellsAssigned(ws As Worksheet) As Boolean
+        Dim cell As Range
+        For Each cell In ws.Range("A3:G8")
+            If IsNumeric(cell.Value) Then
+                AllCellsAssigned = False
+                Exit Function
+            End If
+        Next cell
+        AllCellsAssigned = True
+    End Function
+            </pre>
+        </div>
+    </section>
+
 
     <script>
         function copyToClipboard(element) {
