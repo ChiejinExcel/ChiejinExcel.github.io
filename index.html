@@ -1661,6 +1661,47 @@ End Sub
             document.body.removeChild(temp);
             alert('コピーしました!');
         }
+
+        // スクロールするとボタンが表示されるようにする
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("backToTopBtn").style.display = "block";
+            } else {
+                document.getElementById("backToTopBtn").style.display = "none";
+            }
+        }
+
+        // ボタンをクリックするとページの一番上に戻る
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
     </script>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="一番上に戻る">▲</button>
+
+    <style>
+        #backToTopBtn {
+            display: none; /* デフォルトでは非表示 */
+            position: fixed; /* 固定位置 */
+            bottom: 20px; /* 下からの距離 */
+            right: 30px; /* 右からの距離 */
+            z-index: 99; /* 他の要素の上に表示 */
+            border: none; /* ボーダーなし */
+            outline: none; /* アウトラインなし */
+            background-color: #555; /* ボタンの背景色 */
+            color: white; /* ボタンの文字色 */
+            cursor: pointer; /* カーソル */
+            padding: 15px; /* パディング */
+            border-radius: 10px; /* ボーダーの丸み */
+            font-size: 18px; /* 文字サイズ */
+        }
+
+        #backToTopBtn:hover {
+            background-color: #333; /* ホバー時の背景色 */
+        }
+    </style>
 </body>
 </html>
