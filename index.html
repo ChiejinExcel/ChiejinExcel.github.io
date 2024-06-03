@@ -42,23 +42,29 @@
             position: relative;
             margin-bottom: 1em;
         }
-        .step-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .step-title-container h2 {
-            margin: 0;
-            flex-grow: 1;
-        }
         .copy-button {
-            margin-left: 10px; /* 必要に応じて調整 */
-            z-index: 10;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+        }
+
+        /* ここに新しいCSSを追加します */
+        .step-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+
+        .copy-button {
+            margin-left: 10px;
+            z-index: 10;
+            position: relative;
         }
     </style>
 </head>
@@ -1781,3 +1787,4 @@ End Sub
     </style>
 </body>
 </html>
+
