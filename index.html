@@ -42,10 +42,18 @@
             position: relative;
             margin-bottom: 1em;
         }
+        .step-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .step-title-container h2 {
+            margin: 0;
+            flex-grow: 1;
+        }
         .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            margin-left: 10px; /* 必要に応じて調整 */
+            z-index: 10;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -99,15 +107,16 @@
             <a href="#code-step16">ステップ16</a>    
             <a href="#code-step17-1">ステップ17-1</a>    
             <a href="#code-step17-2">ステップ17-2</a> 
-        
         </div>
     </nav>
 
     <!-- 依頼文セクション -->
     <section id="request-step1">
-        <h2>ステップ1： 「A1セル」に「現在の年月」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ1： 「A1セル」に「現在の年月」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText1')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText1">
                 エクセルで「Sheet1」のセルA1に、現在の年月を表示するマクロを「DisplayCurrentYearMonth」という名前で作りたいです。セルA1からG1までを結合して「YYYY/MM」形式で中央揃えで表示されるようにしてください。コードを教えてください。
             </blockquote>
@@ -115,9 +124,11 @@
     </section>
 
     <section id="request-step2">
-        <h2>ステップ2： 「曜日」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ2： 「曜日」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText2')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText2">
                 エクセルで「Sheet1」のセルA2からG2に、カレンダーの曜日ヘッダー（日、月、火、水、木、金、土）を表示するマクロを「SetCalendarHeaders」という名前で作りたいです。コードを教えてください。
             </blockquote>
@@ -125,9 +136,11 @@
     </section>
 
     <section id="request-step3">
-        <h2>ステップ3： 「枠線」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ3： 「枠線」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText3')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText3">
                 エクセルで「Sheet1」のセルA2からG8に、カレンダーの枠線を引くマクロを「DrawCalendarBorders」という名前で作りたいです。コードを教えてください。
             </blockquote>
@@ -135,9 +148,11 @@
     </section>
 
     <section id="request-step4">
-        <h2>ステップ4： 「1日目」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ4： 「1日目」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText4')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText4">
                 エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。カレンダーの1日目を適切な位置に表示するマクロを「DisplayFirstDay」という名前で作りたいです。1日目はセルA3から表示します。コードを教えてください。
             </blockquote>
@@ -145,9 +160,11 @@
     </section>
 
     <section id="request-step5">
-        <h2>ステップ5： 「2日目以降」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ5： 「2日目以降」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText5')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText5">
                 エクセルで「Sheet1」のセルA1に現在の年月を表示し、セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）を設定し、セルA2からG8に枠線を引いています。さらに、1日目は適切な位置に表示されています。この状態から、カレンダーの2日目以降を1日の右から順に追加していくマクロを「AddRemainingDays」という名前で作りたいです。コードを教えてください。
             </blockquote>
@@ -155,9 +172,11 @@
     </section>
 
     <section id="request-step6">
-        <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText6')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText6">
                 エクセルで「Sheet1」のカレンダーの土曜日を青、日曜日を赤に表示するマクロを「ColorWeekends」という名前で作りたいです。曜日ヘッダー（セルA2からG2）も同様に土曜日を青、日曜日を赤にしてください。カレンダーは以下の前提で作成されています。
                 <ol>
@@ -171,9 +190,11 @@
     </section>
 
     <section id="request-step7">
-        <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText7')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText7">
                 エクセルで今年の日本の祝日リストを「祝日」という名前のシートに書き込むマクロを「CreateHolidaySheet」という名前で作成したいです。<br><br>
                 
@@ -243,9 +264,11 @@
     </section>
 
     <section id="request-step8">
-        <h2>ステップ8： 「祝日を赤」にする</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ8： 「祝日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText8')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText8">
                 エクセルで「Sheet1」にカレンダーを作成しています。カレンダーは以下の前提で作成されています。
                 <ol>
@@ -287,9 +310,11 @@
     </section>
 
     <section id="request-step9">
-        <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText9')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText9">
                 エクセルで「Sheet1」にカレンダーを作成しています。シートを初期状態に戻してからカレンダーを作成するためのVBAマクロを作成したいと考えています。具体的な要件は以下の通りです：
                 <ol>
@@ -313,9 +338,11 @@
     </section>
 
     <section id="request-step10">
-        <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText10')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText10">
                 エクセルで「Sheet1」にカレンダーを作成しています。各日付セルをダブルクリックすることでセルの色を変更できるようにしたいと考えています。ダブルクリックしたセルの塗りつぶし色を赤にし、再度ダブルクリックすると元の状態に戻るようにしたいです。カレンダーの構成は以下の通りです：
                 <ol>
@@ -335,9 +362,11 @@
     </section>
 
     <section id="request-step11">
-        <h2>ステップ11： 仮の「メンバーシート」作成</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ11： 仮の「メンバーシート」作成</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText11')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText11">
                 エクセルで「管理用」というシートに、メンバーリストを作成してほしいです。以下の要件を満たすマクロを「CreateMemberList」という名前で作成してください。
                 <ol>
@@ -385,9 +414,11 @@
     </section>
 
     <section id="request-step12">
-        <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText12')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText12">
                 「管理用」シートのB列、B2以下最下段までのセルをダブルクリックしたときに実行される、「管理用」シート用のコードが欲しいです。ダブルクリックされたセルのメンバー名を取得し、既存のInitializeAndCreateCalendarマクロを呼び出してください。カレンダーがSheet1に作成されるので、そのA1セルの内容を、「元の内容 + 半角スペース + メンバー名」という形式で更新し、最後にSheet1をアクティブにしてください。引数は渡さないで実装してください。
                 以上の機能を実装したコードを教えてもらえますか。
@@ -396,9 +427,11 @@
     </section>
 
     <section id="request-step13">
-        <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText13')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText13">
                 エクセルの「Sheet1」に、コマンドボタンを追加する「AddCommandButton」というVBAコードが欲しいです。<br>
                 以下の要件を満たすコードを教えてください。<br>
@@ -412,9 +445,11 @@
     </section>
 
     <section id="request-step14">
-        <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText14')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText14">
                 エクセルの「Sheet1」にある、「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
                 コードは以下の要件を満たします。<br>
@@ -429,9 +464,11 @@
     </section>
 
     <section id="request-step15">
-        <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText15')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText15">
                 エクセルの「Sheet1」上の「選択セル」にメンバーを割り当てるための「AssignShifts」というVBAコードを作成してください。<br>
                 コードは以下の要件を満たします。<br>
@@ -527,9 +564,11 @@
     </section>
 
     <section id="request-step16">
-        <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText16')">コピーする</button>
+        </div>
+        <div class="code-container">
             <blockquote id="requestText16">
                 エクセルの「Sheet1」上のカレンダーにメンバーを割り当てるための「AssignShiftsBasedOnMemberOffDays」というVBAコードを作成してください。<br>
                 コードを実行すると、以下のルールに従って、選択セルを移動しながら「AssignShifts」という既存の関数を引数なしで呼び出します。<br>
@@ -598,12 +637,14 @@
             </blockquote>
         </div>
     </section>
-    
+
     <!-- コード例セクション -->
     <section id="code-step1">
-        <h2>ステップ1： 「A1セル」に「現在の年月」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ1： 「A1セル」に「現在の年月」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample1')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample1">
 Sub DisplayCurrentYearMonth()
     Dim ws As Worksheet
@@ -629,9 +670,11 @@ End Sub
     </section>
 
     <section id="code-step2">
-        <h2>ステップ2： 「曜日」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ2： 「曜日」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample2')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample2">
 Sub SetCalendarHeaders()
     Dim ws As Worksheet
@@ -653,9 +696,11 @@ End Sub
     </section>
 
     <section id="code-step3">
-        <h2>ステップ3： 「枠線」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ3： 「枠線」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample3')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample3">
 Sub DrawCalendarBorders()
     Dim ws As Worksheet
@@ -710,9 +755,11 @@ End Sub
     </section>
 
     <section id="code-step4">
-        <h2>ステップ4： 「1日目」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ4： 「1日目」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample4')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample4">
 Sub DisplayFirstDay()
     Dim ws As Worksheet
@@ -739,9 +786,11 @@ End Sub
     </section>
 
     <section id="code-step5">
-        <h2>ステップ5： 「2日目以降」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ5： 「2日目以降」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample5')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample5">
 Sub AddRemainingDays()
     Dim ws As Worksheet
@@ -787,9 +836,11 @@ End Sub
     </section>
 
     <section id="code-step6">
-        <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample6')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample6">
 Sub ColorWeekends()
     Dim ws As Worksheet
@@ -844,9 +895,11 @@ End Sub
     </section>
 
     <section id="code-step7">
-        <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample7')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample7">
 Sub CreateHolidaySheet()
     Dim ws As Worksheet
@@ -915,9 +968,11 @@ End Sub
     </section>
 
     <section id="code-step8">
-        <h2>ステップ8： 「祝日を赤」にする</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ8： 「祝日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample8')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample8">
 Sub MarkHolidaysInRed()
     Dim calendarSheet As Worksheet
@@ -965,9 +1020,11 @@ End Sub
     </section>
 
     <section id="code-step9">
-        <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample9')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample9">
     Sub InitializeAndCreateCalendar()
         ' シート1の内容、書式、結合をクリア
@@ -998,9 +1055,11 @@ End Sub
     </section>
     
     <section id="code-step10">
-        <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample10')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample10">
     Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
         Dim rngCalendar As Range
@@ -1027,9 +1086,11 @@ End Sub
     </section>
 
     <section id="code-step11">
-        <h2>ステップ11： 仮の「メンバーシート」作成</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ11： 仮の「メンバーシート」作成</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample11')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample11">
     Sub CreateMemberList()
         Dim ws As Worksheet
@@ -1083,9 +1144,11 @@ End Sub
     </section>
 
     <section id="code-step12">
-        <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample12')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample12">
     Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
         ' シート1のオブジェクトを取得
@@ -1116,9 +1179,11 @@ End Sub
     </section>
 
     <section id="code-step13">
-        <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample13')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample13">
         Sub AddCommandButton()
             Dim ws As Worksheet
@@ -1159,9 +1224,11 @@ End Sub
     </section>
 
     <section id="code-step14">
-        <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample14')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample14">
         Private Sub btnKakutei_Click()
             Dim ws As Worksheet
@@ -1208,9 +1275,11 @@ End Sub
     </section>
 
     <section id="code-step15">
-        <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample15')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample15">
     Sub AssignShifts()
         Dim ws As Worksheet
@@ -1497,9 +1566,11 @@ End Sub
     </section>
 
     <section id="code-step16">
-        <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
-        <div class="code-container">
+        <div class="step-title-container">
+            <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample16')">コピーする</button>
+        </div>
+        <div class="code-container">
             <pre id="codeExample16">
     Sub AssignShiftsBasedOnMemberOffDays()
         Dim wsManagement As Worksheet
