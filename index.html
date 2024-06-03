@@ -4,69 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ゼロからできる！医師が教えるChatGPTでExcelを5倍活用する方法</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        nav {
-            background-color: #f8f8f8;
-            padding: 10px;
-        }
-        nav div {
-            margin-bottom: 10px;
-        }
-        nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #007BFF;
-        }
-        section {
-            margin-bottom: 50px;
-        }
-        h2 {
-            color: #333;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ddd;
-            overflow-x: auto;
-        }
-        blockquote {
-            background-color: #f9f9f9;
-            border-left: 10px solid #ccc;
-            margin: 1.5em 10px;
-            padding: 0.5em 10px;
-        }
-        .code-container {
-            position: relative;
-            margin-bottom: 1em;
-        }
-        .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    nav {
+        background-color: #f8f8f8;
+        padding: 10px;
+    }
+    nav div {
+        margin-bottom: 10px;
+    }
+    nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #007BFF;
+    }
+    section {
+        margin-bottom: 50px;
+    }
+    h2 {
+        color: #333;
+    }
+    pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ddd;
+        overflow-x: auto;
+    }
+    blockquote {
+        background-color: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+    }
+    .code-container {
+        position: relative;
+        margin-bottom: 1em;
+    }
+    /* 修正箇所 */
+    .step-title-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* スペースを均等に配置する */
+        gap: 10px; /* タイトルとボタンの間にスペースを追加 */
+        margin-bottom: 1em;
+        position: relative;
+    }
 
-        /* ここに新しいCSSを追加します */
-        .step-title-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1em;
-        }
+    .copy-button {
+        margin-left: auto; /* タイトルの右端に配置する */
+        z-index: 10;
+    }
+</style>
 
-        .copy-button {
-            margin-left: 10px;
-            z-index: 10;
-            position: relative;
-        }
-    </style>
 </head>
 <body>
     <h1>ゼロからできる！<br>医師が教えるChatGPTでExcelを5倍活用する方法</h1>
