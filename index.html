@@ -663,7 +663,7 @@
 
     <section id="request-step17-1">
         <div class="step-title-container">
-            <h2>ステップ17： 「保存終了」ボタンを設置</h2>
+            <h2>ステップ17-1： 「保存終了」ボタンを設置</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText17-1')">コピーする</button>
         </div>
         <div class="code-container">
@@ -675,6 +675,27 @@
                     ・ ボタンの位置とサイズはセルI5とI6の2マス分<br>
                     ・ 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br>
                 この機能を実行するためのコードを教えてもらえますか。<br>
+            </blockquote>
+        </div>
+    </section>
+
+        <section id="request-step17-2">
+        <div class="step-title-container">
+            <h2>ステップ17-2： 「保存終了」ボタンでバックアップファイル作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText17-2')">コピーする</button>
+        </div>
+        <div class="code-container">
+            <blockquote id="requestText17-2">
+                Excelの「Sheet1」にある「btnHozonShuryo」というコマンドボタンのコードが欲しいです。<br>
+                コードは以下の要件を満たしてください。<br>
+                    ・ ボタンクリックで以下の内容が実行される<br>
+                    ・ 現在のワークブックのバックアップファイルを作成する<br>
+                    ・ 現在のワークブックのパスと名前を取得<br>
+                    ・ 日時をもとにバックアップファイルのパスを設定（例：backup_yyyymmdd_hhmmss.xlsm）<br>
+                    ・ 「ThisWorkbook.SaveAs」を用いてバックアップファイルとして保存<br>
+                    ・ 元の名前で再度保存し、ワークブックを閉じる<br>
+                    ・ エラーが発生しないように、アラートメッセージを無効化し、後で再有効化する<br>
+                この機能を実行するためのコードを教えてもらえますか。
             </blockquote>
         </div>
     </section>
