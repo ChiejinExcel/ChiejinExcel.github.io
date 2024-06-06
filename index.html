@@ -1788,6 +1788,50 @@ End Sub
         </div>
     </section>
 
+    <section id="code-step17-1">
+        <div class="step-title-container">
+            <h2>ステップ17-1： 「保存終了」ボタンを設置</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample17-1')">コピーする</button>
+        </div>
+        <div class="code-container">
+            <pre id="codeExample17-1">
+    Sub AddCommandButton2()
+        Dim ws As Worksheet
+        Dim btn As OLEObject
+        Dim cell1 As Range, cell2 As Range
+        Dim topPos As Double, leftPos As Double, btnWidth As Double, btnHeight As Double
+    
+        ' シートの参照
+        Set ws = ThisWorkbook.Sheets("Sheet1")
+        
+        ' 既存のボタンが存在する場合は削除
+        On Error Resume Next
+        ws.OLEObjects("btnHozonShuryo").Delete
+        On Error GoTo 0
+    
+        ' I5とI6のセル範囲を取得
+        Set cell1 = ws.Range("I5")
+        Set cell2 = ws.Range("I6")
+    
+        ' ボタンの位置とサイズを設定
+        topPos = cell1.Top
+        leftPos = cell1.Left
+        btnWidth = cell1.Width
+        btnHeight = cell1.Height + cell2.Height
+    
+        ' コマンドボタンを追加
+        Set btn = ws.OLEObjects.Add(ClassType:="Forms.CommandButton.1", _
+                                    Left:=leftPos, Top:=topPos, Width:=btnWidth, Height:=btnHeight)
+        
+        ' ボタンのキャプションと名前を設定
+        With btn
+            .name = "btnHozonShuryo"
+            .Object.Caption = "保存終了"
+        End With
+    End Sub
+            </pre>
+        </div>
+    </section>
 
     <script>
         function copyToClipboard(element) {
