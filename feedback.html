@@ -16,7 +16,7 @@
         form {
             max-width: 600px;
             margin: auto;
-            padding: 10px;
+            padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,6 +32,10 @@
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 150px;
         }
         button {
             background-color: #28a745;
@@ -41,6 +45,11 @@
         button:hover {
             background-color: #218838;
         }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -49,12 +58,13 @@
         <label for="name">お名前:</label>
         <input type="text" id="name" name="name" required><br>
         
-        <label for="email">メールアドレス:</label>
-        <input type="email" id="email" name="_replyto" required><br>
+        <label for="email">メールアドレス（任意）:</label>
+        <input type="email" id="email" name="_replyto"><br>
         
         <label for="message">フィードバック:</label>
         <textarea id="message" name="message" required></textarea><br>
         
+        <input type="hidden" name="_subject" value="フィードバックが送信されました">
         <button type="submit">送信</button>
     </form>
 </body>
