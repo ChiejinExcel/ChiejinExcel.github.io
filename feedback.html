@@ -45,16 +45,23 @@
         button:hover {
             background-color: #218838;
         }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 10px;
-        }
     </style>
+    <script>
+        function confirmSubmission(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            let confirmationMessage = `以下の内容で送信しますか？\n\nお名前: ${name}\nメールアドレス: ${email}\nフィードバック:\n${message}`;
+            if (confirm(confirmationMessage)) {
+                document.getElementById('feedbackForm').submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>フィードバックをお寄せください</h1>
-    <form action="https://formspree.io/f/mayrgkkp" method="POST">
+    <form id="feedbackForm" action="https://formspree.io/f/mayrgkkp" method="POST" onsubmit="confirmSubmission(event)">
         <label for="name">お名前:</label>
         <input type="text" id="name" name="name" required><br>
         
