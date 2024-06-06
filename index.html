@@ -1833,6 +1833,44 @@ End Sub
         </div>
     </section>
 
+        <section id="code-step17-2">
+        <div class="step-title-container">
+            <h2>ステップ17-2：  「保存終了」ボタンでバックアップファイル作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample17-2')">コピーする</button>
+        </div>
+        <div class="code-container">
+            <pre id="codeExample17-2">
+    Private Sub btnHozonShuryo_Click()
+        Dim backupPath As String
+        Dim originalPath As String
+        Dim originalFileFormat As XlFileFormat
+        
+        ' 現在のワークブックのパスと名前を取得
+        originalPath = ThisWorkbook.FullName
+        originalFileFormat = ThisWorkbook.FileFormat
+        
+        ' バックアップファイルのパスを設定
+        backupPath = ThisWorkbook.Path & "\backup_" & Format(Now, "yyyymmdd_hhmmss") & ".xlsm"
+        
+        ' アラートメッセージを無効化
+        Application.DisplayAlerts = False
+        
+        ' バックアップファイルとして保存
+        ThisWorkbook.SaveAs Filename:=backupPath, FileFormat:=xlOpenXMLWorkbookMacroEnabled
+        
+        ' 元の名前で再度保存
+        ThisWorkbook.SaveAs Filename:=originalPath, FileFormat:=originalFileFormat
+        
+        ' アラートメッセージを再有効化
+        Application.DisplayAlerts = True
+        
+        ' ワークブックを閉じる
+        ThisWorkbook.Close SaveChanges:=False
+    End Sub
+            </pre>
+        </div>
+    </section>
+
     <script>
         function copyToClipboard(element) {
             var temp = document.createElement('textarea');
