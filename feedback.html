@@ -9,6 +9,9 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
             text-align: center;
@@ -17,8 +20,12 @@
             text-align: center;
             color: #333;
         }
-        form {
+        .content {
             max-width: 600px;
+            width: 100%;
+            text-align: center; /* 中央揃えにするため追加 */
+        }
+        form {
             margin: auto;
             padding: 20px;
             background-color: #fff;
@@ -104,26 +111,29 @@
     </script>
 </head>
 <body>
-    <h1>フィードバックフォーム</h1>
-    <h2>ゼロからできる！医師が教えるChatGPTでExcelを5倍活用する方法</h2>
-    <p>本書に関するご意見やご感想をお寄せください。<br>
-    いただいたフィードバックは、今後の改善に役立てさせていただきます。<br>
-    なお、全てのフィードバックに個別に返信できるわけではございませんが、貴重なご意見として大切に受け止めさせていただきます。</p>
-    <form id="feedbackForm" action="https://formspree.io/f/mayrgkkp" method="POST" onsubmit="confirmSubmission(event)">
-        <label for="name">お名前:</label>
-        <input type="text" id="name" name="name" required><br>
-        
-        <label for="email">メールアドレス（任意）:</label>
-        <input type="email" id="email" name="_replyto"><br>
-        
-        <label for="message">フィードバック:</label>
-        <textarea id="message" name="message" required></textarea><br>
-        
-        <input type="hidden" name="_subject" value="フィードバックが送信されました">
-        <button type="submit">送信</button>
-    </form>
-    <div class="home-link">
-        <a href="https://drmacroexcel.github.io/DrMacro.github.io/">ホームに戻る</a>
+    <div class="content">
+        <h1>フィードバックフォーム</h1>
+        <h2>ゼロからできる！医師が教えるChatGPTでExcelを5倍活用する方法</h2>
+        <p>本書に関するご意見やご感想をお寄せください。<br>
+        いただいたフィードバックは、今後の改善に役立てさせていただきます。<br>
+        なお、全てのフィードバックに個別に返信できるわけではございませんが、<br>
+        貴重なご意見として大切に受け止めさせていただきます。</p>
+        <form id="feedbackForm" action="https://formspree.io/f/mayrgkkp" method="POST" onsubmit="confirmSubmission(event)">
+            <label for="name">お名前:</label>
+            <input type="text" id="name" name="name" required><br>
+            
+            <label for="email">メールアドレス（任意）:</label>
+            <input type="email" id="email" name="_replyto"><br>
+            
+            <label for="message">フィードバック:</label>
+            <textarea id="message" name="message" required></textarea><br>
+            
+            <input type="hidden" name="_subject" value="フィードバックが送信されました">
+            <button type="submit">送信</button>
+        </form>
+        <div class="home-link">
+            <a href="https://drmacroexcel.github.io/DrMacro.github.io/">ホームに戻る</a>
+        </div>
     </div>
 </body>
 </html>
