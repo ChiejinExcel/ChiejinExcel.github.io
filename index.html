@@ -1353,286 +1353,314 @@ End Sub
         </div>
         <div class="code-container">
             <pre id="codeExample15">
-    Sub AssignShifts()
-        Dim ws As Worksheet
-        Dim wsManagement As Worksheet
-        Dim Candidates As Collection
-        Dim MemberList As Range
-        Dim MemberCount As Object ' Dictionary
-        Dim MemberOffs As Object ' Dictionary
-        Dim OffCount As Object ' Dictionary
-        Dim i As Long
-        Dim member As String
-        Dim shiftDate As String
-        Dim cell As Range
-        Dim minCount As Long
-        Dim maxCount As Long
-        Dim maxOffCount As Long
-        Dim memberCell As Range ' MemberListの各セルを表す変数
-        Dim adjacentMembers As Collection ' 隣接するセルのメンバーを保持するコレクション
-        Dim candidateArray() As Variant ' 配列に変換した候補メンバー
-    
-        ' シートの設定
-        Set ws = ThisWorkbook.Sheets("Sheet1")
-        Set wsManagement = ThisWorkbook.Sheets("管理用")
-    
-        ' 選択セルの確認
-        If Selection.Cells.Count <> 1 Then Exit Sub
-    
-        ' 選択セルの範囲内確認
-        If Intersect(Selection, ws.Range("A3:G8")) Is Nothing Then Exit Sub
-    
-        ' 選択セルが数値か確認
-        If Not IsNumeric(Selection.Value) Or Selection.Value = "" Then Exit Sub
-    
-        ' メンバーのリスト取得
-        Set MemberList = wsManagement.Range("B2", wsManagement.Cells(wsManagement.Rows.Count, 2).End(xlUp))
-    
-        ' メンバーの登場回数と休み希望日数をカウントする辞書を作成
-        Set MemberCount = CreateObject("Scripting.Dictionary")
-        Set OffCount = CreateObject("Scripting.Dictionary")
-        Set MemberOffs = CreateObject("Scripting.Dictionary")
-        For Each memberCell In MemberList
-            member = memberCell.Value
-            MemberCount(member) = 0
-            MemberOffs(member) = Split(wsManagement.Cells(memberCell.Row, 3).Value, ",")
-            OffCount(member) = UBound(MemberOffs(member)) - LBound(MemberOffs(member)) + 1
-        Next memberCell
-    
-        ' A3:G8の範囲をチェックして登場回数をカウント
-        For Each cell In ws.Range("A3:G8")
-            If cell.Value <> "" Then
-                For Each memberCell In MemberList
-                    If InStr(cell.Value, memberCell.Value) > 0 Then
-                        MemberCount(memberCell.Value) = MemberCount(memberCell.Value) + 1
+        Sub AssignShifts()
+            Dim ws As Worksheet
+            Dim wsManagement As Worksheet
+            Dim Candidates As Collection
+            Dim MemberList As Range
+            Dim MemberCount As Object ' Dictionary
+            Dim MemberOffs As Object ' Dictionary
+            Dim OffCount As Object ' Dictionary
+            Dim i As Long
+            Dim member As String
+            Dim shiftDate As String
+            Dim cell As Range
+            Dim minCount As Long
+            Dim maxCount As Long
+            Dim maxOffCount As Long
+            Dim memberCell As Range ' MemberListの各セルを表す変数
+            Dim adjacentMembers As Collection ' 隣接するセルのメンバーを保持するコレクション
+            Dim candidateArray() As Variant ' 配列に変換した候補メンバー
+        
+            ' シートの設定
+            Set ws = ThisWorkbook.Sheets("Sheet1")
+            Set wsManagement = ThisWorkbook.Sheets("管理用")
+        
+            ' 選択セルの確認
+            If Selection.Cells.Count <> 1 Then
+                Exit Sub
+            End If
+        
+            ' 選択セルの範囲内確認
+            If Intersect(Selection, ws.Range("A3:G8")) Is Nothing Then
+                Exit Sub
+            End If
+        
+            ' 選択セルが数値か確認
+            If Not IsNumeric(Selection.Value) Or Selection.Value = "" Then
+                Exit Sub
+            End If
+        
+            ' メンバーのリスト取得
+            Set MemberList = wsManagement.Range("B2", wsManagement.Cells(wsManagement.Rows.Count, 2).End(xlUp))
+        
+            ' メンバーの登場回数と休み希望日数をカウントする辞書を作成
+            Set MemberCount = CreateObject("Scripting.Dictionary")
+            Set OffCount = CreateObject("Scripting.Dictionary")
+            Set MemberOffs = CreateObject("Scripting.Dictionary")
+            For Each memberCell In MemberList
+                member = memberCell.Value
+                MemberCount(member) = 0
+                MemberOffs(member) = Split(wsManagement.Cells(memberCell.Row, 3).Value, ",")
+                OffCount(member) = UBound(MemberOffs(member)) - LBound(MemberOffs(member)) + 1
+            Next memberCell
+        
+            ' A3:G8の範囲をチェックして登場回数をカウント
+            For Each cell In ws.Range("A3:G8")
+                If cell.Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(cell.Value, memberCell.Value) > 0 Then
+                            MemberCount(memberCell.Value) = MemberCount(memberCell.Value) + 1
+                        End If
+                    Next memberCell
+                End If
+            Next cell
+        
+            ' 選択セルの値を取得
+            shiftDate = CStr(Selection.Value)
+        
+            ' 最初に休み希望日を除外
+            Set Candidates = New Collection
+            For Each memberCell In MemberList
+                member = memberCell.Value
+                If Not IsNumberInArray(shiftDate, MemberOffs(member)) Then
+                    Candidates.Add member
+                End If
+            Next memberCell
+        
+            ' 割り付け候補がいない場合は終了
+            If Candidates.Count = 0 Then
+                MsgBox "割り付け可能なメンバーがいません。"
+                Exit Sub
+            End If
+        
+            ' Candidatesを配列に変換
+            If Candidates.Count > 0 Then
+                ReDim candidateArray(1 To Candidates.Count)
+                For i = 1 To Candidates.Count
+                    candidateArray(i) = Candidates(i)
+                Next i
+            Else
+                Exit Sub
+            End If
+        
+            ' 登場回数が全員同じ場合は全員をCandidatesに残す
+            minCount = Application.WorksheetFunction.Min(MemberCount.items)
+            maxCount = Application.WorksheetFunction.Max(MemberCount.items)
+            If minCount <> maxCount Then
+                ' 登場回数が最小のメンバーのみをCandidatesに残す
+                Dim tempCandidates As Collection
+                Set tempCandidates = New Collection
+                For i = LBound(candidateArray) To UBound(candidateArray)
+                    member = candidateArray(i)
+                    If MemberCount(member) = minCount Then
+                        tempCandidates.Add member
                     End If
-                Next memberCell
+                Next i
+                Set Candidates = tempCandidates
+        
+                ' Candidatesを配列に再変換
+                If Candidates.Count > 0 Then
+                    ReDim candidateArray(1 To Candidates.Count)
+                    For i = 1 To Candidates.Count
+                        candidateArray(i) = Candidates(i)
+                    Next i
+                Else
+                    Exit Sub
+                End If
+            Else
+                ' 登場回数が全員同じ場合はそのままCandidatesを使用
+                If Candidates.Count > 0 Then
+                    ReDim candidateArray(1 To Candidates.Count)
+                    For i = 1 To Candidates.Count
+                        candidateArray(i) = Candidates(i)
+                    Next i
+                Else
+                    Exit Sub
+                End If
             End If
-        Next cell
-    
-        ' 選択セルの値を取得
-        shiftDate = CStr(Selection.Value)
-    
-        ' 最初に休み希望日を除外
-        Set Candidates = New Collection
-        For Each memberCell In MemberList
-            member = memberCell.Value
-            If Not IsNumberInArray(shiftDate, MemberOffs(member)) Then
-                Candidates.Add member
+        
+            ' 左右の隣接セルのメンバーを取得
+            Set adjacentMembers = New Collection
+            Dim colIndex As Long
+            Dim rowIndex As Long
+            colIndex = Selection.Column
+            rowIndex = Selection.Row
+        
+            ' 左隣のセル（特別条件を含む）
+            If colIndex > 1 Then
+                ' 通常の左隣
+                If ws.Cells(rowIndex, colIndex - 1).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex, colIndex - 1).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
+            ElseIf colIndex = 1 And rowIndex > 3 Then
+                ' 左端の場合の特別条件（A列）
+                ' B列のセル
+                If ws.Cells(rowIndex, colIndex + 1).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex, colIndex + 1).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
+                ' 上行のG列のセル
+                If ws.Cells(rowIndex - 1, 7).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex - 1, 7).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
             End If
-        Next memberCell
-    
-        ' 割り付け候補がいない場合は終了
-        If Candidates.Count = 0 Then
-            MsgBox "割り付け可能なメンバーがいません。"
-            Exit Sub
-        End If
-    
-        ' Candidatesを配列に変換
-        If Candidates.Count > 0 Then
-            ReDim candidateArray(1 To Candidates.Count)
-            For i = 1 To Candidates.Count
-                candidateArray(i) = Candidates(i)
-            Next i
-        Else
-            Exit Sub
-        End If
-    
-        ' 登場回数が全員同じ場合は全員をCandidatesに残す
-        minCount = Application.WorksheetFunction.Min(MemberCount.Items)
-        maxCount = Application.WorksheetFunction.Max(MemberCount.Items)
-        If minCount <> maxCount Then
-            ' 登場回数が最小のメンバーのみをCandidatesに残す
-            Dim tempCandidates As Collection
-            Set tempCandidates = New Collection
+        
+            ' 右隣のセル（特別条件を含む）
+            If colIndex < 7 Then
+                ' 通常の右隣
+                If ws.Cells(rowIndex, colIndex + 1).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex, colIndex + 1).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
+            ElseIf colIndex = 7 And rowIndex < 8 Then
+                ' 右端の場合の特別条件（G列）
+                ' F列のセル
+                If ws.Cells(rowIndex, colIndex - 1).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex, colIndex - 1).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
+                ' 下行のA列のセル
+                If ws.Cells(rowIndex + 1, 1).Value <> "" Then
+                    For Each memberCell In MemberList
+                        If InStr(ws.Cells(rowIndex + 1, 1).Value, memberCell.Value) > 0 Then
+                            On Error Resume Next
+                            adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
+                            On Error GoTo 0
+                        End If
+                    Next memberCell
+                End If
+            End If
+        
+            ' 割り付け候補から隣接メンバーを除外
+            Dim finalCandidates As Collection
+            Set finalCandidates = New Collection
             For i = LBound(candidateArray) To UBound(candidateArray)
                 member = candidateArray(i)
-                If MemberCount(member) = minCount Then
-                    tempCandidates.Add member
+                If Not IsInCollection(adjacentMembers, member) Then
+                    finalCandidates.Add member
                 End If
             Next i
-            Set Candidates = tempCandidates
-    
-            ' Candidatesを配列に再変換
-            If Candidates.Count > 0 Then
-                ReDim candidateArray(1 To Candidates.Count)
-                For i = 1 To Candidates.Count
-                    candidateArray(i) = Candidates(i)
+        
+            ' finalCandidatesが空の場合は終了
+            If finalCandidates.Count = 0 Then
+                MsgBox "割り付け可能なメンバーがいません。"
+                Exit Sub
+            End If
+        
+            ' finalCandidatesを配列に変換
+            If finalCandidates.Count > 0 Then
+                ReDim candidateArray(1 To finalCandidates.Count)
+                For i = 1 To finalCandidates.Count
+                    candidateArray(i) = finalCandidates(i)
                 Next i
             Else
                 Exit Sub
             End If
-        Else
-            ' 登場回数が全員同じ場合はそのままCandidatesを使用
-            If Candidates.Count > 0 Then
-                ReDim candidateArray(1 To Candidates.Count)
-                For i = 1 To Candidates.Count
-                    candidateArray(i) = Candidates(i)
+        
+            ' finalCandidatesから最大の休み希望日数を持つメンバーのみを残す
+            maxOffCount = Application.WorksheetFunction.Max(GetOffCounts(candidateArray, OffCount))
+            Dim maxOffCandidates As Collection
+            Set maxOffCandidates = New Collection
+            For i = LBound(candidateArray) To UBound(candidateArray)
+                member = candidateArray(i)
+                If OffCount(member) = maxOffCount Then
+                    maxOffCandidates.Add member
+                End If
+            Next i
+        
+            ' maxOffCandidatesが空の場合は終了
+            If maxOffCandidates.Count = 0 Then
+                MsgBox "割り付け可能なメンバーがいません。"
+                Exit Sub
+            End If
+        
+            ' maxOffCandidatesを配列に変換
+            If maxOffCandidates.Count > 0 Then
+                ReDim candidateArray(1 To maxOffCandidates.Count)
+                For i = 1 To maxOffCandidates.Count
+                    candidateArray(i) = maxOffCandidates(i)
                 Next i
             Else
                 Exit Sub
             End If
-        End If
-    
-        ' 左右の隣接セルのメンバーを取得
-        Set adjacentMembers = New Collection
-        Dim colIndex As Long
-        Dim rowIndex As Long
-        colIndex = Selection.Column
-        rowIndex = Selection.Row
-    
-        ' 左隣のセル（特別条件を含む）
-        If colIndex > 1 Then
-            ' 通常の左隣
-            If ws.Cells(rowIndex, colIndex - 1).Value <> "" Then
-                For Each memberCell In MemberList
-                    If InStr(ws.Cells(rowIndex, colIndex - 1).Value, memberCell.Value) > 0 Then
-                        On Error Resume Next
-                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
-                        On Error GoTo 0
-                    End If
-                Next memberCell
-            End If
-        ElseIf colIndex = 1 And rowIndex > 3 Then
-            ' 左端の場合の特別条件（A3は除外）
-            If ws.Cells(rowIndex - 1, 7).Value <> "" Then
-                For Each memberCell In MemberList
-                    If InStr(ws.Cells(rowIndex - 1, 7).Value, memberCell.Value) > 0 Then
-                        On Error Resume Next
-                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
-                        On Error GoTo 0
-                    End If
-                Next memberCell
-            End If
-        End If
-    
-        ' 右隣のセル（特別条件を含む）
-        If colIndex < 7 Then
-            ' 通常の右隣
-            If ws.Cells(rowIndex, colIndex + 1).Value <> "" Then
-                For Each memberCell In MemberList
-                    If InStr(ws.Cells(rowIndex, colIndex + 1).Value, memberCell.Value) > 0 Then
-                        On Error Resume Next
-                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
-                        On Error GoTo 0
-                    End If
-                Next memberCell
-            End If
-        ElseIf colIndex = 7 And rowIndex < 8 Then
-            ' 右端の場合の特別条件（G8は除外）
-            If ws.Cells(rowIndex + 1, 1).Value <> "" Then
-                For Each memberCell In MemberList
-                    If InStr(ws.Cells(rowIndex + 1, 1).Value, memberCell.Value) > 0 Then
-                        On Error Resume Next
-                        adjacentMembers.Add memberCell.Value, CStr(memberCell.Value)
-                        On Error GoTo 0
-                    End If
-                Next memberCell
-            End If
-        End If
-    
-        ' 割り付け候補から隣接メンバーを除外
-        Dim finalCandidates As Collection
-        Set finalCandidates = New Collection
-        For i = LBound(candidateArray) To UBound(candidateArray)
-            member = candidateArray(i)
-            If Not IsInCollection(adjacentMembers, member) Then
-                finalCandidates.Add member
-            End If
-        Next i
-    
-        ' finalCandidatesが空の場合は終了
-        If finalCandidates.Count = 0 Then
-            MsgBox "割り付け可能なメンバーがいません。"
-            Exit Sub
-        End If
-    
-        ' finalCandidatesを配列に変換
-        If finalCandidates.Count > 0 Then
-            ReDim candidateArray(1 To finalCandidates.Count)
-            For i = 1 To finalCandidates.Count
-                candidateArray(i) = finalCandidates(i)
+        
+            ' 候補メンバーをシャッフル
+            For i = UBound(candidateArray) To LBound(candidateArray) Step -1
+                shuffleIndex = Int((i - LBound(candidateArray) + 1) * Rnd + LBound(candidateArray))
+                member = candidateArray(shuffleIndex)
+                candidateArray(shuffleIndex) = candidateArray(i)
+                candidateArray(i) = member
             Next i
-        Else
-            Exit Sub
-        End If
-    
-        ' finalCandidatesから最大の休み希望日数を持つメンバーのみを残す
-        maxOffCount = Application.WorksheetFunction.Max(GetOffCounts(candidateArray, OffCount))
-        Dim maxOffCandidates As Collection
-        Set maxOffCandidates = New Collection
-        For i = LBound(candidateArray) To UBound(candidateArray)
-            member = candidateArray(i)
-            If OffCount(member) = maxOffCount Then
-                maxOffCandidates.Add member
-            End If
-        Next i
-    
-        ' maxOffCandidatesが空の場合は終了
-        If maxOffCandidates.Count = 0 Then
-            MsgBox "割り付け可能なメンバーがいません。"
-            Exit Sub
-        End If
-    
-        ' maxOffCandidatesを配列に変換
-        If maxOffCandidates.Count > 0 Then
-            ReDim candidateArray(1 To maxOffCandidates.Count)
-            For i = 1 To maxOffCandidates.Count
-                candidateArray(i) = maxOffCandidates(i)
+        
+            ' 割り付け実行
+            For i = LBound(candidateArray) To UBound(candidateArray)
+                member = candidateArray(i)
+                Selection.Value = Selection.Value & vbCrLf & member
+                MemberCount(member) = MemberCount(member) + 1
+                Exit For
             Next i
-        Else
-            Exit Sub
-        End If
-    
-        ' 候補メンバーをシャッフル
-        For i = UBound(candidateArray) To LBound(candidateArray) Step -1
-            shuffleIndex = Int((i - LBound(candidateArray) + 1) * Rnd + LBound(candidateArray))
-            member = candidateArray(shuffleIndex)
-            candidateArray(shuffleIndex) = candidateArray(i)
-            candidateArray(i) = member
-        Next i
-    
-        ' 割り付け実行
-        For i = LBound(candidateArray) To UBound(candidateArray)
-            member = candidateArray(i)
-            Selection.Value = Selection.Value & vbCrLf & member
-            MemberCount(member) = MemberCount(member) + 1
-            Exit For
-        Next i
-    End Sub
-    
-    Function IsNumberInArray(num As String, arr As Variant) As Boolean
-        Dim i As Long
-        IsNumberInArray = False
-        For i = LBound(arr) To UBound(arr)
-            If arr(i) = num Then
-                IsNumberInArray = True
-                Exit Function
+        End Sub
+        
+        Function IsNumberInArray(num As String, arr As Variant) As Boolean
+            Dim i As Long
+            IsNumberInArray = False
+            For i = LBound(arr) To UBound(arr)
+                If arr(i) = num Then
+                    IsNumberInArray = True
+                    Exit Function
+                End If
+            Next i
+        End Function
+        
+        Function IsInCollection(coll As Collection, key As String) As Boolean
+            Dim var As Variant
+            On Error Resume Next
+            var = coll(key)
+            On Error GoTo 0
+            If IsEmpty(var) Then
+                IsInCollection = False
+            Else
+                IsInCollection = True
             End If
-        Next i
-    End Function
-    
-    Function IsInCollection(coll As Collection, key As String) As Boolean
-        Dim var As Variant
-        On Error Resume Next
-        var = coll(key)
-        On Error GoTo 0
-        If IsEmpty(var) Then
-            IsInCollection = False
-        Else
-            IsInCollection = True
-        End If
-    End Function
-    
-    Function GetOffCounts(candidateArray As Variant, OffCount As Object) As Variant
-        Dim counts() As Long
-        ReDim counts(LBound(candidateArray) To UBound(candidateArray))
-        Dim i As Long
-        For i = LBound(candidateArray) To UBound(candidateArray)
-            counts(i) = OffCount(candidateArray(i))
-        Next i
-        GetOffCounts = counts
-    End Function
+        End Function
+        
+        Function GetOffCounts(candidateArray As Variant, OffCount As Object) As Variant
+            Dim counts() As Long
+            ReDim counts(LBound(candidateArray) To UBound(candidateArray))
+            Dim i As Long
+            For i = LBound(candidateArray) To UBound(candidateArray)
+                counts(i) = OffCount(candidateArray(i))
+            Next i
+            GetOffCounts = counts
+        End Function
             </pre>
         </div>
     </section>
