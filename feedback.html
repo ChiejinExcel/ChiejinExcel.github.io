@@ -65,14 +65,28 @@
     <script>
         function confirmSubmission(event) {
             event.preventDefault();
+            const form = event.target;
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             let confirmationMessage = `以下の内容で送信しますか？\n\nお名前: ${name}\nメールアドレス: ${email}\nフィードバック:\n${message}`;
             if (confirm(confirmationMessage)) {
-                document.getElementById('feedbackForm').submit();
-                // 送信後にリダイレクト
-                window.location.href = "https://drmacroexcel.github.io/DrMacro.github.io/";
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        alert('フィードバックを送信しました。ありがとうございます！');
+                        window.location.href = "https://drmacroexcel.github.io/DrMacro.github.io/";
+                    } else {
+                        alert('フィードバックの送信に失敗しました。後ほど再度お試しください。');
+                    }
+                }).catch(error => {
+                    alert('フィードバックの送信に失敗しました。後ほど再度お試しください。');
+                });
             }
         }
 
