@@ -50,6 +50,17 @@
         button:hover {
             background-color: #218838;
         }
+        .home-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .home-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .home-link a:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         function confirmSubmission(event) {
@@ -60,6 +71,8 @@
             let confirmationMessage = `以下の内容で送信しますか？\n\nお名前: ${name}\nメールアドレス: ${email}\nフィードバック:\n${message}`;
             if (confirm(confirmationMessage)) {
                 document.getElementById('feedbackForm').submit();
+                // 送信後にリダイレクト
+                window.location.href = "https://drmacroexcel.github.io/DrMacro.github.io/";
             }
         }
 
@@ -92,5 +105,8 @@
         <input type="hidden" name="_subject" value="フィードバックが送信されました">
         <button type="submit">送信</button>
     </form>
+    <div class="home-link">
+        <a href="https://drmacroexcel.github.io/DrMacro.github.io/">ホームに戻る</a>
+    </div>
 </body>
 </html>
