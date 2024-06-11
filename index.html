@@ -457,7 +457,7 @@
                     <li>セルの枠線の設定</li>
                     <li>列の幅の自動調整</li>
                 </ol>
-                このシートを作成するためのコードを教えてください。
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -469,9 +469,15 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText12">
-                Excel「管理用」シートのB列、B2以下最下段までのセルをダブルクリックしたときに実行される、「管理用」シート用のコードが欲しいです。<br>
-                ダブルクリックされたセルのメンバー名を取得し、既存のInitializeAndCreateCalendarマクロを呼び出してください。<br>
-                カレンダーがSheet1に作成されるので、そのA1セルの内容を、「元の内容 + 半角スペース + メンバー名」という形式で更新し、最後にSheet1をアクティブにしてください。<br>
+                Excel「管理用」シートのB列、<br>
+                B2以下最下段までのセルを、<br>
+                ダブルクリックしたときに実行される、<br>
+                「管理用」シート用のコードが欲しいです。<br><br>
+                ダブルクリックされたセルのメンバー名を取得し、<br>
+                既存の「InitializeAndCreateCalendar」マクロを呼び出してください。<br>
+                カレンダーが「Sheet1」に作成されるので、<br>
+                そのA1セル内容を、「元の内容 + 半角スペース + メンバー名」に更新し、<br>
+                最後に「Sheet1」をアクティブにしてください。<br>
                 引数は渡さないで実装してください。<br>
                 コードを教えてください。
             </blockquote>
@@ -485,13 +491,14 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText13">
-                エクセルの「Sheet1」に、コマンドボタンを追加する「AddCommandButton」というVBAコードが欲しいです。<br>
+                Excelの「Sheet1」に、コマンドボタンを追加する<br>
+                「AddCommandButton」というVBAコードが欲しいです。<br>
                 以下の要件を満たすコードを教えてください。<br>
                 ・ シート「Sheet1」にコマンドボタンを追加<br>
                 ・ ボタンのキャプションは「確定」、名前は「btnKakutei」<br>
                 ・ ボタンの位置とサイズはセルI3とI4の2マス分<br>
                 ・ 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br>
-                この機能を実行するためのコードを教えてもらえますか。
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -503,13 +510,15 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText14">
-                エクセルの「Sheet1」にある、「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
+                Excelの「Sheet1」にある、<br>
+                「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
                 コードは以下の要件を満たします。<br>
                 ・ ボタンクリックで下記内容が実行されます<br>
-                ・ Sheet1のA1セル内容の左から8文字目以降をメンバー名として取得します<br>
-                ・ メンバー名がカラの場合は何もしません<br>
-                ・ A3からG8までの範囲で赤塗りつぶしセルの日付を取得します<br>
-                ・ 「管理用」というシートのB列でメンバー名を検索し、C列に取得した日にちをカンマ区切り(スペースなし)で上書きします<br>
+                ・ 「Sheet1」のA1セル内容の最初の半角スペースから右側の文字列を「メンバー名」として取得します<br>
+                ・ 「メンバー名」がカラの場合は何もしません<br>
+                ・ A3からG8までの範囲で「赤塗りつぶし」セルの数値を取得します<br>
+                ・ 「管理用」というシートのB列で「メンバー名」を検索し、<br>
+                　C列に取得した数値をカンマ区切り(スペースなし)で上書きします<br><br>
                 この機能を実行するためのコードを教えてもらえますか。
             </blockquote>
         </div>
@@ -522,95 +531,59 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText15">
-                エクセルの「Sheet1」上の「選択セル」にメンバーを割り当てるための「AssignShifts」というVBAコードを作成してください。<br>
-                コードは以下の要件を満たします。<br>
-                <ol>
-                    <li>選択セルが以下の場合はスキップ：
-                        <ul>
-                            <li>複数選択されている</li>
-                            <li>カレンダーの範囲外</li>
-                            <li>日付がない</li>
-                        </ul>
-                    </li>
-                    <li>メンバーリストの取得と各メンバーの「休み希望」情報の取得：
-                        <ul>
-                            <li>「管理用」シートのB列からメンバーリストを取得</li>
-                            <li>「休み希望」の「日にち」を取得</li>
-                            <li>「休み希望」の日数をカウント</li>
-                        </ul>
-                    </li>
-                    <li>各メンバーの「すでに割り付けられている回数」をカウント：
-                        <ul>
-                            <li>A3からG8の範囲内のセルをチェックして、各メンバーの名前が含まれている個数をカウント</li>
-                        </ul>
-                    </li>
-                    <li>メンバーから「割付候補」の絞り込み：
-                        <ul>
-                            <li>選択セルの日付を「休み希望」に含むメンバーを「割付候補」から外す</li>
-                            <li>「すでに割り付けられている回数」が少ないメンバーを「割付候補」とする</li>
-                            <li>全員が同じ回数であれば、全員を「割付候補」とする</li>
-                            <li>選択セルの左右隣接セルにすでに割り付けられているメンバーを「割付候補」から外す</li>
-                            <li>「割付候補」のうち、最多の「休み希望」をもつメンバーを「最終割付候補」とする</li>
-                        </ul>
-                    </li>
-                    <li>「最終割付候補」からランダムに1人選択：
-                        <ul>
-                            <li>「最終割付候補」をシャッフルし、メンバー1人を選択し、選択セルに改行区切りで追記する</li>
-                        </ul>
-                    </li>
-                </ol>
-                詳細設定：
-                <ul>
-                    <li>シートの設定：
-                        <ul>
-                            <li>`ws`を割り付け対象シート（例：`Sheet1`）に設定</li>
-                            <li>`wsManagement`を管理用シート（例：`管理用`）に設定</li>
-                        </ul>
-                    </li>
-                    <li>変数の設定：
-                        <ul>
-                            <li>`Candidates`、`MemberList`、`MemberCount`、`MemberOffs`、`OffCount`、`existingMembers`、`candidateArray`の変数を適切に初期化</li>
-                            <li>`shiftDate`は選択セルの日付を文字列として取得</li>
-                        </ul>
-                    </li>
-                    <li>メンバーリストの取得：
-                        <ul>
-                            <li>`MemberList`を`wsManagement`のB列から取得</li>
-                            <li>各メンバーの休み希望日をカンマ区切りで取得し、配列として格納</li>
-                            <li>`OffCount`に各メンバーの休み希望日数をカウントして格納</li>
-                        </ul>
-                    </li>
-                    <li>各メンバーの登場回数のカウント：
-                        <ul>
-                            <li>A3からG8の範囲内のセルをチェックし、各メンバーの登場回数を`MemberCount`にカウントして格納</li>
-                        </ul>
-                    </li>
-                    <li>割付候補の絞り込み：
-                        <ul>
-                            <li>`Candidates`に選択セルの日付を休み希望としていないメンバーを追加</li>
-                            <li>`minCount`と`maxCount`を算出し、登場回数が全員同じ場合は全員を`Candidates`に残し、最小のメンバーのみを残す場合は再度`Candidates`を更新</li>
-                            <li>選択セルの左右隣接セルにすでに割り付けられているメンバーを除外</li>
-                        </ul>
-                    </li>
-                    <li>最終割付候補の選定：
-                        <ul>
-                            <li>`GetOffCounts`関数を使用して、`candidateArray`から最多の休み希望日数を持つメンバーのみを残す</li>
-                            <li>`maxOffCandidates`に最終割付候補を追加</li>
-                        </ul>
-                    </li>
-                    <li>シャッフルと割り付け：
-                        <ul>
-                            <li>最終割付候補をシャッフルし、1人を選択して選択セルに割り付け</li>
-                        </ul>
-                    </li>
-                </ul>
-                関数の実装：
-                以下の関数を実装してください：
-                <ul>
-                    <li>`IsNumberInArray`：指定した数値が配列内に存在するかどうかを判定</li>
-                    <li>`IsInCollection`：指定したキーがコレクション内に存在するかどうかを判定</li>
-                    <li>`GetOffCounts`：指定した候補配列から休み希望日数を取得</li>
-                </ul>
+                Excelの「Sheet1」の「選択セル」にメンバーを割り当てるための<br>
+                「AssignShifts」というVBAコードを作成してください。<br>
+                カレンダーの構成は以下の通りです。<br>
+                    ・セルA1は現在の年月（「YYYY/MM」形式）<br>
+                    ・セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）<br>
+                    ・セルA2からG8に枠線<br>
+                    ・日付はA3からG8までの位置で、「1」から「最終日」まで入力済<br>
+                    ・日付は数値のみで表示されています（例：1, 2, 3など）<br>
+                「管理用」というシートにメンバーリストがあります。<br>
+                各変数はカッコ内の設定でお願いします。<br>
+
+                1. 「Sheet1」の「選択セル」が以下なら終了<br>
+                    ・ 複数のセルが選択されている<br>
+                    ・ A3:G8以外のセルが選択されている<br>
+                    ・ 選択セルの内容が「空欄」<br>
+                    ・ 選択セルの内容が「数値」でない<br>
+                2. 「管理用」シート処理<br>
+                    ・ B列B2以下からMemberList(Range)を取得<br>
+                    ・ C列C2以下(カンマ区切りで入っている「数値」)からMemberOffs（Object, Scripting.Dictionaryを使用）を取得<br>
+                    ・ メンバー毎のMemberOffsの「個数」をOffCount(Object, Scripting.Dictionaryを使用）として取得<br>
+                3. 「Sheet１」処理<br>
+                    ・ 「選択セル」の「数値」をshiftDate(String)として取得<br>
+                    ・ 隣接セル（セル位置で場合分けあり）のメンバーをadjacentMembers(Collection)として取得：<br>
+                選択セルがB3:F8の場合、<br>
+                左右の隣接セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                そのメンバーをadjacentMembers(Collection)として取得<br>
+                　ただし、選択セルがA列の場合は、<br>
+                そのB列セルまたは一行上のG列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                そのメンバーをadjacentMembersとして取得<br>
+                　　 また、選択セルがG列の場合は、<br>
+                そのF列セルまたは一行下のA列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                そのメンバーをadjacentMembersとして取得<br>
+                ・ A3:G8で、MemberListにあるメンバー名を含む(部分一致)セルの個数を<br>
+                MemberCount(Object, Scripting.Dictionaryを使用)としてメンバー毎に取得<br>
+                
+                4. メンバーから「候補」の絞り込み<br>
+                    ・ MemberListのうち、<br>
+                shiftDateを、MemberOffsに含まないメンバーをCandidates(Collection)として取得<br>
+                    ・ Candidatesを配列candidateArray(Variant)にし、<br>
+                MemberCountが少ないメンバーをCandidatesに残す<br>
+                    ・ 全員が同じMemberCountであれば、全員をCandidatesに残す<br>
+                    ・ CandidatesからadjacentMembersを外す<br>
+                    ・ Candidatesのうち、最多のOffCountをもつメンバーをCandidatesに残す<br>
+                
+                5. Candidatesをシャッフルし、メンバー1人を選択し、<br>
+                選択セル内容に「改行区切り」で追記する<br>
+                
+                関数の実装：<br>
+                以下の関数を実装してください：<br>
+                ・ `IsNumberInArray`：指定した数値が配列内に存在するかどうかを判定<br>
+                ・ `IsInCollection`：指定したキーがコレクション内に存在するかどうかを判定<br>
+                ・ `GetOffCounts`：指定した候補配列から休み希望日数を取得<br>
+
             </blockquote>
         </div>
     </section>
