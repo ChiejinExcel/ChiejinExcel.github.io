@@ -541,7 +541,7 @@
                 ・日付は数値のみで表示されています（例：1, 2, 3など）<br><br>
             
                 「管理用」というシートにメンバーリストがあります。<br>
-                各変数はカッコ内の設定でお願いします。<br><br>
+                    各変数はカッコ内の設定でお願いします。<br><br>
                 1. 「Sheet1」の「選択セル」が以下なら終了<br>
                 ・ 複数のセルが選択されている<br>
                 ・ A3:G8以外のセルが選択されている<br>
@@ -556,34 +556,34 @@
                 3. 「Sheet1」処理<br>
                 ・ 「選択セル」の「数値」をshiftDate(String)として取得<br>
                 ・ 隣接セル（セル位置で場合分けあり）のメンバーをadjacentMembers(Collection)として取得：<br>
-                選択セルがB3:F8の場合、<br>
-                左右の隣接セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembers(Collection)として取得<br>
-                ただし、選択セルがA列の場合は、<br>
-                そのB列セルまたは一行上のG列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembersとして取得<br>
-                また、選択セルがG列の場合は、<br>
-                そのF列セルまたは一行下のA列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembersとして取得<br>
+                    選択セルがB3:F8の場合、<br>
+                    左右の隣接セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                    そのメンバーをadjacentMembers(Collection)として取得<br>
+                    ただし、選択セルがA列の場合は、<br>
+                    そのB列セルまたは一行上のG列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                    そのメンバーをadjacentMembersとして取得<br>
+                    また、選択セルがG列の場合は、<br>
+                    そのF列セルまたは一行下のA列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                    そのメンバーをadjacentMembersとして取得<br>
                 ・ A3:G8で、MemberListにあるメンバー名を含む(部分一致)セルの個数を<br>
-                MemberCount(Object, Scripting.Dictionaryを使用)としてメンバー毎に取得<br><br>
+                    MemberCount(Object, Scripting.Dictionaryを使用)としてメンバー毎に取得<br><br>
                 
                 4. メンバーから「候補」の絞り込み<br>
                 ・ MemberListのうち、<br>
-                shiftDateを、MemberOffsに含まないメンバーをCandidates(Collection)として取得<br>
+                    shiftDateを、MemberOffsに含まないメンバーをCandidates(Collection)として取得<br>
                 ・ Candidatesを配列candidateArray(Variant)にし、<br>
-                MemberCountが少ないメンバーをCandidatesに残す<br>
+                    MemberCountが少ないメンバーをCandidatesに残す<br>
                 ・ 全員が同じMemberCountであれば、全員をCandidatesに残す<br>
                 ・ CandidatesからadjacentMembersを外す<br>
                 ・ Candidatesのうち、最多のOffCountをもつメンバーをCandidatesに残す<br><br>
                 
                 5. Candidatesをシャッフルし、メンバー1人を選択し、<br>
-                選択セル内容に「改行区切り」で追記する<br><br>
+                    選択セル内容に「改行区切り」で追記する<br><br>
                 
                 以下の関数を実装してください：<br>
-                ・ <code>IsNumberInArray</code>：指定した数値が配列内に存在するかどうかを判定<br>
-                ・ <code>IsInCollection</code>：指定したキーがコレクション内に存在するかどうかを判定<br>
-                ・ <code>GetOffCounts</code>：指定した候補配列から休み希望日数を取得<br>
+                ・ IsNumberInArray：指定した数値が配列内に存在するかどうかを判定<br>
+                ・ IsInCollection：指定したキーがコレクション内に存在するかどうかを判定<br>
+                ・ GetOffCounts：指定した候補配列から休み希望日数を取得<br>
             </blockquote>
         </div>
     </section>
@@ -611,63 +611,63 @@
                 <ol>
                     <li>メンバーの取得：
                         <ul>
-                            <li>管理用シートのB列にはメンバー名が、C列には「休み希望」の日付（数値）がカンマ区切りで並んでいます。この情報を基に、各メンバーとその休み希望日を配列に格納してください。</li>
-                            <li>メンバーと休み希望日を取得するために <code>GetMembersAndOffDays</code> 関数を使用してください。</li>
+                            <li>「管理用」シートで処理<br>
+                            <li>B列に「メンバー名」<br>
+                            <li>C列に「休み希望」の「数値」がカンマ区切りで並ぶ<br>
+                            <li>MemberList配列でメンバー名を格納</li>
+                            <li>各メンバーと「休み希望」の数値をMemberOffs（Scripting.Dictionary オブジェクト）に格納</li>
                         </ul>
                     </li>
                     <li>休み希望日数のカウントとソート：
                         <ul>
-                            <li>各メンバーの休み希望日数をカウントし、オフ日数で降順にソートします。このソートには <code>BubbleSort</code> 関数を使用してください。</li>
-                            <li><code>BubbleSort</code> 関数は、2次元配列を指定された列で降順にソートする機能を持つ必要があります。</li>
-                            <li>休み希望日数をカウントするために <code>CountAndSortOffDays</code> 関数を使用してください。</li>
+                            <li>各メンバーの「休み希望」数をForループで`OffCountArray`で配列に格納</li>
+                            <li>メンバーを「休み希望」数で、`BubbleSort`関数を使って降順にソート</li>
+                            <li>`BubbleSort` 関数は2次元配列を指定された列で降順にソートします</li>
                         </ul>
                     </li>
                     <li>カレンダーの日数の範囲決定：
                         <ul>
-                            <li>カレンダーは <code>Sheet1</code> のセル範囲A3からG8に配置されています。この範囲内の日数の最大値を取得するために <code>GetMaxDayInCalendar</code> 関数を使用します。</li>
-                            <li>この関数は、指定されたカレンダー範囲内の最大日数を返す必要があります。</li>
+                            <li>カレンダーは Sheet1 のA3:G8の範囲</li>
+                            <li>セル内容の「最大値（maxDay）」を`GetMaxDayInCalendar` 関数で取得(月の最終日に相当)</li>
+                            <li>この関数は、指定されたカレンダー範囲内の「最大数」を返す</li>
                         </ul>
                     </li>
                     <li>シフトの割り付け：
                         <ul>
-                            <li>ソートされたメンバーごとに、休み希望日を除外した利用可能な日付のリストを作成し、その中からランダムに1つの日付を選びます。</li>
-                            <li>利用可能な日付のリストを作成するために <code>GetAvailableDays</code> 関数を使用してください。</li>
-                            <li>選択した日付がカレンダーのセル範囲（<code>Sheet1</code> のA3からG8）に存在し、セルの値が日付である場合、そのセルを選択し、「AssignShifts」を引数なしで呼び出します。</li>
-                            <li>選択したセルが日付以外の文字を含んでいた場合は、他の日付をランダムに再選択してください。</li>
-                            <li>全メンバーについて同様の処理を行ったら、最初のメンバーに戻り、同じ処理を繰り返してください。</li>
-                            <li>全てのセルに割り付けが完了するまでループを続けてください。これを確認するために <code>AllCellsAssigned</code> 関数を使用します。</li>
-                            <li>この関数は、指定されたカレンダー範囲内の全てのセルが割り付けられているかどうかを確認する必要があります。</li>
+                            <li>ソートされたメンバーごとに、1からmaxDayの数値から、「休み希望」(MemberOffs)を除外したcollectionを取得</li>
+                            <li>ランダムに1つの数値を選択</li>
+                            <li>選択した数値がSheet1のA3:G8のセル内容と一致する場合、そのセルを選択</li>
+                            <li>その状態で「AssignShifts」を引数なしで呼び出す</li>
+                            <li>全メンバーについて同様の処理を行い、最初のメンバーに戻り、同じ処理を繰り返す</li>
+                            <li>全てのセルに割り付けが完了するまでループを継続</li>
+                            <li>A3:G8全てのセル内容が数値のみでないことを`AllCellsAssigned` 関数で確認</li>
                         </ul>
                     </li>
                 </ol>
                 補助関数の実装：
                 <ul>
-                    <li><code>BubbleSort</code>: 2次元配列を指定された列でソートします。</li>
-                    <li><code>GetMaxDayInCalendar</code>: カレンダーの最大日数を取得します。</li>
-                    <li><code>FindDateCell</code>: 指定した日付を含むセルを探します。セルが見つからない場合は <code>Nothing</code> を返します。</li>
-                    <li><code>IsNumberInArray</code>: 指定した数が配列に含まれているかを確認します。</li>
-                    <li><code>AllCellsAssigned</code>: カレンダーの全てのセルが割り付けられているかどうかを確認します。</li>
-                    <li><code>GetAvailableDays</code>: 最大日数と休み希望日を基に、利用可能な日付のリストを作成します。</li>
+                    <li>BubbleSort: 2次元配列を指定された列で降順にメンバーをソート</li>
+                    <li>GetMaxDayInCalendar: カレンダーA3:G8範囲内の最大数値を取得(数値以外のセルは無視)</li>
+                    <li>FindDateCell: 指定した数値と一致するセルを探す。見つからない場合は `Nothing` を返す</li>
+                    <li>IsNumberInArray: 指定した数が配列に含まれているかを確認（引数はstring型）</li>
+                    <li>AllCellsAssigned: A3:G8範囲内の全てのセル内容が数値のみではないことを確認</li>
                 </ul>
                 変数の型指定：
                 <ul>
-                    <li><code>wsManagement</code> と <code>ws</code> は <code>Worksheet</code> 型。</li>
-                    <li><code>memberCell</code> は <code>Range</code> 型。</li>
-                    <li><code>memberOffDays</code> は <code>Variant</code> 型。</li>
-                    <li><code>offCountArray</code> と <code>sortedMembers</code> は <code>Variant</code> 配列。</li>
-                    <li><code>availableDays</code> は <code>Collection</code> 型。</li>
-                    <li><code>day</code> と <code>maxDay</code> は <code>Long</code> 型。</li>
-                    <li><code>member</code> は <code>String</code> 型。</li>
-                    <li><code>i</code> と <code>j</code> は <code>Long</code> 型。</li>
-                    <li><code>allAssigned</code> は <code>Boolean</code> 型。</li>
+                    <li>wsManagementとwsはWorksheet型。</li>
+                    <li>memberCellはRange型。</li>
+                    <li>memberOffDaysはVariant型。</li>
+                    <li>offCountArrayとsortedMembersはVariant配列。</li>
+                    <li>availableDaysはCollection型。</li>
+                    <li>dayはVariant (FindDateCellに渡す前にCLng(day)でLongに変換)</li>
+                    <li>maxDayはLong型</li>
+                    <li>memberはString型</li>
+                    <li>iとjはLong型</li>
+                    <li>allAssignedはBoolean型</li>
                 </ul>
                 注意点：
                 <ul>
-                    <li><code>BubbleSort</code> 関数は、2次元配列を指定された列で降順にソートしてください。</li>
-                    <li><code>GetMaxDayInCalendar</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内の最大日数を返してください。</li>
-                    <li><code>FindDateCell</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内で指定された日付に対応するセルを返してください。セルが見つからない場合は <code>Nothing</code> を返してください。</li>
-                    <li><code>IsNumberInArray</code> 関数は、指定された数値が配列内に存在するかを確認してください。</li>
-                    <li><code>AllCellsAssigned</code> 関数は、<code>Sheet1</code> のセル範囲A3からG8内の全てのセルが割り付けられているかどうかを確認してください。</li>
+                    <li>For Eachループで使用する変数は、必ずVariant型またはObject型として宣言してください。</li>
                 </ul>
                 この指定に基づいて、適切なVBAコードを提供してください。
             </blockquote>
