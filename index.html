@@ -541,7 +541,6 @@
                     ・日付は数値のみで表示されています（例：1, 2, 3など）<br>
                 「管理用」というシートにメンバーリストがあります。<br>
                 各変数はカッコ内の設定でお願いします。<br>
-
                 1. 「Sheet1」の「選択セル」が以下なら終了<br>
                     ・ 複数のセルが選択されている<br>
                     ・ A3:G8以外のセルが選択されている<br>
@@ -554,36 +553,31 @@
                 3. 「Sheet１」処理<br>
                     ・ 「選択セル」の「数値」をshiftDate(String)として取得<br>
                     ・ 隣接セル（セル位置で場合分けあり）のメンバーをadjacentMembers(Collection)として取得：<br>
-                選択セルがB3:F8の場合、<br>
-                左右の隣接セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembers(Collection)として取得<br>
-                　ただし、選択セルがA列の場合は、<br>
-                そのB列セルまたは一行上のG列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembersとして取得<br>
-                　　 また、選択セルがG列の場合は、<br>
-                そのF列セルまたは一行下のA列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
-                そのメンバーをadjacentMembersとして取得<br>
-                ・ A3:G8で、MemberListにあるメンバー名を含む(部分一致)セルの個数を<br>
-                MemberCount(Object, Scripting.Dictionaryを使用)としてメンバー毎に取得<br>
-                
+                        選択セルがB3:F8の場合、<br>
+                        左右の隣接セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                        そのメンバーをadjacentMembers(Collection)として取得<br>
+                　      ただし、選択セルがA列の場合は、<br>
+                        そのB列セルまたは一行上のG列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                        そのメンバーをadjacentMembersとして取得<br>
+                　　     また、選択セルがG列の場合は、<br>
+                        そのF列セルまたは一行下のA列セルがMemberListにあるメンバー名を含む(部分一致)なら、<br>
+                        そのメンバーをadjacentMembersとして取得<br>
+                        ・ A3:G8で、MemberListにあるメンバー名を含む(部分一致)セルの個数を<br>
+                        MemberCount(Object, Scripting.Dictionaryを使用)としてメンバー毎に取得<br>
                 4. メンバーから「候補」の絞り込み<br>
                     ・ MemberListのうち、<br>
-                shiftDateを、MemberOffsに含まないメンバーをCandidates(Collection)として取得<br>
+                        shiftDateを、MemberOffsに含まないメンバーをCandidates(Collection)として取得<br>
                     ・ Candidatesを配列candidateArray(Variant)にし、<br>
-                MemberCountが少ないメンバーをCandidatesに残す<br>
+                        MemberCountが少ないメンバーをCandidatesに残す<br>
                     ・ 全員が同じMemberCountであれば、全員をCandidatesに残す<br>
                     ・ CandidatesからadjacentMembersを外す<br>
                     ・ Candidatesのうち、最多のOffCountをもつメンバーをCandidatesに残す<br>
-                
                 5. Candidatesをシャッフルし、メンバー1人を選択し、<br>
-                選択セル内容に「改行区切り」で追記する<br>
-                
-                関数の実装：<br>
+                    選択セル内容に「改行区切り」で追記する<br>
                 以下の関数を実装してください：<br>
                 ・ `IsNumberInArray`：指定した数値が配列内に存在するかどうかを判定<br>
                 ・ `IsInCollection`：指定したキーがコレクション内に存在するかどうかを判定<br>
                 ・ `GetOffCounts`：指定した候補配列から休み希望日数を取得<br>
-
             </blockquote>
         </div>
     </section>
@@ -595,8 +589,19 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText16">
-                エクセルの「Sheet1」上のカレンダーにメンバーを割り当てるための「AssignShiftsBasedOnMemberOffDays」というVBAコードを作成してください。<br>
-                コードを実行すると、以下のルールに従って、選択セルを移動しながら「AssignShifts」という既存の関数を引数なしで呼び出します。<br>
+                Excelで「Sheet1」上のカレンダーにメンバーを割り当てるための<br>
+                「AssignShiftsBasedOnMemberOffDays」という<br>
+                VBAコードを作成してください。<br>
+                カレンダーの構成は以下の通りです。<br>
+                    ・A3:G8に「1」から「最終日」まで入力済<br>
+                    ・日付は数値のみで表示されています（例：1, 2, 3など）<br>
+
+                「管理用」というシートにメンバーリストがあり、<br>
+                コードを実行すると、<br>
+                以下のルールに従って、<br>
+                Sheet1のA3:G8の範囲で選択セルを移動しながら「AssignShifts」という<br>
+                メンバー割付関数を引数なしで呼び出します。<br>
+                （AssignShiftsは実装済みです）<br>
                 <ol>
                     <li>メンバーの取得：
                         <ul>
