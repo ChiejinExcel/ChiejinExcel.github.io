@@ -1321,30 +1321,30 @@ End Sub
         </div>
         <div class="code-container">
             <pre id="codeExample12">
-    Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
-        ' シート1のオブジェクトを取得
-        Dim ws As Worksheet
-        Set ws = ThisWorkbook.Sheets("Sheet1")
+Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
+    ' シート1のオブジェクトを取得
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+    
+    ' 管理用シートのB列（B2以下）をチェック
+    If Not Intersect(Target, Me.Range("B2:B" & Me.Rows.Count)) Is Nothing Then
+        ' メンバー名を取得
+        Dim memberName As String
+        memberName = Target.Value
         
-        ' 管理用シートのB列（B2以下）をチェック
-        If Not Intersect(Target, Me.Range("B2:B" & Me.Rows.Count)) Is Nothing Then
-            ' メンバー名を取得
-            Dim memberName As String
-            memberName = Target.Value
+        ' カレンダーを作成
+        InitializeAndCreateCalendar
             
-            ' カレンダーを作成
-            InitializeAndCreateCalendar
+        ' A1セルの内容を更新
+        ws.Range("A1").Value = ws.Range("A1").Value & " " & memberName
             
-            ' A1セルの内容を更新
-            ws.Range("A1").Value = ws.Range("A1").Value & " " & memberName
-            
-            ' Sheet1をアクティブにする
-            ws.Activate
-            
-            ' ダブルクリックによる編集をキャンセル
-            Cancel = True
-        End If
-    End Sub
+        ' Sheet1をアクティブにする
+        ws.Activate
+        
+        ' ダブルクリックによる編集をキャンセル
+        Cancel = True
+    End If
+End Sub
             </pre>
         </div>
     </section>
