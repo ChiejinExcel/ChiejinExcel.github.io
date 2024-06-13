@@ -1197,30 +1197,30 @@ End Sub
         </div>
         <div class="code-container">
             <pre id="codeExample9">
-    Sub InitializeAndCreateCalendar()
-        ' シート1の内容、書式、結合をクリア
-        Dim ws As Worksheet
-        Set ws = ThisWorkbook.Sheets("Sheet1")
+Sub InitializeAndCreateCalendar()
+    ' シート1の内容、書式、結合をクリア
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Sheet1")
         
-        ' セルの内容をクリア
-        ws.Cells.Clear
+    ' セルの内容をクリア
+    ws.Cells.Clear
         
-        ' 書式のクリア
-        ws.Cells.ClearFormats
+    ' 書式のクリア
+    ws.Cells.ClearFormats
         
-        ' 結合の解除
-        ws.Cells.UnMerge
+    ' 結合の解除
+    ws.Cells.UnMerge
         
-        ' カレンダー作成の各ステップを順に呼び出す
-        Call DisplayCurrentYearMonth
-        Call SetCalendarHeaders
-        Call DrawCalendarBorders
-        Call DisplayFirstDay
-        Call AddRemainingDays
-        Call ColorWeekends
-        Call CreateHolidaySheet
-        Call MarkHolidaysInRed
-    End Sub
+    ' カレンダー作成の各ステップを順に呼び出す
+    Call DisplayCurrentYearMonth
+    Call SetCalendarHeaders
+    Call DrawCalendarBorders
+    Call DisplayFirstDay
+    Call AddRemainingDays
+    Call ColorWeekends
+    Call CreateHolidaySheet
+    Call MarkHolidaysInRed
+End Sub
             </pre>
         </div>
     </section>
