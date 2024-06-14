@@ -965,61 +965,11 @@ End Sub
 
     <section id="code-step5">
         <div class="step-title-container">
-            <h2>ステップ5： 「2日目以降」を書く</h2>
+            <h2>ステップ5： 「土曜日を青」、「日曜日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample5')">コピーする</button>
         </div>
         <div class="code-container">
             <pre id="codeExample5">
-Sub AddRemainingDays()
-    Dim ws As Worksheet
-    Dim startDate As Date
-    Dim currentDate As Date
-    Dim endDate As Date
-    Dim currentRow As Integer
-    Dim currentColumn As Integer
-
-    ' Sheet1を取得
-    Set ws = ThisWorkbook.Sheets("Sheet1")
-
-    ' 1日目の日付を取得
-    startDate = DateSerial(Year(Date), Month(Date), 1)
-    currentDate = startDate + 1
-
-    ' 月の最終日を取得
-    endDate = DateSerial(Year(Date), Month(Date) + 1, 0)
-
-    ' 1日目の表示位置を計算
-    currentRow = 3
-    currentColumn = Weekday(startDate, vbSunday)
-
-    ' 2日目以降を表示
-    Do While currentDate <= endDate
-        currentColumn = currentColumn + 1
-
-        ' 次の行に移動するか確認
-        If currentColumn > 7 Then
-            currentColumn = 1
-            currentRow = currentRow + 1
-        End If
-
-        ws.Cells(currentRow, currentColumn).Value = Day(currentDate)
-        ws.Cells(currentRow, currentColumn).HorizontalAlignment = xlCenter
-
-        ' 次の日付へ
-        currentDate = currentDate + 1
-    Loop
-End Sub
-            </pre>
-        </div>
-    </section>
-
-    <section id="code-step6">
-        <div class="step-title-container">
-            <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample6')">コピーする</button>
-        </div>
-        <div class="code-container">
-            <pre id="codeExample6">
 Sub ColorWeekends()
     Dim ws As Worksheet
     Dim cell As Range
@@ -1072,13 +1022,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step7">
+    <section id="code-step6">
         <div class="step-title-container">
-            <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample7')">コピーする</button>
+            <h2>ステップ6： 「祝日」シートに、「祝日リスト」を書く</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample6')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample7">
+            <pre id="codeExample6">
 Sub CreateHolidaySheet()
     Dim ws As Worksheet
     Dim holidayList As Variant
@@ -1145,13 +1095,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step8">
+    <section id="code-step7">
         <div class="step-title-container">
-            <h2>ステップ8： 「祝日を赤」にする</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample8')">コピーする</button>
+            <h2>ステップ7： 「祝日を赤」にする</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample7')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample8">
+            <pre id="codeExample7">
 Sub MarkHolidaysInRed()
     Dim calendarSheet As Worksheet
     Dim holidaySheet As Worksheet
@@ -1197,13 +1147,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step9">
+    <section id="code-step8">
         <div class="step-title-container">
-            <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample9')">コピーする</button>
+            <h2>ステップ8： 「シートクリア」＆「カレンダー作成」</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample8')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample9">
+            <pre id="codeExample8">
 Sub InitializeAndCreateCalendar()
     ' シート1の内容、書式、結合をクリア
     Dim ws As Worksheet
@@ -1232,13 +1182,13 @@ End Sub
         </div>
     </section>
     
-    <section id="code-step10">
+    <section id="code-step9">
         <div class="step-title-container">
-            <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample10')">コピーする</button>
+            <h2>ステップ9： 「ダブルクリック」で「赤塗りつぶし」</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample9')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample10">
+            <pre id="codeExample9">
 Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
     Dim rngCalendar As Range
     
@@ -1263,13 +1213,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step11">
+    <section id="code-step10">
         <div class="step-title-container">
-            <h2>ステップ11： 仮の「メンバーシート」作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample11')">コピーする</button>
+            <h2>ステップ10： 仮の「メンバーシート」作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample10')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample11">
+            <pre id="codeExample10">
 Sub CreateMemberList()
     Dim ws As Worksheet
     Dim i As Integer
@@ -1321,13 +1271,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step12">
+    <section id="code-step11">
         <div class="step-title-container">
-            <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample12')">コピーする</button>
+            <h2>ステップ11： 「各メンバー用のカレンダー」作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample11')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample12">
+            <pre id="codeExample11">
 Private Sub Worksheet_BeforeDoubleClick(ByVal Target As Range, Cancel As Boolean)
     ' シート1のオブジェクトを取得
     Dim ws As Worksheet
@@ -1356,13 +1306,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step13">
+    <section id="code-step12">
         <div class="step-title-container">
-            <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample13')">コピーする</button>
+            <h2>ステップ12： 「休み希望」の「確定ボタン」設置</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample12')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample13">
+            <pre id="codeExample12">
 Sub AddCommandButton()
     Dim ws As Worksheet
     Dim btn As OLEObject
@@ -1401,13 +1351,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step14">
+    <section id="code-step13">
         <div class="step-title-container">
-            <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample14')">コピーする</button>
+            <h2>ステップ13： 「確定ボタン」で「休み希望」を収集</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample13')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample14">
+            <pre id="codeExample13">
 Private Sub btnKakutei_Click()
     Dim ws As Worksheet
     Set ws = ThisWorkbook.Sheets("Sheet1")
@@ -1452,13 +1402,13 @@ End Sub
         </div>
     </section>
 
-    <section id="code-step15">
+    <section id="code-step14">
         <div class="step-title-container">
-            <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample15')">コピーする</button>
+            <h2>ステップ14： 「選択セル」に「メンバー」を自動割付</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample14')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample15">
+            <pre id="codeExample14">
 Sub AssignShifts()
     Dim ws As Worksheet
     Dim wsManagement As Worksheet
@@ -1771,13 +1721,13 @@ End Function
         </div>
     </section>
 
-    <section id="code-step16">
+    <section id="code-step15">
         <div class="step-title-container">
-            <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
-            <button class="copy-button" onclick="copyToClipboard('#codeExample16')">コピーする</button>
+            <h2>ステップ15： 「一か月分」の「メンバー」を自動割付</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample15')">コピーする</button>
         </div>
         <div class="code-container">
-            <pre id="codeExample16">
+            <pre id="codeExample15">
 Sub AssignShiftsBasedOnMemberOffDays()
     Dim wsManagement As Worksheet
     Dim ws As Worksheet
