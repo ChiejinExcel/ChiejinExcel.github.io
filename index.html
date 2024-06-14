@@ -912,30 +912,52 @@ End Sub
 
     <section id="code-step4">
         <div class="step-title-container">
-            <h2>ステップ4： 「1日目」を書く</h2>
+            <h2>ステップ4： 「日付」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#codeExample4')">コピーする</button>
         </div>
         <div class="code-container">
             <pre id="codeExample4">
-Sub DisplayFirstDay()
+Sub AddDates()
     Dim ws As Worksheet
     Dim startDate As Date
-    Dim firstDayColumn As Integer
-
-    ' Sheet1を取得
+    Dim currentDate As Date
+    Dim currentRow As Integer
+    Dim currentColumn As Integer
+    Dim yearMonth As String
+    Dim lastDay As Integer
+    
+    ' Sheet1を設定
     Set ws = ThisWorkbook.Sheets("Sheet1")
-
-    ' 現在の年月の1日目を取得
-    startDate = DateSerial(Year(Date), Month(Date), 1)
-
-    ' 1日目の曜日を取得し、対応する列を計算
-    firstDayColumn = Weekday(startDate, vbSunday)
-
-    ' 1日目を表示
-    ws.Cells(3, firstDayColumn).Value = 1
-
-    ' 文字を中央揃えに設定
-    ws.Cells(3, firstDayColumn).HorizontalAlignment = xlCenter
+    
+    ' セルA1から年月を取得
+    yearMonth = ws.Range("A1").Value
+    startDate = DateSerial(Left(yearMonth, 4), Mid(yearMonth, 6, 2), 1)
+    
+    ' 開始日を設定
+    currentDate = startDate
+    lastDay = day(DateSerial(year(startDate), month(startDate) + 1, 0))
+    
+    ' 開始行を設定
+    currentRow = 3
+    
+    ' 1日の曜日に対応する列を取得
+    currentColumn = Weekday(startDate, vbSunday)
+    
+    Do While currentDate <= DateSerial(year(startDate), month(startDate), lastDay)
+        ' 現在の日付を対応する列に入力
+        ws.Cells(currentRow, currentColumn).Value = day(currentDate)
+        ws.Cells(currentRow, currentColumn).HorizontalAlignment = xlCenter
+        
+        ' 次の日付に進む
+        currentDate = currentDate + 1
+        currentColumn = currentColumn + 1
+        
+        ' 1週間が終わったら次の行に移動
+        If currentColumn > 7 Then
+            currentColumn = 1
+            currentRow = currentRow + 1
+        End If
+    Loop
 End Sub
             </pre>
         </div>
