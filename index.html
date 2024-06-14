@@ -81,11 +81,10 @@
             <a href="#request-step13">ステップ13</a>
             <a href="#request-step14">ステップ14</a>
             <a href="#request-step15">ステップ15</a>
-            <a href="#request-step16">ステップ16</a>
-            <a href="#request-step17-1">ステップ17-1</a> 
-            <a href="#request-step17-2">ステップ17-2</a> 
-            <a href="#request-step18-1">ステップ18-1</a>
-            <a href="#request-step18-2">ステップ18-2</a>
+            <a href="#request-step16-1">ステップ16-1</a> 
+            <a href="#request-step16-2">ステップ16-2</a> 
+            <a href="#request-step17-1">ステップ17-1</a>
+            <a href="#request-step17-2">ステップ17-2</a>
         </div>
         <div><strong>コード例</strong></div>
         <div>
@@ -104,10 +103,9 @@
             <a href="#code-step13">ステップ13</a>
             <a href="#code-step14">ステップ14</a>
             <a href="#code-step15">ステップ15</a>    
-            <a href="#code-step16">ステップ16</a>    
-            <a href="#code-step17-1">ステップ17-1</a>    
-            <a href="#code-step17-2">ステップ17-2</a> 
-            <a href="#code-step18">ステップ18-2</a>
+            <a href="#code-step17-1">ステップ16-1</a>    
+            <a href="#code-step17-2">ステップ16-2</a> 
+            <a href="#code-step18">ステップ17-2</a>
         </div>
     </nav>
 
@@ -166,7 +164,7 @@
 
     <section id="request-step4">
         <div class="step-title-container">
-            <h2>ステップ4： 「1日目」を書く</h2>
+            <h2>ステップ4： 「日付」を書く</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText4')">コピーする</button>
         </div>
         <div class="code-container">
@@ -182,37 +180,35 @@
                 このコードを実行すると、「月の初日(1日)のみ」が書き込まれます。<br>
                 「中央揃え」で表示されるようにしてください。<br>
                 コードを教えてください。
+                Excelで「Sheet1」にカレンダーがあり、<br>
+                ・ セルA1に、カレンダーの年月（「YYYY/MM」形式）<br>
+                ・ セルA2からG2に、曜日ヘッダー（日,月,火,水,木,金,土）<br>
+                がすでに入力されています。<br><br>
+                すでに入力されている部分はそのままで、<br>
+                次の手順を実行するマクロを<br>
+                「AddDates」という名前で作ってほしいです。<br><br>
+                ・ 当月の1日の日付を取得し、開始日に設定<br>
+                ・ 当月の1日から月末までの日付を順に入力するためのループ処理を作成<br>
+                ・ 入力は、シートの3行目から始め、１日目は曜日に対応する列に入力<br>
+                ・ 入力する日付は数字のみで中央揃え<br>
+                ・ ループ処理内で、1週間が終わるごとに次の行に移動<br>
+                ・ 最終日までの日付を入力<br>
+                注意：<br>
+                ・ DateSerial関数で日付を取得<br>
+                ・ Weekday関数で、日付の曜日を取得（日曜日を1とする）<br>
+                ・ ループ処理にはDo While ループを使用<br><br>
+                コードを教えてください。<br>
             </blockquote>
         </div>
     </section>
 
     <section id="request-step5">
         <div class="step-title-container">
-            <h2>ステップ5： 「2日目以降」を書く</h2>
+            <h2>ステップ5： 「土曜日を青」、「日曜日を赤」にする</h2>
             <button class="copy-button" onclick="copyToClipboard('#requestText5')">コピーする</button>
         </div>
         <div class="code-container">
             <blockquote id="requestText5">
-                Excelで「Sheet1」にカレンダーが途中までが書いてあります。<br>
-                ・セルA1は現在の年月（「YYYY/MM」形式）<br>
-                ・セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）<br>
-                ・セルA2からG8に枠線<br>
-                ・1日目は適切な位置に「1」と入力済<br>
-                この状態から、<br>
-                カレンダーの2日目以降を1日の右から順に追加していくマクロを<br>
-                「AddRemainingDays」という名前で作ってほしいです。<br>
-                コードを教えてください。
-            </blockquote>
-        </div>
-    </section>
-
-    <section id="request-step6">
-        <div class="step-title-container">
-            <h2>ステップ6： 「土曜日を青」、「日曜日を赤」にする</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText6')">コピーする</button>
-        </div>
-        <div class="code-container">
-            <blockquote id="requestText6">
                 Excelで「Sheet1」にカレンダーが途中までが書いてあります。<br>
                     ・セルA1は現在の年月（「YYYY/MM」形式）<br>
                     ・セルA2からG2に曜日ヘッダー（日、月、火、水、木、金、土）<br>
@@ -232,13 +228,13 @@
         </div>
     </section>
 
-    <section id="request-step7">
+    <section id="request-step6">
         <div class="step-title-container">
-            <h2>ステップ7： 「祝日」シートに、「祝日リスト」を書く</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText7')">コピーする</button>
+            <h2>ステップ6： 「祝日」シートに、「祝日リスト」を書く</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText6')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText7">
+            <blockquote id="requestText6">
                 Excelで、<br>
                 祝日リストを「祝日」というシートに書き込むマクロを<br>
                 「CreateHolidaySheet」という名前で作成したいです。<br><br>
@@ -310,13 +306,13 @@
         </div>
     </section>
 
-    <section id="request-step8">
+    <section id="request-step7">
         <div class="step-title-container">
-            <h2>ステップ8： 「祝日を赤」にする</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText8')">コピーする</button>
+            <h2>ステップ7： 「祝日を赤」にする</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText7')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText8">
+            <blockquote id="requestText7">
                 Excelの「Sheet1」にカレンダーがあります<br>
                     ・A1は年月（「YYYY/MM」形式）<br>
                     ・A2からG2に曜日ヘッダー（日、月、火、水、木、金、土）<br>
@@ -345,13 +341,13 @@
         </div>
     </section>
 
-    <section id="request-step9">
+    <section id="request-step8">
         <div class="step-title-container">
-            <h2>ステップ9： 「シートクリア」＆「カレンダー作成」</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText9')">コピーする</button>
+            <h2>ステップ8： 「シートクリア」＆「カレンダー作成」</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText8')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText9">
+            <blockquote id="requestText8">
                 Excelで「Sheet1」にカレンダーを作成しています。<br>
                 シートを初期状態に戻してから<br>
                 カレンダーを作成するためのマクロを<br>
@@ -377,13 +373,13 @@
         </div>
     </section>
 
-    <section id="request-step10">
+    <section id="request-step9">
         <div class="step-title-container">
-            <h2>ステップ10： 「ダブルクリック」で「赤塗りつぶし」</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText10')">コピーする</button>
+            <h2>ステップ9： 「ダブルクリック」で「赤塗りつぶし」</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText9')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText10">
+            <blockquote id="requestText9">
                 Excelの「Sheet1」にカレンダーが書いてあります。<br>
                 各日付セルをダブルクリックすることで、<br>
                 セルの色を変更できるコードがほしいです。<br>
@@ -401,13 +397,13 @@
         </div>
     </section>
 
-    <section id="request-step11">
+    <section id="request-step10">
         <div class="step-title-container">
-            <h2>ステップ11： 仮の「メンバーシート」作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText11')">コピーする</button>
+            <h2>ステップ10： 仮の「メンバーシート」作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText10')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText11">
+            <blockquote id="requestText10">
                 Excelで「管理用」というシートに、<br>
                 下のようなメンバーリストを作成する「CreateMemberList」という<br>
                 コードがほしいです。<br>
@@ -464,13 +460,13 @@
         </div>
     </section>
 
-    <section id="request-step12">
+    <section id="request-step11">
         <div class="step-title-container">
-            <h2>ステップ12： 「各メンバー用のカレンダー」作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText12')">コピーする</button>
+            <h2>ステップ11： 「各メンバー用のカレンダー」作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText11')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText12">
+            <blockquote id="requestText11">
                 Excel「管理用」シートのB列、<br>
                 B2以下最下段までのセルを、<br>
                 ダブルクリックしたときに実行される、<br>
@@ -486,13 +482,13 @@
         </div>
     </section>
 
-    <section id="request-step13">
+    <section id="request-step12">
         <div class="step-title-container">
-            <h2>ステップ13： 「休み希望」の「確定ボタン」設置</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText13')">コピーする</button>
+            <h2>ステップ12： 「休み希望」の「確定ボタン」設置</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText12')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText13">
+            <blockquote id="requestText12">
                 Excelの「Sheet1」に、コマンドボタンを追加する<br>
                 「AddCommandButton」というVBAコードが欲しいです。<br>
                 以下の要件を満たすコードを教えてください。<br>
@@ -505,13 +501,13 @@
         </div>
     </section>
 
-    <section id="request-step14">
+    <section id="request-step13">
         <div class="step-title-container">
-            <h2>ステップ14： 「確定ボタン」で「休み希望」を収集</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText14')">コピーする</button>
+            <h2>ステップ13： 「確定ボタン」で「休み希望」を収集</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText13')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText14">
+            <blockquote id="requestText13">
                 Excelの「Sheet1」にある、<br>
                 「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
                 コードは以下の要件を満たします。<br>
@@ -526,13 +522,13 @@
         </div>
     </section>
 
-    <section id="request-step15">
+    <section id="request-step14">
         <div class="step-title-container">
-            <h2>ステップ15： 「選択セル」に「メンバー」を自動割付</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText15')">コピーする</button>
+            <h2>ステップ14： 「選択セル」に「メンバー」を自動割付</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText14')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText15">
+            <blockquote id="requestText14">
                 Excelの「Sheet1」の「選択セル」にメンバーを割り当てるための<br>
                 「AssignShifts」というVBAコードを作成してください。<br>
                 カレンダーの構成は以下の通りです。<br>
@@ -590,13 +586,13 @@
         </div>
     </section>
 
-    <section id="request-step16">
+    <section id="request-step15">
         <div class="step-title-container">
-            <h2>ステップ16： 「一か月分」の「メンバー」を自動割付</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText16')">コピーする</button>
+            <h2>ステップ15： 「一か月分」の「メンバー」を自動割付</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText15')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText16">
+            <blockquote id="requestText15">
                 Excelで「Sheet1」上のカレンダーにメンバーを割り当てるための<br>
                 「AssignShiftsBasedOnMemberOffDays」という<br>
                 VBAコードを作成してください。<br>
@@ -676,13 +672,13 @@
         </div>
     </section>
 
-    <section id="request-step17-1">
+    <section id="request-step16-1">
         <div class="step-title-container">
-            <h2>ステップ17-1： 「保存終了」ボタンを設置</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText17-1')">コピーする</button>
+            <h2>ステップ16-1： 「保存終了」ボタンを設置</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText16-1')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText17-1">
+            <blockquote id="requestText16-1">
                 Excelの「Sheet1」に、<br>
                 コマンドボタンを追加する「AddCommandButton2」というVBAコードが欲しいです。<br>
                 以下の要件を満たすコードを教えてください。<br>
@@ -695,13 +691,13 @@
         </div>
     </section>
 
-    <section id="request-step17-2">
+    <section id="request-step16-2">
         <div class="step-title-container">
-            <h2>ステップ17-2： 「保存終了」ボタンでバックアップファイル作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText17-2')">コピーする</button>
+            <h2>ステップ16-2： 「保存終了」ボタンでバックアップファイル作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText16-2')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText17-2">
+            <blockquote id="requestText16-2">
                 Excelの「Sheet1」にある「btnHozonShuryo」というコマンドボタンのコードが欲しいです。<br>
                 コードは以下の要件を満たしてください。<br>
                 &nbsp;&nbsp;    ・ ボタンクリックで以下の内容が実行される<br>
@@ -716,13 +712,13 @@
         </div>
     </section>
 
-       <section id="request-step18-1">
+       <section id="request-step17-1">
         <div class="step-title-container">
-            <h2>ステップ18-1： 1か月分のExcelファイルを含むzip形式のフォルダを作成</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText18-1')">コピーする</button>
+            <h2>ステップ17-1： 1か月分のExcelファイルを含むzip形式のフォルダを作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText17-1')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText18-1">
+            <blockquote id="requestText17-1">
                 Excelファイルを30個生成し、<br>
                 それぞれのファイルを以下のようにフォーマットしてください。<br><br>                
                 &nbsp;&nbsp;1. A1:F1、それぞれ　病名、A病、B病、C病、D病、E病と入力<br>
@@ -743,13 +739,13 @@
         </div>
     </section>
 
-        <section id="request-step18-2">
+        <section id="request-step17-2">
         <div class="step-title-container">
-            <h2>ステップ18-2： 1か月分のExcelファイルからのデータ収集</h2>
-            <button class="copy-button" onclick="copyToClipboard('#requestText18-2')">コピーする</button>
+            <h2>ステップ17-2： 1か月分のExcelファイルからのデータ収集</h2>
+            <button class="copy-button" onclick="copyToClipboard('#requestText17-2')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText18-2">
+            <blockquote id="requestText17-2">
                 現在のワークブックが置かれているフォルダ内のExcelファイルからデータを収集し、<br>
                 アクティブシートに取り込んで表示する、<br>
                 「ImportData」というコードが欲しいです<br>
@@ -2148,7 +2144,7 @@ End Sub
             temp.select();
             document.execCommand('copy');
             document.body.removeChild(temp);
-            alert('コピーしました!');
+            alert('コピーしました');
         }
 
         // スクロールするとボタンが表示されるようにする
