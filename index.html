@@ -964,51 +964,13 @@ End Sub
             <pre id="codeExample5">
 Sub ColorWeekends()
     Dim ws As Worksheet
-    Dim cell As Range
-    Dim startDate As Date
-    Dim endDate As Date
-    Dim currentDate As Date
-    Dim firstDayColumn As Integer
-    Dim currentRow As Integer
-    Dim currentColumn As Integer
-
-    ' Sheet1を取得
     Set ws = ThisWorkbook.Sheets("Sheet1")
-
-    ' 曜日ヘッダーの色設定
-    ws.Range("A2").Font.Color = RGB(255, 0, 0) ' 日曜日 赤色
-    ws.Range("G2").Font.Color = RGB(0, 0, 255) ' 土曜日 青色
-
-    ' 1日目の日付を取得
-    startDate = DateSerial(Year(Date), Month(Date), 1)
-    endDate = DateSerial(Year(Date), Month(Date) + 1, 0)
-    firstDayColumn = Weekday(startDate, vbSunday)
-
-    ' 各日付をループ
-    currentDate = startDate
-    currentRow = 3
-    currentColumn = firstDayColumn
-
-    Do While currentDate <= endDate
-        Set cell = ws.Cells(currentRow, currentColumn)
-
-        ' 土曜日と日曜日の色設定
-        If Weekday(currentDate, vbSunday) = vbSunday Then
-            cell.Font.Color = RGB(255, 0, 0) ' 赤色
-        ElseIf Weekday(currentDate, vbSunday) = vbSaturday Then
-            cell.Font.Color = RGB(0, 0, 255) ' 青色
-        End If
-
-        ' 次の日付へ
-        currentDate = currentDate + 1
-        currentColumn = currentColumn + 1
-
-        ' 次の行に移動するか確認
-        If currentColumn > 7 Then
-            currentColumn = 1
-            currentRow = currentRow + 1
-        End If
-    Loop
+    
+    ' G2:G8を青フォント
+    ws.Range("G2:G8").Font.Color = RGB(0, 0, 255)
+    
+    ' A2:A8を赤フォント
+    ws.Range("A2:A8").Font.Color = RGB(255, 0, 0)
 End Sub
             </pre>
         </div>
