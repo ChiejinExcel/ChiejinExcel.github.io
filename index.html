@@ -215,75 +215,50 @@
             <button class="copy-button" onclick="copyToClipboard('#requestText6')">コピーする</button>
         </div>
         <div class="code-container">
-            <blockquote id="requestText6">
-                Excelで、<br>
-                祝日リストを「祝日」というシートに書き込むマクロを<br>
-                「CreateHolidaySheet」という名前で作成したいです。<br><br>
-                
-                すでに祝日というシートがある場合は、
-                内容とフォーマットをws.Cells.Clearとws.Cells.ClearFormatsでクリアしてください。<br>
-                シートの削除は禁止です。<br>
-                祝日リストは、以下の祝日リストを参照してください。<br>
-                祝日リストをマクロコード内に直接書き込んでください。<br><br>
-                
-                祝日リストは、1行目がヘッダーで、<br>
-                ・A1は「祝日名」、B1は「日付」と入力<br>
-                ・A2以下に祝日名、B2以下に「YYYY/MM/DD」の形式で祝日の日付を入力<br><br>
-                
-                祝日リストを入力した後に、以下のように書式を調整してください<br>
-                ・A1:Bの範囲で「枠線」を付ける<br>
-                ・A1:Bの範囲で文字は「中央ぞろえ」にする<br>
-                ・A1:Bの範囲で文字が切れないようにA列とB列のセル幅を「AutoFit」で調整<br>
-                ・ヘッダーのみ「黄色塗りつぶし」<br><br>
-                
-                コード内の継続文字「_」が多くなるため、<br>
-                コード内ではArrayを1行に2つずつ入れるようにしてください。<br>
-                必ず、祝日リストを入力してから、書式を調整する順にして下さい。<br><br>
-    
-                <b>祝日リスト:</b><br>
-                名称 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 日付<br>
-                元日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/1/1<br>
-                成人の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/1/8<br>
-                建国記念の日 &nbsp;&nbsp; 2024/2/11<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/2/12<br>
-                天皇誕生日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/2/23<br>
-                春分の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/3/20<br>
-                昭和の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/4/29<br>
-                憲法記念日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/5/3<br>
-                みどりの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/5/4<br>
-                こどもの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/5/5<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/5/6<br>
-                海の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/7/15<br>
-                山の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/8/11<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/8/12<br>
-                敬老の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/9/16<br>
-                秋分の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/9/22<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/9/23<br>
-                スポーツの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/10/14<br>
-                文化の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/11/3<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2024/11/4<br>
-                勤労感謝の日 &nbsp;&nbsp; 2024/11/23<br><br>
-                
-                元日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/1/1<br>
-                成人の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/1/13<br>
-                建国記念の日 &nbsp;&nbsp; 2025/2/11<br>
-                天皇誕生日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/2/23<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/2/24<br>
-                春分の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/3/20<br>
-                昭和の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/4/29<br>
-                憲法記念日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/5/3<br>
-                みどりの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/5/4<br>
-                こどもの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/5/5<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/5/6<br>
-                海の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/7/21<br>
-                山の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/8/11<br>
-                敬老の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/9/15<br>
-                秋分の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/9/23<br>
-                スポーツの日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/10/13<br>
-                文化の日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/11/3<br>
-                勤労感謝の日 &nbsp;&nbsp; 2025/11/23<br>
-                休日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2025/11/24<br>
-            </blockquote>
+<blockquote id="requestText6">
+    Excelで、<br>
+    祝日リストを「祝日」というシートに書き込むマクロを<br>
+    「CreateHolidaySheet」という名前で作成したいです。<br><br>
+
+    ・「祝日」というシートに、下の祝日リストを書き込む。<br>
+    ・すでに「祝日」というシートがある場合、<br>
+    内容とフォーマットをws.Cells.Clearとws.Cells.ClearFormatsでクリア<br>
+    ・シートの削除は禁止<br>
+    ・A1に「祝日名」、B1に「日付」と入力し、「黄色塗りつぶし」<br>
+    ・A2以下に祝日名、B2以下に「YYYY/MM/DD」の形式で祝日の日付を入力<br>
+    ・継続記号「_」は多用せず、Arrayを1行に2つずつ<br>
+    ・祝日リストは、下の「祝日リスト」を参照<br>
+    ・祝日リストをコード内に直接書く<br><br>
+
+    祝日リスト:<br>
+    "元日", "2024/1/1", "成人の日", "2024/1/8",<br>
+    "建国記念の日", "2024/2/11", "休日", "2024/2/12",<br>
+    "天皇誕生日", "2024/2/23", "春分の日", "2024/3/20",<br>
+    "昭和の日", "2024/4/29", "憲法記念日", "2024/5/3",<br>
+    "みどりの日", "2024/5/4", "こどもの日", "2024/5/5",<br>
+    "休日", "2024/5/6", "海の日", "2024/7/15",<br>
+    "山の日", "2024/8/11", "休日", "2024/8/12",<br>
+    "敬老の日", "2024/9/16", "秋分の日", "2024/9/22",<br>
+    "休日", "2024/9/23", "スポーツの日", "2024/10/14",<br>
+    "文化の日", "2024/11/3", "休日", "2024/11/4",<br>
+    "勤労感謝の日", "2024/11/23", "元日", "2025/1/1",<br>
+    "成人の日", "2025/1/13", "建国記念の日", "2025/2/11",<br>
+    "天皇誕生日", "2025/2/23", "休日", "2025/2/24",<br>
+    "春分の日", "2025/3/20", "昭和の日", "2025/4/29",<br>
+    "憲法記念日", "2025/5/3", "みどりの日", "2025/5/4",<br>
+    "こどもの日", "2025/5/5", "休日", "2025/5/6",<br>
+    "海の日", "2025/7/21", "山の日", "2025/8/11",<br>
+    "敬老の日", "2025/9/15", "秋分の日", "2025/9/23",<br>
+    "スポーツの日", "2025/10/13", "文化の日", "2025/11/3",<br>
+    "勤労感謝の日", "2025/11/23", "休日", "2025/11/24"<br><br>
+
+    最後に、<br>
+    A1からB列最下段の範囲で、<br>
+    ・「枠線」<br>
+    ・「中央ぞろえ」<br>
+    ・セル幅を「AutoFit」<br><br>
+</blockquote>
+
         </div>
     </section>
 
