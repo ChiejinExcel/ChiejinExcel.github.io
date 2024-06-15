@@ -853,46 +853,15 @@ End Sub
 Sub DrawCalendarBorders()
     Dim ws As Worksheet
     Dim calendarRange As Range
-
+    
     ' Sheet1を取得
     Set ws = ThisWorkbook.Sheets("Sheet1")
-
+    
     ' カレンダー範囲を設定
     Set calendarRange = ws.Range("A2:G8")
-
-    ' 外枠の設定
-    With calendarRange.Borders(xlEdgeLeft)
-        .LineStyle = xlContinuous
-        .Weight = xlThin
-        .ColorIndex = 0
-    End With
-
-    With calendarRange.Borders(xlEdgeTop)
-        .LineStyle = xlContinuous
-        .Weight = xlThin
-        .ColorIndex = 0
-    End With
-
-    With calendarRange.Borders(xlEdgeBottom)
-        .LineStyle = xlContinuous
-        .Weight = xlThin
-        .ColorIndex = 0
-    End With
-
-    With calendarRange.Borders(xlEdgeRight)
-        .LineStyle = xlContinuous
-        .Weight = xlThin
-        .ColorIndex = 0
-    End With
-
-    ' 内側の枠線の設定
-    With calendarRange.Borders(xlInsideVertical)
-        .LineStyle = xlContinuous
-        .Weight = xlThin
-        .ColorIndex = 0
-    End With
-
-    With calendarRange.Borders(xlInsideHorizontal)
+    
+    ' 外枠と内側の枠線を一括で設定
+    With calendarRange.Borders
         .LineStyle = xlContinuous
         .Weight = xlThin
         .ColorIndex = 0
