@@ -452,16 +452,21 @@
         </div>
         <div class="code-container">
             <blockquote id="requestText13">
-                Excelの「Sheet1」にある、<br>
-                「btnKakutei」というコマンドボタンのコードが欲しいです。<br>
-                コードは以下の要件を満たします。<br>
-                ・ ボタンクリックで下記内容が実行されます<br>
-                ・ 「Sheet1」のA1セル内容の最初の半角スペースから右側の文字列を「メンバー名」として取得します<br>
-                ・ 「メンバー名」がカラの場合は何もしません<br>
-                ・ A3からG8までの範囲で「赤塗りつぶし」セルの数値を取得します<br>
-                ・ 「管理用」というシートのB列で「メンバー名」を検索し、<br>
-                　C列に取得した数値をカンマ区切り(スペースなし)で上書きします<br><br>
-                この機能を実行するためのコードを教えてもらえますか。
+                Excelの「Sheet1」にある<br>
+                「btnKakutei」というコマンドボタンのクリック時に、<br>
+                以下の処理を実行するコードを書いてください：<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;1.「Sheet1」を設定<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;2.  A1セルの値を取得<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;3. 最初の半角スペース以降の文字列を「メンバー名」として取得<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;半角スペースが見つからなければ、終了<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;メンバー名のスペースは除去しない<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;4. 「Sheet1」のA3からG8までの範囲をループし、<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赤く塗りつぶされたセルの数値（値）を取得し、カンマ区切りの文字列にしてください<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;5. 「管理用」シートのB列で「メンバー名」を検索し、<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;見つかった行のC列に赤塗りつぶしセルの数値をカンマ区切りで入力<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（区切りはカンマのみで、スペースは不要、既存の値がある場合は、上書き）<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;「メンバー名」が見つからなければ終了<br><br>
+                コードを教えてもらえますか。
             </blockquote>
         </div>
     </section>
