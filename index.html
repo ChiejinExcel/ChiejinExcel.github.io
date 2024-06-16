@@ -432,10 +432,14 @@
                 Excelの「Sheet1」に、<br>
                 コマンドボタンを追加する、<br>
                 「AddCommandButton」というコードが欲しいです。<br>
-                &nbsp;&nbsp;1. ボタンのキャプションは「確定」、名前は「btnKakutei」<br>
-                &nbsp;&nbsp;2. 位置とサイズは「セルI3とI4の2マス分」<br>
-                &nbsp;&nbsp;3. 既に同じ名前のボタンが存在する場合は、<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;そのボタンを削除してから新しいボタンを追加<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;1. ボタンはActiveX（OLEObjects）<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;2. ボタンのキャプションは「確定」<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;3. Objectプロパティを使用し、名前を「btnKakutei」にする<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;4. 位置は「セルI3とI4」、サイズは「セルI3とI4」の2マス分<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ボタンの位置とサイズを取得するために、<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;セルI3の上端位置と左端位置、セルI4の左端位置と上端位置を使用<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;セルI4の幅と高さも考慮<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;5. 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br><br>
                 コードを教えてください。
             </blockquote>
         </div>
