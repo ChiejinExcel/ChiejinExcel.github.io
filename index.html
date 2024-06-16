@@ -1054,25 +1054,21 @@ End Sub
         <div class="code-container">
             <pre id="codeExample8">
 Sub InitializeAndCreateCalendar()
-    ' シート1の内容、書式、結合をクリア
     Dim ws As Worksheet
     Set ws = ThisWorkbook.Sheets("Sheet1")
-        
-    ' セルの内容をクリア
-    ws.Cells.Clear
-        
-    ' 書式のクリア
-    ws.Cells.ClearFormats
-        
-    ' 結合の解除
-    ws.Cells.UnMerge
-        
-    ' カレンダー作成の各ステップを順に呼び出す
+    
+    ' シートの初期化
+    With ws
+        .Cells.ClearContents
+        .Cells.ClearFormats
+        .Cells.MergeCells = False
+    End With
+    
+    ' カレンダー作成のための各コードの呼び出し
     Call DisplayCurrentYearMonth
     Call SetCalendarHeaders
     Call DrawCalendarBorders
-    Call DisplayFirstDay
-    Call AddRemainingDays
+    Call AddDates
     Call ColorWeekends
     Call CreateHolidaySheet
     Call MarkHolidaysInRed
