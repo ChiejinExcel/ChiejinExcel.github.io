@@ -628,13 +628,17 @@
         <div class="code-container">
             <blockquote id="requestText16-1">
                 Excelの「Sheet1」に、<br>
-                コマンドボタンを追加する「AddCommandButton2」というVBAコードが欲しいです。<br>
-                以下の要件を満たすコードを教えてください。<br>
-                &nbsp;&nbsp; ・ シート「Sheet1」にコマンドボタンを追加<br>
-                &nbsp;&nbsp; ・ ボタンのキャプションは「保存終了」、名前は「btnHozonShuryo」<br>
-                &nbsp;&nbsp; ・ ボタンの位置とサイズはセルI5とI6の2マス分<br>
-                &nbsp;&nbsp; ・ 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br>
-                この機能を実行するためのコードを教えてもらえますか。<br>
+                コマンドボタンを追加する、<br>
+                「AddCommandButton2」というVBAコードが欲しいです。<br>
+                &nbsp;&nbsp;1. ボタンはActiveX（OLEObjects）<br>
+                &nbsp;&nbsp;2. ボタンのキャプションは「保存終了」<br>
+                &nbsp;&nbsp;3. Objectプロパティを使用し、名前を「btnHozonShuryo」にする<br>
+                &nbsp;&nbsp;4. 位置は「セルI5とI6」、サイズは「セルI5とI6」の2マス分<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;ボタンの位置とサイズを取得するために、<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;セルI5の上端位置と左端位置、セルI6の左端位置と上端位置を使用<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;セルI6の幅と高さも考慮<br>
+                &nbsp;&nbsp;5. 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br><br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
