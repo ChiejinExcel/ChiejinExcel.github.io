@@ -125,7 +125,7 @@
                 「DisplayCurrentYearMonth」という名前で作りたいです。<br>
                 セル「A1からG1まで」を結合してください。<br>
                 「現在の年月」を 「YYYY/MM」形式で、<br>
-                「中央揃え」で表示されるようにしてください。<br>
+                「中央揃え」で表示されるようにしてください。<br><br>
                 コードを教えてください。
             </blockquote>
         </div>
@@ -141,7 +141,7 @@
                 Excelで「Sheet1」の「セルA2からG2」に、<br>
                 カレンダーの曜日ヘッダー（日、月、火、水、木、金、土）を表示するマクロを<br>
                 「SetCalendarHeaders」という名前で作りたいです。<br>
-                「中央揃え」で表示されるようにしてください。<br>
+                「中央揃え」で表示されるようにしてください。<br><br>
                 コードを教えてください。
             </blockquote>
         </div>
@@ -156,7 +156,7 @@
             <blockquote id="requestText3">
                 Excelで「Sheet1」の「セルA2からG8」に、<br>
                 カレンダーの枠線を引くマクロを<br>
-                「DrawCalendarBorders」という名前で作りたいです。<br>
+                「DrawCalendarBorders」という名前で作りたいです。<br><br>
                 コードを教えてください。
             </blockquote>
         </div>
@@ -186,7 +186,7 @@
                 ・ DateSerial関数で日付を取得<br>
                 ・ Weekday関数で、日付の曜日を取得（日曜日を1とする）<br>
                 ・ ループ処理にはDo While ループを使用<br><br>
-                コードを教えてください。<br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -203,7 +203,6 @@
                 「ColorWeekends」という名前で作ってください。<br>
                     ・G2:G8を青フォント<br>
                     ・A2:A8を赤フォント<br><br>
-                
                 コードを教えてください。<br>        
             </blockquote>
         </div>
@@ -258,7 +257,7 @@
                 ・「中央ぞろえ」<br>
                 ・セル幅を「AutoFit」<br><br>
 
-                コードを教えてください。<br>        
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -292,8 +291,8 @@
                     1. カレンダーの日付を変換する際、Year関数とMonth関数を使用してセルA1の値から年と月を取得<br>
                     2. For Eachループを使用する際、変数をセルオブジェクトに適したものに設定<br>
                     （例：calendarCell、holidayCellはそれぞれRangeオブジェクト内の個々のセルを指します）<br>
-                    3. 日付の比較にはDateSerial関数とDateValue関数を使用<br>
-                この構造に従ってマクロを作成してください
+                    3. 日付の比較にはDateSerial関数とDateValue関数を使用<br><br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -320,10 +319,10 @@
                 &nbsp;&nbsp;- AddDates<br>
                 &nbsp;&nbsp;- ColorWeekends<br>
                 &nbsp;&nbsp;- CreateHolidaySheet<br>
-                &nbsp;&nbsp;- MarkHolidaysInRed<br><br>
-                これらのコードを順に呼び出すコードをもらえますか<br>
+                &nbsp;&nbsp;- MarkHolidaysInRed<br>
                 （各コードは既に実装されています）<br>
-                （InitializeAndCreateCalendar以外のコードは作成しないでください）
+                （InitializeAndCreateCalendar以外のコードは作成しないでください）<br><br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -338,9 +337,10 @@
                 Excelの「Sheet1」で、<br>
                 A3からG8のセルがダブルクリックされた時に、<br>
                 以下の条件で動作するVBAコードをお願いします<br><br>
-                1. セルが空でない場合、背景色を赤に設定<br>
-                2. セルが赤の背景色の場合、再度ダブルクリックで背景色をクリア（塗りつぶしなし）<br>
-                3. ダブルクリックによるセルの編集を防ぐ<br><br>
+                &nbsp;&nbsp;1. セルが空でない場合、背景色を赤に設定<br>
+                &nbsp;&nbsp;2. セルが赤の背景色の場合、再度ダブルクリックで背景色をクリア（塗りつぶしなし）<br>
+                &nbsp;&nbsp;3. ダブルクリックによるセルの編集を防ぐ<br><br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
@@ -438,7 +438,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;セルI3の上端位置と左端位置、セルI4の左端位置と上端位置を使用<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;セルI4の幅と高さも考慮<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;5. 既に同じ名前のボタンが存在する場合は、そのボタンを削除してから新しいボタンを追加<br><br>
-                注意: 必要な機能以外のオプションやコードは追加しないでください。<br>
+                注意: 必要な機能以外のオプションやコードは追加しないでください。<br><br>
                 コードを教えてください。
             </blockquote>
         </div>
@@ -658,8 +658,8 @@
                 &nbsp;&nbsp;    ・ 日時をもとにバックアップファイルのパスを設定（例：backup_yyyymmdd_hhmmss.xlsm）<br>
                 &nbsp;&nbsp;    ・ 「ThisWorkbook.SaveAs」を用いてバックアップファイルとして保存<br>
                 &nbsp;&nbsp;    ・ 元の名前で再度保存し、ワークブックを閉じる<br>
-                &nbsp;&nbsp;    ・ エラーが発生しないように、アラートメッセージを無効化し、後で再有効化する<br>
-                この機能を実行するためのコードを教えてもらえますか。
+                &nbsp;&nbsp;    ・ エラーが発生しないように、アラートメッセージを無効化し、後で再有効化する<br><br>
+                コードを教えてください。
             </blockquote>
         </div>
     </section>
