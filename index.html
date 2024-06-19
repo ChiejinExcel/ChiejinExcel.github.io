@@ -103,9 +103,10 @@
             <a href="#code-step13">ステップ13</a>
             <a href="#code-step14">ステップ14</a>
             <a href="#code-step15">ステップ15</a>    
-            <a href="#code-step17-1">ステップ16-1</a>    
-            <a href="#code-step17-2">ステップ16-2</a> 
-            <a href="#code-step18">ステップ17-2</a>
+            <a href="#code-step16-1">ステップ16-1</a>    
+            <a href="#code-step16-2">ステップ16-2</a> 
+            <a href="#code-step17-1">ステップ17-1</a>
+            <a href="#code-step17-2">ステップ17-2</a>
         </div>
     </nav>
 
@@ -1859,7 +1860,114 @@ End Sub
             </pre>
         </div>
     </section>
+            <section id="code-step17-1">
+        <div class="step-title-container">
+            <h2>ステップ17-1：   1か月分のExcelファイルを含むフォルダを作成</h2>
+            <button class="copy-button" onclick="copyToClipboard('#codeExample17-1')">コピーする</button>
+        </div>
+        <div class="code-container">
+            <pre id="codeExample17-1">
+Sub CreateExcelFiles()
+    Dim ws As Worksheet
+    Dim wb As Workbook
+    Dim folderPath As String
+    Dim subFolderPath As String
+    Dim i As Integer
+    Dim j As Integer
+    Dim randValue As Integer
+    Dim header As Variant
+    Dim filename As String
+    Dim fDialog As FileDialog
+    
+    ' フォルダ選択ダイアログの設定
+    Set fDialog = Application.FileDialog(msoFileDialogFolderPicker)
+    With fDialog
+        .Title = "保存するフォルダを選択してください"
+        .AllowMultiSelect = False
+        If .Show = -1 Then ' ユーザーがフォルダを選択した場合
+            folderPath = .SelectedItems(1)
+        Else
+            MsgBox "フォルダが選択されませんでした。処理を中止します。", vbExclamation
+            Exit Sub
+        End If
+    End With
+    
+    ' サブフォルダの設定
+    subFolderPath = folderPath & Application.PathSeparator & "2024.4"
+    
+    ' サブフォルダの存在を確認し、存在しない場合は作成
+    On Error Resume Next
+    MkDir subFolderPath
+    If Err.Number <> 0 Then
+        MsgBox "フォルダを作成できませんでした: " & subFolderPath, vbCritical
+        Exit Sub
+    End If
+    On Error GoTo 0
 
+    ' ヘッダーの設定
+    header = Array("病名", "A病", "B病", "C病", "D病", "E病")
+
+    ' 30個のExcelファイルを作成
+    For i = 1 To 30
+        ' 新しいワークブックを作成
+        Set wb = Workbooks.Add
+        Set ws = wb.Sheets(1)
+
+        ' ヘッダーの入力
+        For j = 1 To 6
+            ws.Cells(1, j).Value = header(j - 1)
+        Next j
+
+        ' ヘッダーの黄色塗りつぶし
+        ws.Range("A1:F1").Interior.Color = RGB(255, 255, 0)
+
+        ' A2セルに「患者数」と入力
+        ws.Cells(2, 1).Value = "患者数"
+
+        ' B2:F2セルにランダムな数値を入力
+        For j = 2 To 6
+            randValue = Application.WorksheetFunction.RandBetween(1, 100)
+            ws.Cells(2, j).Value = randValue
+        Next j
+
+        ' 格子枠の設定
+        With ws.Range("A1:F2").Borders
+            .LineStyle = xlContinuous
+            .Weight = xlThin
+        End With
+
+        ' 文字を中央揃え
+        With ws.Range("A1:F2")
+            .HorizontalAlignment = xlCenter
+            .VerticalAlignment = xlCenter
+        End With
+
+        ' 列幅の自動調整
+        ws.Columns("A:F").AutoFit
+
+        ' ファイル名の設定
+        filename = subFolderPath & Application.PathSeparator & "4." & i & ".xlsx"
+
+        ' ファイルを保存して閉じる
+        On Error Resume Next
+        wb.SaveAs filename
+        On Error GoTo 0
+        wb.Close False
+    Next i
+
+    ' データ集積用の空ファイルを作成
+    Set wb = Workbooks.Add
+    On Error Resume Next
+    wb.SaveAs subFolderPath & Application.PathSeparator & "データ集積用.xlsx"
+    On Error GoTo 0
+    wb.Close False
+
+    ' 完了メッセージ
+    MsgBox "30個のファイルとデータ集積用のファイルを作成しました。", vbInformation
+End Sub
+            </pre>
+        </div>
+    </section>
             <section id="code-step17-2">
         <div class="step-title-container">
             <h2>ステップ17-2：  「保存終了」ボタンでバックアップファイル作成</h2>
