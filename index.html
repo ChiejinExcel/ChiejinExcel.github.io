@@ -1976,125 +1976,100 @@ End Sub
         <div class="code-container">
             <pre id="codeExample17-2">
 Sub ImportData()
-    Dim ws As Worksheet
     Dim folderPath As String
-    Dim fileName As String
-    Dim rowIndex As Long
-    Dim folderName As String
-    Dim yearMonth As Variant
-    Dim year As Integer
-    Dim month As Integer
+    Dim cleanedFolderPath As String
+    Dim yearStr As String
+    Dim monthStr As String
     Dim lastDay As Integer
-    Dim filePrefix As String
-    Dim srcWorkbook As Workbook
-    Dim srcSheet As Worksheet
-
-    ' フォルダパスとフォルダ名の設定
-    folderPath = ThisWorkbook.Path & "\"
-
-    ' フォルダ名の抽出（末尾のスラッシュを除去）
-    folderName = Mid(Left(folderPath, Len(folderPath) - 1), InStrRev(Left(folderPath, Len(folderPath) - 1), "\") + 1)
-
-    ' フォルダ名が "YYYY.M" または "YYYY.MM" 形式であることを確認し、年月を取得
-    If IsNumeric(Left(folderName, 4)) And Mid(folderName, 5, 1) = "." And IsNumeric(Mid(folderName, 6)) Then
-        yearMonth = Split(folderName, ".")
-        year = CInt(yearMonth(0))
-        month = CInt(yearMonth(1))
-        lastDay = Day(DateSerial(year, month + 1, 0)) ' 月の最終日を取得
-        filePrefix = month & "." ' ファイルプレフィックスの設定
-    Else
-        MsgBox "フォルダ名が 'YYYY.M' または 'YYYY.MM' 形式ではありません。"
-        Exit Sub
-    End If
-
-    ' アクティブシートを設定
-    Set ws = ActiveSheet
-
-    ' アクティブシートの内容をクリア
-    ws.Cells.Clear
-
-    ' ヘッダーの設定
-    ws.Cells(1, 1).Value = month & "月"
-    ws.Cells(1, 2).Value = "A病"
-    ws.Cells(1, 3).Value = "B病"
-    ws.Cells(1, 4).Value = "C病"
-    ws.Cells(1, 5).Value = "D病"
-    ws.Cells(1, 6).Value = "E病"
-
-    ' ヘッダーのフォーマット設定
-    With ws.Range("A1:F1")
-        .Interior.Color = RGB(255, 255, 0) ' ヘッダーを黄色で塗りつぶし
-        .Font.Bold = True
-        .HorizontalAlignment = xlCenter ' 文字を中央揃え
-        .VerticalAlignment = xlCenter ' 文字を中央揃え
+    Dim currentDay As Integer
+    Dim fileName As String
+    Dim dataWb As Workbook
+    Dim dataSheet As Worksheet
+    Dim destSheet As Worksheet
+    
+    ' フォルダ選択ダイアログを表示
+    With Application.FileDialog(msoFileDialogFolderPicker)
+        .Title = "フォルダを選択してください"
+        .AllowMultiSelect = False
+        If .Show = -1 Then
+            folderPath = .SelectedItems(1)
+        Else
+            MsgBox "フォルダが選択されていません"
+            Exit Sub
+        End If
     End With
-
-    ' 初期行インデックスの設定（A2が開始地点）
-    rowIndex = 2
-
-    ' 1日から月の最終日までのループ
-    Dim i As Integer
-    For i = 1 To lastDay
-        ' ファイル名の設定
-        fileName = folderPath & filePrefix & i & ".xlsx"
-
-        ' 日付をA列に設定
-        ws.Cells(rowIndex, 1).Value = i
-
-        ' ファイルが存在する場合のみ処理を行う
+    
+    ' バックスラッシュとスラッシュを削除したパスを保持
+    cleanedFolderPath = Replace(folderPath, "\", "")
+    cleanedFolderPath = Replace(cleanedFolderPath, "/", "")
+    
+    ' フォルダパスから年と月を取得
+    yearStr = Mid(cleanedFolderPath, InStrRev(cleanedFolderPath, ".") - 4, 4)
+    monthStr = Mid(cleanedFolderPath, InStrRev(cleanedFolderPath, ".") + 1)
+    
+    ' 最終日を取得
+    lastDay = Day(DateSerial(CInt(yearStr), CInt(monthStr) + 1, 0))
+    
+    ' アクティブシート全セル内容をクリア
+    Set destSheet = ActiveSheet
+    destSheet.Cells.Clear
+    
+    ' ヘッダーの設定
+    destSheet.Range("A1").Value = monthStr & "月"
+    destSheet.Range("B1").Value = "A病"
+    destSheet.Range("C1").Value = "B病"
+    destSheet.Range("D1").Value = "C病"
+    destSheet.Range("E1").Value = "D病"
+    destSheet.Range("F1").Value = "E病"
+    destSheet.Range("A1:F1").Interior.Color = RGB(255, 255, 0)
+    
+    ' 日付ごとのループ
+    For currentDay = 1 To lastDay
+        destSheet.Cells(currentDay + 1, 1).Value = currentDay
+        fileName = folderPath & "\" & monthStr & "." & currentDay & ".xlsx"
+        
+        ' ファイルが存在するか確認
         If Dir(fileName) <> "" Then
             ' ファイルを開く
-            Set srcWorkbook = Workbooks.Open(fileName)
-            Set srcSheet = srcWorkbook.Sheets(1)
-
-            ' 各セルの値を取得して貼り付け
-            ws.Cells(rowIndex, 2).Value = srcSheet.Range("B2").Value ' B列
-            ws.Cells(rowIndex, 3).Value = srcSheet.Range("C2").Value ' C列
-            ws.Cells(rowIndex, 4).Value = srcSheet.Range("D2").Value ' D列
-            ws.Cells(rowIndex, 5).Value = srcSheet.Range("E2").Value ' E列
-            ws.Cells(rowIndex, 6).Value = srcSheet.Range("F2").Value ' F列
-
+            Set dataWb = Workbooks.Open(fileName)
+            Set dataSheet = dataWb.Sheets("Sheet1")
+            
+            ' データを転記
+            destSheet.Cells(currentDay + 1, 2).Value = dataSheet.Range("B2").Value
+            destSheet.Cells(currentDay + 1, 3).Value = dataSheet.Range("C2").Value
+            destSheet.Cells(currentDay + 1, 4).Value = dataSheet.Range("D2").Value
+            destSheet.Cells(currentDay + 1, 5).Value = dataSheet.Range("E2").Value
+            destSheet.Cells(currentDay + 1, 6).Value = dataSheet.Range("F2").Value
+            
             ' ファイルを閉じる
-            srcWorkbook.Close False
+            dataWb.Close False
         End If
-
-        ' 次の行に移動
-        rowIndex = rowIndex + 1
-    Next i
-
-    ' 合計を追加
-    ws.Cells(rowIndex, 1).Value = "合計"
-    ws.Cells(rowIndex, 2).Formula = "=SUM(B2:B" & rowIndex - 1 & ")"
-    ws.Cells(rowIndex, 3).Formula = "=SUM(C2:C" & rowIndex - 1 & ")"
-    ws.Cells(rowIndex, 4).Formula = "=SUM(D2:D" & rowIndex - 1 & ")"
-    ws.Cells(rowIndex, 5).Formula = "=SUM(E2:E" & rowIndex - 1 & ")"
-    ws.Cells(rowIndex, 6).Formula = "=SUM(F2:F" & rowIndex - 1 & ")"
-
-    ' 次の行に移動して平均を追加
-    rowIndex = rowIndex + 1
-    ws.Cells(rowIndex, 1).Value = "平均"
-    ws.Cells(rowIndex, 2).Formula = "=ROUND(AVERAGE(B2:B" & rowIndex - 2 & "), 1)"
-    ws.Cells(rowIndex, 3).Formula = "=ROUND(AVERAGE(C2:C" & rowIndex - 2 & "), 1)"
-    ws.Cells(rowIndex, 4).Formula = "=ROUND(AVERAGE(D2:D" & rowIndex - 2 & "), 1)"
-    ws.Cells(rowIndex, 5).Formula = "=ROUND(AVERAGE(E2:E" & rowIndex - 2 & "), 1)"
-    ws.Cells(rowIndex, 6).Formula = "=ROUND(AVERAGE(F2:F" & rowIndex - 2 & "), 1)"
-
-    ' 全体の格子枠を設定
-    With ws.Range("A1:F" & rowIndex).Borders
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-
-    ' 文字を中央揃えに設定
-    With ws.Range("A1:F" & rowIndex)
+    Next currentDay
+    
+    ' 合計の計算
+    destSheet.Cells(lastDay + 2, 1).Value = "合計"
+    destSheet.Cells(lastDay + 2, 2).Formula = "=SUM(B2:B" & lastDay + 1 & ")"
+    destSheet.Cells(lastDay + 2, 3).Formula = "=SUM(C2:C" & lastDay + 1 & ")"
+    destSheet.Cells(lastDay + 2, 4).Formula = "=SUM(D2:D" & lastDay + 1 & ")"
+    destSheet.Cells(lastDay + 2, 5).Formula = "=SUM(E2:E" & lastDay + 1 & ")"
+    destSheet.Cells(lastDay + 2, 6).Formula = "=SUM(F2:F" & lastDay + 1 & ")"
+    
+    ' 平均の計算
+    destSheet.Cells(lastDay + 3, 1).Value = "平均"
+    destSheet.Cells(lastDay + 3, 2).Formula = "=ROUND(AVERAGE(B2:B" & lastDay + 1 & "), 1)"
+    destSheet.Cells(lastDay + 3, 3).Formula = "=ROUND(AVERAGE(C2:C" & lastDay + 1 & "), 1)"
+    destSheet.Cells(lastDay + 3, 4).Formula = "=ROUND(AVERAGE(D2:D" & lastDay + 1 & "), 1)"
+    destSheet.Cells(lastDay + 3, 5).Formula = "=ROUND(AVERAGE(E2:E" & lastDay + 1 & "), 1)"
+    destSheet.Cells(lastDay + 3, 6).Formula = "=ROUND(AVERAGE(F2:F" & lastDay + 1 & "), 1)"
+    
+    ' フォーマット設定
+    With destSheet.Range("A1:F" & lastDay + 3)
+        .Borders.LineStyle = xlContinuous
         .HorizontalAlignment = xlCenter
-        .VerticalAlignment = xlCenter
     End With
-
+    
     ' 列の幅を自動調整
-    ws.Columns("A:F").AutoFit
+    destSheet.Columns.AutoFit
 End Sub
             </pre>
         </div>
